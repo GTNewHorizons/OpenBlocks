@@ -73,10 +73,14 @@ public class LastStandEnchantmentsHandler {
 						}).floatValue();
 
 				if (xpAvailable >= xpRequired) {
-					e.player.setHealth(1f);
-					EnchantmentUtils.addPlayerXP(e.player, -(int)xpRequired);
-					e.amount = 0;
-					e.setCanceled(true);
+					int rn = random.nextInt(101);
+					rn = rn+enchantmentLevels;
+					if (rn >=25) {
+						e.player.setHealth(1f);
+						EnchantmentUtils.addPlayerXP(e.player, -(int)xpRequired);
+						e.amount = 0;
+						e.setCanceled(true);
+					}
 				}
 			}
 		}
