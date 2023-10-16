@@ -12,15 +12,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
-import openblocks.Config;
-import openmods.Log;
-import openmods.Mods;
-import openmods.config.properties.ConfigurationChange;
-import openmods.network.event.EventDirection;
-import openmods.network.event.NetworkEvent;
-import openmods.network.event.NetworkEventMeta;
-import openmods.utils.ByteUtils;
-
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -32,6 +23,14 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import gnu.trove.procedure.TIntProcedure;
 import gnu.trove.set.TIntSet;
 import gnu.trove.set.hash.TIntHashSet;
+import openblocks.Config;
+import openmods.Log;
+import openmods.Mods;
+import openmods.config.properties.ConfigurationChange;
+import openmods.network.event.EventDirection;
+import openmods.network.event.NetworkEvent;
+import openmods.network.event.NetworkEventMeta;
+import openmods.utils.ByteUtils;
 
 public class MapDataManager {
 

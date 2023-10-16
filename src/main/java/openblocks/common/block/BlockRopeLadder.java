@@ -14,6 +14,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.Config;
 import openblocks.OpenBlocks;
 import openmods.block.BlockRotationMode;
@@ -22,8 +24,6 @@ import openmods.geometry.Orientation;
 import openmods.infobook.BookDocumentation;
 import openmods.utils.BlockManipulator;
 import openmods.utils.BlockUtils;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @BookDocumentation
 public class BlockRopeLadder extends OpenBlock {

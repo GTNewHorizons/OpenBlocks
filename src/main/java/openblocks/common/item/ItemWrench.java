@@ -14,9 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import openblocks.OpenBlocks;
-import openmods.infobook.BookDocumentation;
-
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.base.Predicate;
@@ -25,6 +22,8 @@ import com.google.common.collect.Sets;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import openblocks.OpenBlocks;
+import openmods.infobook.BookDocumentation;
 
 @BookDocumentation
 public class ItemWrench extends Item {

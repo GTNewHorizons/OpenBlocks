@@ -26,6 +26,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.OpenBlocks;
 import openblocks.api.SleepingBagUseEvent;
 import openblocks.asm.EntityPlayerVisitor;
@@ -35,8 +37,6 @@ import openmods.reflection.FieldAccess;
 import openmods.utils.BlockUtils;
 import openmods.utils.ItemUtils;
 import openmods.utils.TagUtils;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @BookDocumentation(customName = "sleepingbag")
 public class ItemSleepingBag extends ItemArmor {

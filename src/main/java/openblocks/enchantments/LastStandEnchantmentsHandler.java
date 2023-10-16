@@ -6,6 +6,9 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+import com.google.common.base.Supplier;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import openblocks.Config;
 import openblocks.OpenBlocks.Enchantments;
 import openmods.calc.Environment;
@@ -16,9 +19,6 @@ import openmods.calc.types.fp.DoubleCalculatorFactory;
 import openmods.config.properties.ConfigurationChange;
 import openmods.entity.PlayerDamageEvent;
 import openmods.utils.EnchantmentUtils;
-
-import com.google.common.base.Supplier;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class LastStandEnchantmentsHandler {
 

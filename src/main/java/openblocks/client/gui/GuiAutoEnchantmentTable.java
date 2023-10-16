@@ -5,6 +5,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
+import com.google.common.collect.ImmutableList;
+
 import openblocks.common.container.ContainerAutoEnchantmentTable;
 import openblocks.common.tileentity.TileEntityAutoEnchantmentTable;
 import openblocks.common.tileentity.TileEntityAutoEnchantmentTable.AutoSlots;
@@ -19,8 +21,6 @@ import openmods.gui.component.GuiComponentTankLevel;
 import openmods.gui.listener.IValueChangedListener;
 import openmods.gui.logic.ValueCopyAction;
 import openmods.utils.MiscUtils;
-
-import com.google.common.collect.ImmutableList;
 
 public class GuiAutoEnchantmentTable extends
         GuiConfigurableSlots<TileEntityAutoEnchantmentTable, ContainerAutoEnchantmentTable, TileEntityAutoEnchantmentTable.AutoSlots> {

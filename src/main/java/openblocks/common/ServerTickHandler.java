@@ -3,11 +3,11 @@ package openblocks.common;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 
-import openblocks.enchantments.FlimFlamEnchantmentsHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import openblocks.enchantments.FlimFlamEnchantmentsHandler;
 
 public class ServerTickHandler {
 

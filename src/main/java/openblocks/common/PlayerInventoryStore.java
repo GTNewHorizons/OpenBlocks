@@ -30,14 +30,6 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
-import openblocks.Config;
-import openblocks.api.InventoryEvent;
-import openblocks.api.InventoryEvent.SubInventory;
-import openmods.Log;
-import openmods.inventory.GenericInventory;
-import openmods.utils.ItemUtils;
-import openmods.utils.TagUtils;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
@@ -46,6 +38,13 @@ import com.mojang.authlib.GameProfile;
 
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import openblocks.Config;
+import openblocks.api.InventoryEvent;
+import openblocks.api.InventoryEvent.SubInventory;
+import openmods.Log;
+import openmods.inventory.GenericInventory;
+import openmods.utils.ItemUtils;
+import openmods.utils.TagUtils;
 
 public class PlayerInventoryStore {
 

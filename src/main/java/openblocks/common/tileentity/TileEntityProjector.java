@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.client.gui.GuiProjector;
 import openblocks.common.HeightMapData;
 import openblocks.common.MapDataManager;
@@ -29,8 +31,6 @@ import openmods.sync.SyncableInt;
 import openmods.tileentity.SyncedTileEntity;
 import openmods.utils.BlockNotifyFlags;
 import openmods.utils.ByteUtils;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityProjector extends SyncedTileEntity
         implements IHasGui, IInventoryProvider, ISyncListener, IRotatable {

@@ -14,14 +14,14 @@ import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 
-import openblocks.client.Icons.ComposedIcon;
-import openblocks.client.Icons.IDrawableIcon;
-import openmods.Log;
-
 import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Maps;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import openblocks.client.Icons.ComposedIcon;
+import openblocks.client.Icons.IDrawableIcon;
+import openmods.Log;
 
 public class SoundIconRegistry {
 

@@ -17,13 +17,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChunkCoordinates;
 
+import com.google.common.collect.Lists;
+
 import openblocks.api.InventoryEvent.SubInventory;
 import openblocks.common.PlayerInventoryStore.LoadedInventories;
 import openmods.Log;
 import openmods.utils.BlockUtils;
 import openmods.utils.InventoryUtils;
-
-import com.google.common.collect.Lists;
 
 public class CommandInventory implements ICommand {
 

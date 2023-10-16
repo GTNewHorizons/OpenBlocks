@@ -17,6 +17,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
 
+import com.google.common.collect.Lists;
+
 import openblocks.Config;
 import openblocks.OpenBlocks;
 import openblocks.client.renderer.tileentity.tank.INeighbourMap;
@@ -39,8 +41,6 @@ import openmods.sync.SyncableTank;
 import openmods.tileentity.SyncedTileEntity;
 import openmods.utils.EnchantmentUtils;
 import openmods.utils.ItemUtils;
-
-import com.google.common.collect.Lists;
 
 public class TileEntityTank extends SyncedTileEntity
         implements IActivateAwareTile, IPlacerAwareTile, INeighbourAwareTile, ICustomHarvestDrops {

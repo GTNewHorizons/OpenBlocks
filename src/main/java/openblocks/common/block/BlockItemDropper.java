@@ -4,10 +4,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import openmods.block.BlockRotationMode;
-import openmods.infobook.BookDocumentation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import openmods.block.BlockRotationMode;
+import openmods.infobook.BookDocumentation;
 
 @BookDocumentation
 public class BlockItemDropper extends OpenBlock {

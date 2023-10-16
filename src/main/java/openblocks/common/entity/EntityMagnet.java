@@ -15,6 +15,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import io.netty.buffer.ByteBuf;
 import openblocks.Config;
 import openblocks.api.IMagnetAware;
 import openblocks.common.CraneRegistry;
@@ -23,10 +27,6 @@ import openblocks.common.item.ItemCraneBackpack;
 import openmods.entity.DelayedEntityLoadManager;
 import openmods.entity.EntityBlock;
 import openmods.entity.IEntityLoadListener;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import io.netty.buffer.ByteBuf;
 
 public class EntityMagnet extends EntitySmoothMove implements IEntityAdditionalSpawnData, IEntitySelector {
 

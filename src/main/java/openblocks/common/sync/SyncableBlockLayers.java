@@ -9,10 +9,10 @@ import java.util.List;
 
 import net.minecraft.nbt.NBTTagCompound;
 
+import com.google.common.collect.Lists;
+
 import openblocks.common.Stencil;
 import openmods.sync.SyncableObjectBase;
-
-import com.google.common.collect.Lists;
 
 public class SyncableBlockLayers extends SyncableObjectBase {
 

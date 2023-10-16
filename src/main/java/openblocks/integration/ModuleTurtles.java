@@ -6,11 +6,11 @@ import static openmods.integration.Conditions.modLoaded;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import openmods.Mods;
-import openmods.integration.IntegrationModule;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import dan200.computercraft.api.ComputerCraftAPI;
+import openmods.Mods;
+import openmods.integration.IntegrationModule;
 
 public class ModuleTurtles extends IntegrationModule {
 

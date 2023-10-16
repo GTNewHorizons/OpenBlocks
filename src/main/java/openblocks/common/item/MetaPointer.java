@@ -10,10 +10,10 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import openblocks.api.IPointable;
-import openmods.utils.ItemUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import openblocks.api.IPointable;
+import openmods.utils.ItemUtils;
 
 /**
  * Pointer item is used for.. pointing

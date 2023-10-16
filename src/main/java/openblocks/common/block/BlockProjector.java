@@ -6,10 +6,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import openblocks.Config;
-import openmods.utils.ByteUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import openblocks.Config;
+import openmods.utils.ByteUtils;
 
 public class BlockProjector extends OpenBlock {
 

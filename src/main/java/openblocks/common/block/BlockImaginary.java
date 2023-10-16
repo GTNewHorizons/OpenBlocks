@@ -15,13 +15,12 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import openblocks.common.tileentity.TileEntityImaginary;
-import openblocks.common.tileentity.TileEntityImaginary.Property;
-
 import com.google.common.collect.Lists;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import openblocks.common.tileentity.TileEntityImaginary;
+import openblocks.common.tileentity.TileEntityImaginary.Property;
 
 public class BlockImaginary extends OpenBlock {
 

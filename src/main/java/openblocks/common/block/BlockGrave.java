@@ -10,11 +10,11 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import org.apache.logging.log4j.Level;
+
 import openblocks.Config;
 import openmods.Log;
 import openmods.block.BlockRotationMode;
-
-import org.apache.logging.log4j.Level;
 
 public class BlockGrave extends OpenBlock {
 

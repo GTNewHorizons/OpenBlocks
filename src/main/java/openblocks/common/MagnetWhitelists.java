@@ -26,11 +26,11 @@ import net.minecraft.tileentity.TileEntityNote;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
+import cpw.mods.fml.common.eventhandler.Event;
 import openmods.utils.ITester;
 import openmods.utils.ObjectTester;
 import openmods.utils.ObjectTester.ClassNameTester;
 import openmods.utils.ObjectTester.ClassTester;
-import cpw.mods.fml.common.eventhandler.Event;
 
 public class MagnetWhitelists {
 

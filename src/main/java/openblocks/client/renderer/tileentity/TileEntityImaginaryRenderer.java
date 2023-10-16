@@ -8,6 +8,9 @@ import net.minecraft.util.IIcon;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import openblocks.Config;
 import openblocks.OpenBlocks.Blocks;
 import openblocks.common.tileentity.TileEntityImaginary;
@@ -15,10 +18,6 @@ import openblocks.common.tileentity.TileEntityImaginary.ICollisionData;
 import openblocks.common.tileentity.TileEntityImaginary.PanelData;
 import openblocks.common.tileentity.TileEntityImaginary.Property;
 import openblocks.common.tileentity.TileEntityImaginary.StairsData;
-
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class TileEntityImaginaryRenderer extends TileEntitySpecialRenderer {
 

@@ -7,6 +7,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import com.google.common.collect.Lists;
+
 import openblocks.OpenBlocks;
 import openblocks.client.ChangelogBuilder;
 import openblocks.client.ChangelogBuilder.Changelog;
@@ -23,11 +28,6 @@ import openmods.gui.component.page.PageBase.ActionIcon;
 import openmods.gui.component.page.SectionPage;
 import openmods.gui.component.page.TitledPage;
 import openmods.infobook.PageBuilder;
-
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
-import com.google.common.collect.Lists;
 
 public class GuiInfoBook extends ComponentGui {
 

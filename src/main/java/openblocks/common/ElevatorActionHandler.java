@@ -8,18 +8,17 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.google.common.base.Preconditions;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.Config;
 import openblocks.api.IElevatorBlock;
 import openblocks.api.IElevatorBlock.PlayerRotation;
 import openblocks.events.ElevatorActionEvent;
 import openmods.movement.PlayerMovementEvent;
 import openmods.utils.EnchantmentUtils;
-
-import com.google.common.base.Preconditions;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ElevatorActionHandler {
 

@@ -5,9 +5,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import openblocks.OpenBlocks;
 import openblocks.client.gui.GuiInfoBook;
-import cpw.mods.fml.common.FMLCommonHandler;
 
 public class ItemInfoBook extends Item {
 

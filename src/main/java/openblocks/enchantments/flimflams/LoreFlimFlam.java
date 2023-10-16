@@ -22,17 +22,17 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 
-import openblocks.Config;
-import openblocks.api.IFlimFlamAction;
-import openblocks.rubbish.LoreGenerator;
-import openmods.utils.ItemUtils;
-
 import org.lwjgl.input.Keyboard;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import openblocks.Config;
+import openblocks.api.IFlimFlamAction;
+import openblocks.rubbish.LoreGenerator;
+import openmods.utils.ItemUtils;
 
 public class LoreFlimFlam implements IFlimFlamAction {
 

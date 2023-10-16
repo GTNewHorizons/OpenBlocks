@@ -7,11 +7,11 @@ import java.util.Set;
 
 import net.minecraftforge.fluids.FluidStack;
 
-import openblocks.common.tileentity.TileEntityTank;
-import openmods.utils.Diagonal;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import openblocks.common.tileentity.TileEntityTank;
+import openmods.utils.Diagonal;
 
 public class DiagonalConnection extends RenderConnection {
 

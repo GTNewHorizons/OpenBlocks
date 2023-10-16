@@ -12,11 +12,11 @@ import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 
+import com.google.common.collect.Lists;
+
 import openblocks.api.IFlimFlamDescription;
 import openblocks.enchantments.flimflams.FlimFlamRegistry;
 import openmods.utils.CollectionUtils;
-
-import com.google.common.collect.Lists;
 
 public class CommandFlimFlam implements ICommand {
 

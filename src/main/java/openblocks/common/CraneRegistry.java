@@ -5,9 +5,9 @@ import java.util.Map;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
-import openblocks.common.entity.EntityMagnet;
-
 import com.google.common.collect.MapMaker;
+
+import openblocks.common.entity.EntityMagnet;
 
 public class CraneRegistry {
 

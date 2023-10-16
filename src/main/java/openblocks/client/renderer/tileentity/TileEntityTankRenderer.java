@@ -12,14 +12,14 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
+import org.lwjgl.opengl.GL11;
+
 import openblocks.client.renderer.tileentity.tank.ITankRenderFluidData;
 import openblocks.common.tileentity.TileEntityTank;
 import openmods.renderer.TessellatorPool;
 import openmods.renderer.TessellatorPool.TessellatorUser;
 import openmods.utils.Diagonal;
 import openmods.utils.TextureUtils;
-
-import org.lwjgl.opengl.GL11;
 
 public class TileEntityTankRenderer extends TileEntitySpecialRenderer {
 

@@ -2,12 +2,12 @@ package openblocks.asm;
 
 import net.minecraft.launchwrapper.IClassTransformer;
 
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.ClassWriter;
+
 import openmods.Log;
 import openmods.asm.VisitorHelper;
 import openmods.asm.VisitorHelper.TransformProvider;
-
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.ClassWriter;
 
 public class OpenBlocksClassTransformer implements IClassTransformer {
 

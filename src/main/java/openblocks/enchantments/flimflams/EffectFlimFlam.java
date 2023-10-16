@@ -8,9 +8,9 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
-import openblocks.api.IFlimFlamAction;
-
 import com.google.common.collect.Lists;
+
+import openblocks.api.IFlimFlamAction;
 
 public class EffectFlimFlam implements IFlimFlamAction {
 

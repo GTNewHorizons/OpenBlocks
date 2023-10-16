@@ -8,10 +8,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
+import org.lwjgl.opengl.GL11;
+
 import openblocks.OpenBlocks.Items;
 import openmods.utils.render.RenderUtils;
-
-import org.lwjgl.opengl.GL11;
 
 public class EntityGoldenEyeRenderer extends Render {
 

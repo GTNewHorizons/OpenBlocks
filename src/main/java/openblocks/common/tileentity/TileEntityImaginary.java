@@ -10,16 +10,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.google.common.base.Preconditions;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.common.item.ItemImaginary;
 import openblocks.common.item.ItemImaginationGlasses;
 import openmods.OpenMods;
 import openmods.api.ICustomPickItem;
 import openmods.tileentity.SimpleNetTileEntity;
-
-import com.google.common.base.Preconditions;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityImaginary extends SimpleNetTileEntity implements ICustomPickItem {
 

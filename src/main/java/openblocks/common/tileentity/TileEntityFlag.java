@@ -6,6 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.OpenBlocks;
 import openblocks.common.block.BlockFlag;
 import openmods.api.IActivateAwareTile;
@@ -15,8 +17,6 @@ import openmods.sync.SyncableFloat;
 import openmods.tileentity.SyncedTileEntity;
 import openmods.utils.BlockUtils;
 import openmods.utils.ColorUtils.RGB;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityFlag extends SyncedTileEntity implements IPlaceAwareTile, IActivateAwareTile {
 

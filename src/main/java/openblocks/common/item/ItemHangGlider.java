@@ -7,11 +7,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.google.common.collect.MapMaker;
+
 import openblocks.OpenBlocks;
 import openblocks.common.entity.EntityHangGlider;
 import openmods.infobook.BookDocumentation;
-
-import com.google.common.collect.MapMaker;
 
 @BookDocumentation(hasVideo = true)
 public class ItemHangGlider extends Item {

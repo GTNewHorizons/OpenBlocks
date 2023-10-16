@@ -18,13 +18,13 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
+import com.google.common.collect.Lists;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import openblocks.OpenBlocks.Enchantments;
 import openblocks.api.IFlimFlamDescription;
 import openblocks.enchantments.flimflams.FlimFlamRegistry;
 import openmods.Log;
-
-import com.google.common.collect.Lists;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class FlimFlamEnchantmentsHandler {
 

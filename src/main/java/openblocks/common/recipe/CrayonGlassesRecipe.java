@@ -9,11 +9,11 @@ import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import com.google.common.collect.Lists;
+
 import openblocks.OpenBlocks;
 import openblocks.common.item.ItemImaginary;
 import openmods.utils.ItemUtils;
-
-import com.google.common.collect.Lists;
 
 public class CrayonGlassesRecipe extends ShapelessRecipes {
 

@@ -17,6 +17,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.common.tileentity.TileEntityGuide;
 import openmods.api.ISelectionAware;
 import openmods.block.BlockRotationMode;
@@ -27,8 +29,6 @@ import openmods.geometry.BoundingBoxMap;
 import openmods.geometry.HalfAxis;
 import openmods.geometry.Orientation;
 import openmods.infobook.BookDocumentation;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @BookDocumentation(hasVideo = true)
 public class BlockGuide extends OpenBlock implements ISelectionAware {

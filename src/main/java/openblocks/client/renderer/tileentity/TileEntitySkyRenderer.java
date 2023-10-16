@@ -5,6 +5,8 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.MinecraftForgeClient;
 
+import org.lwjgl.opengl.GL11;
+
 import openblocks.client.StencilSkyRenderer;
 import openblocks.common.block.BlockSky;
 import openmods.Log;
@@ -13,8 +15,6 @@ import openmods.stencil.StencilBitAllocation;
 import openmods.stencil.StencilPoolManager;
 import openmods.utils.ColorUtils.RGB;
 import openmods.utils.render.RenderUtils;
-
-import org.lwjgl.opengl.GL11;
 
 public class TileEntitySkyRenderer extends TileEntitySpecialRenderer {
 

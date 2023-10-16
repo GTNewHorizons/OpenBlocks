@@ -9,6 +9,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.api.IElevatorBlock;
 import openmods.geometry.Orientation;
 import openmods.infobook.BookDocumentation;
@@ -16,8 +18,6 @@ import openmods.utils.BlockNotifyFlags;
 import openmods.utils.CollectionUtils;
 import openmods.utils.ColorUtils;
 import openmods.utils.ColorUtils.ColorMeta;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @BookDocumentation(hasVideo = true)
 public class BlockElevator extends OpenBlock implements IElevatorBlock {

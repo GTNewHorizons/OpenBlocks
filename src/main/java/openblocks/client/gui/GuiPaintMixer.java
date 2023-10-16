@@ -4,6 +4,9 @@ import java.util.List;
 
 import net.minecraft.util.StatCollector;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+
 import openblocks.common.container.ContainerPaintMixer;
 import openblocks.common.tileentity.TileEntityPaintMixer;
 import openblocks.common.tileentity.TileEntityPaintMixer.DyeSlot;
@@ -26,9 +29,6 @@ import openmods.gui.logic.IValueUpdateAction;
 import openmods.gui.logic.ValueCopyAction;
 import openmods.utils.ColorUtils;
 import openmods.utils.ColorUtils.ColorMeta;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 
 public class GuiPaintMixer extends SyncedGuiContainer<ContainerPaintMixer> {
 

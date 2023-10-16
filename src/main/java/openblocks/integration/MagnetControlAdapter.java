@@ -9,6 +9,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.google.common.base.Preconditions;
+
+import dan200.computercraft.api.turtle.ITurtleAccess;
+import dan200.computercraft.api.turtle.TurtleSide;
 import openblocks.Config;
 import openblocks.common.entity.EntityMagnet;
 import openblocks.common.entity.EntityMagnet.IEntityBlockFactory;
@@ -28,11 +32,6 @@ import openperipheral.api.architecture.IAttachable;
 import openperipheral.api.helpers.MultiReturn;
 import openperipheral.api.peripheral.ExposeInterface;
 import openperipheral.api.peripheral.PeripheralTypeId;
-
-import com.google.common.base.Preconditions;
-
-import dan200.computercraft.api.turtle.ITurtleAccess;
-import dan200.computercraft.api.turtle.TurtleSide;
 
 @PeripheralTypeId("openblocks_magnet")
 @ExposeInterface({ ITickingTurtle.class, IAttachable.class })

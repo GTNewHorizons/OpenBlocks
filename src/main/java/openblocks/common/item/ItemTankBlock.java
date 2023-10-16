@@ -14,12 +14,12 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
+import com.google.common.base.Strings;
+
 import openblocks.OpenBlocks;
 import openblocks.common.tileentity.TileEntityTank;
 import openmods.item.ItemOpenBlock;
 import openmods.utils.ItemUtils;
-
-import com.google.common.base.Strings;
 
 public class ItemTankBlock extends ItemOpenBlock implements IFluidContainerItem {
 

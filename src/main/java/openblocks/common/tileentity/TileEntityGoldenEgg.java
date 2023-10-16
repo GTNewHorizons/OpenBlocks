@@ -14,6 +14,12 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.Constants;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
+import com.mojang.authlib.GameProfile;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.Config;
 import openblocks.common.MagnetWhitelists;
 import openblocks.common.entity.EntityMiniMe;
@@ -26,13 +32,6 @@ import openmods.fakeplayer.FakePlayerPool.PlayerUser;
 import openmods.fakeplayer.OpenModsFakePlayer;
 import openmods.sync.SyncableEnum;
 import openmods.tileentity.SyncedTileEntity;
-
-import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
-import com.mojang.authlib.GameProfile;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityGoldenEgg extends SyncedTileEntity implements IPlacerAwareTile, IBreakAwareTile {
 

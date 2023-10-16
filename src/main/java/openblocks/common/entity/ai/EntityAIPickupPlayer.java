@@ -7,10 +7,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.world.World;
 
+import com.mojang.authlib.GameProfile;
+
 import openblocks.common.entity.EntityMiniMe;
 import openmods.utils.WorldUtils;
-
-import com.mojang.authlib.GameProfile;
 
 public class EntityAIPickupPlayer extends EntityAIBase {
 

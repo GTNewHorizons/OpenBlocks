@@ -9,6 +9,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.OpenBlocks;
 import openblocks.api.IPaintableBlock;
 import openblocks.common.Stencil;
@@ -16,8 +18,6 @@ import openblocks.common.tileentity.TileEntityCanvas;
 import openmods.infobook.BookDocumentation;
 import openmods.utils.ColorUtils;
 import openmods.utils.ColorUtils.ColorMeta;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @BookDocumentation(hasVideo = true)
 public class BlockCanvas extends OpenBlock implements IPaintableBlock {

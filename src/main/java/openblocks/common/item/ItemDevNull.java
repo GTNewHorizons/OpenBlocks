@@ -13,6 +13,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.Config;
 import openblocks.OpenBlocks;
 import openblocks.OpenBlocksGuiHandler;
@@ -22,9 +25,6 @@ import openmods.inventory.PlayerItemInventory;
 import openmods.inventory.StackEqualityTesterBuilder;
 import openmods.inventory.StackEqualityTesterBuilder.IEqualityTester;
 import openmods.inventory.legacy.ItemDistribution;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @BookDocumentation
 public class ItemDevNull extends Item {

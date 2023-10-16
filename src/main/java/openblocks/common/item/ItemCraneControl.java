@@ -13,17 +13,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import com.google.common.collect.MapMaker;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.Config;
 import openblocks.OpenBlocks;
 import openblocks.common.CraneRegistry;
 import openblocks.common.entity.EntityMagnet;
 import openmods.OpenMods;
 import openmods.infobook.BookDocumentation;
-
-import com.google.common.collect.MapMaker;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @BookDocumentation(customName = "crane_control", hasVideo = true)
 public class ItemCraneControl extends Item {

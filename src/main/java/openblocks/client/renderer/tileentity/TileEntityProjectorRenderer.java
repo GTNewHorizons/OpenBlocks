@@ -6,14 +6,14 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
 
+import org.lwjgl.opengl.GL11;
+
 import openblocks.client.model.ModelProjector;
 import openblocks.client.renderer.HeightMapRenderer;
 import openblocks.common.HeightMapData;
 import openblocks.common.MapDataManager;
 import openblocks.common.tileentity.TileEntityProjector;
 import openmods.OpenMods;
-
-import org.lwjgl.opengl.GL11;
 
 public class TileEntityProjectorRenderer extends TileEntitySpecialRenderer {
 

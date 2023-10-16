@@ -11,9 +11,9 @@ import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 
-import openblocks.enchantments.FlimFlamEnchantmentsHandler;
-
 import com.google.common.collect.Lists;
+
+import openblocks.enchantments.FlimFlamEnchantmentsHandler;
 
 public class CommandLuck implements ICommand {
 

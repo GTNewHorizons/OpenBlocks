@@ -9,9 +9,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import openmods.infobook.BookDocumentation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import openmods.infobook.BookDocumentation;
 
 @BookDocumentation
 public class BlockAutoEnchantmentTable extends OpenBlock {

@@ -10,6 +10,8 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.api.IPointable;
 import openblocks.common.entity.EntityItemProjectile;
 import openblocks.rpc.ITriggerable;
@@ -20,8 +22,6 @@ import openmods.sync.SyncableDouble;
 import openmods.tileentity.SyncedTileEntity;
 import openmods.utils.InventoryUtils;
 import openmods.utils.render.GeometryUtils;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityCannon extends SyncedTileEntity implements IPointable, ISurfaceAttachment, ITriggerable {
 

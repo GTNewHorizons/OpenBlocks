@@ -6,9 +6,9 @@ import java.util.Random;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayerMP;
 
-import openblocks.api.IFlimFlamAction;
-
 import com.google.common.collect.ImmutableList;
+
+import openblocks.api.IFlimFlamAction;
 
 public class SquidFilmFlam implements IFlimFlamAction {
 

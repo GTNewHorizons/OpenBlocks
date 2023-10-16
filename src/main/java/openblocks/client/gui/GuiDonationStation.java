@@ -9,6 +9,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiConfirmOpenLink;
 import net.minecraft.client.gui.GuiYesNoCallback;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Strings;
+
 import openblocks.common.container.ContainerDonationStation;
 import openblocks.common.tileentity.TileEntityDonationStation;
 import openmods.Log;
@@ -17,9 +20,6 @@ import openmods.gui.component.BaseComponent;
 import openmods.gui.component.GuiComponentLabel;
 import openmods.gui.component.GuiComponentTextButton;
 import openmods.gui.listener.IMouseDownListener;
-
-import com.google.common.base.Joiner;
-import com.google.common.base.Strings;
 
 public class GuiDonationStation extends BaseGuiContainer<ContainerDonationStation> implements GuiYesNoCallback {
 

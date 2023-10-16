@@ -6,6 +6,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
+import com.google.common.collect.ImmutableList;
+
 import openblocks.common.container.ContainerAutoAnvil;
 import openblocks.common.tileentity.TileEntityAutoAnvil;
 import openblocks.common.tileentity.TileEntityAutoAnvil.AutoSlots;
@@ -19,8 +21,6 @@ import openmods.gui.component.GuiComponentTab;
 import openmods.gui.component.GuiComponentTankLevel;
 import openmods.gui.logic.ValueCopyAction;
 import openmods.utils.MiscUtils;
-
-import com.google.common.collect.ImmutableList;
 
 public class GuiAutoAnvil
         extends GuiConfigurableSlots<TileEntityAutoAnvil, ContainerAutoAnvil, TileEntityAutoAnvil.AutoSlots> {

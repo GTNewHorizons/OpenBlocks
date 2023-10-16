@@ -5,12 +5,12 @@ import java.lang.reflect.Method;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.google.common.base.Throwables;
+
+import codechicken.nei.api.IConfigureNEI;
 import openblocks.common.item.MetasGeneric;
 import openblocks.common.item.MetasGenericUnstackable;
 import openmods.Log;
-import codechicken.nei.api.IConfigureNEI;
-
-import com.google.common.base.Throwables;
 
 public class NEIOpenBlocksConfig implements IConfigureNEI {
 

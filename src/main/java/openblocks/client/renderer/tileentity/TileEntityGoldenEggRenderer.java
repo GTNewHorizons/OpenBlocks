@@ -8,11 +8,11 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
+import org.lwjgl.opengl.GL11;
+
 import openblocks.client.model.ModelEgg;
 import openblocks.common.tileentity.TileEntityGoldenEgg;
 import openblocks.common.tileentity.TileEntityGoldenEgg.State;
-
-import org.lwjgl.opengl.GL11;
 
 public class TileEntityGoldenEggRenderer extends TileEntitySpecialRenderer {
 

@@ -6,11 +6,11 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 
-import openmods.utils.TextureUtils;
-
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.base.Preconditions;
+
+import openmods.utils.TextureUtils;
 
 public class Icons {
 

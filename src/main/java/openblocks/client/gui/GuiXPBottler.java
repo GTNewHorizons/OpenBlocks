@@ -4,6 +4,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
+import com.google.common.collect.ImmutableList;
+
 import openblocks.common.container.ContainerXPBottler;
 import openblocks.common.tileentity.TileEntityXPBottler;
 import openblocks.common.tileentity.TileEntityXPBottler.AutoSlots;
@@ -15,8 +17,6 @@ import openmods.gui.component.GuiComponentTab;
 import openmods.gui.component.GuiComponentTankLevel;
 import openmods.gui.logic.ValueCopyAction;
 import openmods.utils.MiscUtils;
-
-import com.google.common.collect.ImmutableList;
 
 public class GuiXPBottler
         extends GuiConfigurableSlots<TileEntityXPBottler, ContainerXPBottler, TileEntityXPBottler.AutoSlots> {

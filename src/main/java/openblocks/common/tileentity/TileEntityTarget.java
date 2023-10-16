@@ -15,6 +15,11 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.OpenBlocks;
 import openblocks.OpenBlocks.Blocks;
 import openmods.Log;
@@ -29,12 +34,6 @@ import openmods.sync.SyncableBoolean;
 import openmods.tileentity.SyncedTileEntity;
 import openmods.utils.BlockUtils;
 import openmods.utils.EntityUtils;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityTarget extends SyncedTileEntity
         implements ISurfaceAttachment, INeighbourAwareTile, IAddAwareTile {
