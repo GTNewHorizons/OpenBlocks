@@ -603,6 +603,8 @@ public class OpenBlocks {
         // needed first, to properly initialize delegates
         FluidRegistry.registerFluid(Fluids.xpJuice);
 
+        ItemHangGlider.loadConfig(evt);
+
         startupHelper.registerBlocksHolder(OpenBlocks.Blocks.class);
         startupHelper.registerItemsHolder(OpenBlocks.Items.class);
 
