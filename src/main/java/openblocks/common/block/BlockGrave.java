@@ -1,16 +1,19 @@
 package openblocks.common.block;
 
+import java.util.Objects;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import openblocks.Config;
+import openblocks.common.tileentity.TileEntityGrave;
 import openmods.Log;
 import openmods.block.BlockRotationMode;
 
@@ -23,6 +26,7 @@ public class BlockGrave extends OpenBlock {
         setRotationMode(BlockRotationMode.FOUR_DIRECTIONS);
         setBlockBounds(0, 0, 0, 1f, 0.2f, 1f);
         setResistance(2000.0F);
+        setHardness(6.0F);
         setRenderMode(RenderMode.TESR_ONLY);
     }
 
@@ -81,4 +85,15 @@ public class BlockGrave extends OpenBlock {
                 world.provider.dimensionId);
     }
 
+	@Override
+	public float getPlayerRelativeBlockHardness(EntityPlayer player, World world, int x, int y, int z) {
+		TileEntity tile = getTileEntity(world, x, y, z);
+
+        if (tile instanceof TileEntityGrave) {
+            TileEntityGrave graveStone = (TileEntityGrave) tile;
+            if (Objects.equals(graveStone.getUsername(), player.getDisplayName())) return 3.0F;
+        }
+
+		return super.getPlayerRelativeBlockHardness(player, world, x, y, z);
+	}
 }
