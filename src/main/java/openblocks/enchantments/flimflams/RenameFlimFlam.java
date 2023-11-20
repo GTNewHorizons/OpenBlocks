@@ -8,13 +8,13 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import openblocks.api.IFlimFlamAction;
-import openblocks.rubbish.LoreGenerator;
-import openmods.utils.WorldUtils;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Strings;
+
+import openblocks.api.IFlimFlamAction;
+import openblocks.rubbish.LoreGenerator;
+import openmods.utils.WorldUtils;
 
 public class RenameFlimFlam implements IFlimFlamAction {
 

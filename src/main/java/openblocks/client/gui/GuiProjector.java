@@ -4,6 +4,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+
 import openblocks.client.renderer.HeightMapRenderer;
 import openblocks.common.HeightMapData;
 import openblocks.common.MapDataManager;
@@ -18,9 +21,6 @@ import openmods.gui.listener.IMouseDownListener;
 import openmods.gui.misc.Trackball.TrackballWrapper;
 import openmods.utils.MathUtils;
 import openmods.utils.render.FakeIcon;
-
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 
 public class GuiProjector extends BaseGuiContainer<ContainerProjector> {
 

@@ -14,6 +14,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.google.common.collect.ImmutableSet;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.OpenBlocks.Items;
 import openblocks.client.renderer.entity.EntitySelectionHandler.ISelectAware;
 import openblocks.common.MapDataBuilder;
@@ -33,11 +37,6 @@ import openmods.sync.SyncableObjectBase;
 import openmods.utils.BitSet;
 import openmods.utils.ByteUtils;
 import openmods.utils.ItemUtils;
-
-import com.google.common.collect.ImmutableSet;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @VisibleForDocumentation
 public class EntityCartographer extends EntityAssistant implements ISelectAware, ISyncMapProvider {

@@ -20,6 +20,10 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.common.util.FakePlayer;
 
+import com.google.common.base.Strings;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.Config;
 import openmods.api.IActivateAwareTile;
 import openmods.api.IAddAwareTile;
@@ -31,11 +35,6 @@ import openmods.sync.SyncableBoolean;
 import openmods.sync.SyncableString;
 import openmods.tileentity.SyncedTileEntity;
 import openmods.utils.BlockUtils;
-
-import com.google.common.base.Strings;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityGrave extends SyncedTileEntity
         implements IPlacerAwareTile, IInventoryProvider, INeighbourAwareTile, IActivateAwareTile, IAddAwareTile {

@@ -23,16 +23,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
-import openblocks.common.entity.ai.EntityAIBreakBlock;
-import openblocks.common.entity.ai.EntityAIPickupPlayer;
-import openmods.Log;
-import openmods.api.VisibleForDocumentation;
-import openmods.network.event.EventDirection;
-import openmods.network.event.NetworkEvent;
-import openmods.network.event.NetworkEventMeta;
-import openmods.utils.ByteUtils;
-import openmods.utils.io.GameProfileSerializer;
-
 import com.google.common.base.Objects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
@@ -48,6 +38,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
+import openblocks.common.entity.ai.EntityAIBreakBlock;
+import openblocks.common.entity.ai.EntityAIPickupPlayer;
+import openmods.Log;
+import openmods.api.VisibleForDocumentation;
+import openmods.network.event.EventDirection;
+import openmods.network.event.NetworkEvent;
+import openmods.network.event.NetworkEventMeta;
+import openmods.utils.ByteUtils;
+import openmods.utils.io.GameProfileSerializer;
 
 @VisibleForDocumentation
 public class EntityMiniMe extends EntityCreature implements IEntityAdditionalSpawnData {

@@ -10,14 +10,14 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.OpenBlocks;
 import openblocks.common.PedometerHandler;
 import openblocks.common.PedometerHandler.PedometerData;
 import openblocks.common.PedometerHandler.PedometerState;
 import openmods.utils.Units.DistanceUnit;
 import openmods.utils.Units.SpeedUnit;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemPedometer extends Item {
 

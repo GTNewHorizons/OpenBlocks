@@ -15,17 +15,16 @@ import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import openblocks.common.item.ItemDevNull;
 import openblocks.common.item.ItemDevNull.Icons;
 import openmods.inventory.ItemInventory;
 import openmods.renderer.DisplayListWrapper;
 import openmods.utils.TextureUtils;
 import openmods.utils.render.RenderUtils;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class ItemRendererDevNull implements IItemRenderer {
 

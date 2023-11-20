@@ -6,12 +6,12 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
 import openblocks.common.entity.EntityLuggage;
 import openmods.utils.LazyValue;
 import openmods.utils.render.RenderUtils;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 public class ItemRendererLuggage implements IItemRenderer {
 

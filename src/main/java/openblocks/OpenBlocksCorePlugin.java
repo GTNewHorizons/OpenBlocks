@@ -4,10 +4,10 @@ import java.util.Map;
 
 import net.minecraft.launchwrapper.Launch;
 
-import openmods.core.OpenModsCorePlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.SortingIndex;
+import openmods.core.OpenModsCorePlugin;
 
 // must be higher than the one in OpenModslib
 @SortingIndex(32)

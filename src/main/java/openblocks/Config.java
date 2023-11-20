@@ -18,6 +18,9 @@ import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import cpw.mods.fml.common.IFuelHandler;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.RegistryDelegate;
 import openblocks.OpenBlocks.Enchantments;
 import openblocks.common.Stencil;
 import openblocks.common.TrophyHandler;
@@ -43,9 +46,6 @@ import openmods.config.properties.ConfigProperty;
 import openmods.config.properties.OnLineModifiable;
 import openmods.utils.ColorUtils;
 import openmods.utils.ColorUtils.ColorMeta;
-import cpw.mods.fml.common.IFuelHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.RegistryDelegate;
 
 public class Config {
 

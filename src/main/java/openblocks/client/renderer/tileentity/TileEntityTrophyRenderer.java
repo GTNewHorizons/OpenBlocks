@@ -7,12 +7,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import org.lwjgl.opengl.GL11;
+
 import openblocks.common.TrophyHandler.Trophy;
 import openblocks.common.tileentity.TileEntityTrophy;
 import openmods.utils.BlockUtils;
 import openmods.utils.render.RenderUtils;
-
-import org.lwjgl.opengl.GL11;
 
 public class TileEntityTrophyRenderer extends TileEntitySpecialRenderer {
 

@@ -6,6 +6,9 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
 import openblocks.common.block.BlockCanvas;
 import openblocks.common.sync.SyncableBlockLayers;
 import openblocks.common.sync.SyncableBlockLayers.Layer;
@@ -13,9 +16,6 @@ import openblocks.common.tileentity.TileEntityCanvas;
 import openmods.renderer.FixedRenderBlocks;
 import openmods.renderer.IBlockRenderer;
 import openmods.utils.render.RenderUtils;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 public class BlockCanvasRenderer implements IBlockRenderer<BlockCanvas> {
 

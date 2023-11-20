@@ -15,6 +15,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
+import com.google.common.base.Strings;
+import com.google.common.base.Supplier;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import openblocks.Config;
 import openblocks.OpenBlocks;
 import openblocks.common.item.ItemTrophyBlock;
@@ -38,12 +44,6 @@ import openmods.calc.SingleExprEvaluator.EnvironmentConfigurator;
 import openmods.calc.types.fp.DoubleCalculatorFactory;
 import openmods.config.properties.ConfigurationChange;
 import openmods.reflection.ReflectionHelper;
-
-import com.google.common.base.Strings;
-import com.google.common.base.Supplier;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class TrophyHandler {
 

@@ -9,9 +9,9 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import openmods.infobook.BookDocumentation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import openmods.infobook.BookDocumentation;
 
 @BookDocumentation(hasVideo = true)
 public class BlockBuilderGuide extends BlockGuide {

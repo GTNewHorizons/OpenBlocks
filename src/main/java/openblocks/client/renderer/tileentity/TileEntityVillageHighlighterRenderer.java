@@ -6,12 +6,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 
+import org.lwjgl.opengl.GL11;
+
 import openblocks.client.model.ModelVillage;
 import openblocks.common.tileentity.TileEntityVillageHighlighter;
 import openmods.sync.SyncableIntArray;
 import openmods.utils.BlockUtils;
-
-import org.lwjgl.opengl.GL11;
 
 public class TileEntityVillageHighlighterRenderer extends TileEntitySpecialRenderer {
 

@@ -4,13 +4,13 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
+import org.lwjgl.opengl.GL11;
+
 import openblocks.OpenBlocks;
 import openblocks.client.renderer.tileentity.TileEntityTrophyRenderer;
 import openblocks.common.TrophyHandler.Trophy;
 import openblocks.common.item.ItemTrophyBlock;
 import openmods.utils.render.RenderUtils;
-
-import org.lwjgl.opengl.GL11;
 
 public class ItemRendererTrophy implements IItemRenderer {
 

@@ -9,15 +9,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
+import com.google.common.collect.Sets;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import openblocks.Config;
 import openblocks.OpenBlocks;
 import openmods.Log;
 import openmods.config.properties.ConfigurationChange;
 import openmods.utils.BlockUtils;
 import openmods.utils.PlayerUtils;
-
-import com.google.common.collect.Sets;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityEventHandler {
 

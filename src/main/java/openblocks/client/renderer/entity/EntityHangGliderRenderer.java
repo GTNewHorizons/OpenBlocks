@@ -6,10 +6,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
+import org.lwjgl.opengl.GL11;
+
 import openblocks.common.entity.EntityHangGlider;
 import openmods.renderer.DisplayListWrapper;
-
-import org.lwjgl.opengl.GL11;
 
 public class EntityHangGliderRenderer extends Render {
 

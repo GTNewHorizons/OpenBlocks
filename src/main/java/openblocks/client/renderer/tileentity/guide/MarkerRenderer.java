@@ -8,15 +8,15 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.shader.TesselatorVertexState;
 import net.minecraft.util.ResourceLocation;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL15;
+import org.lwjgl.opengl.GL20;
+
 import openblocks.shapes.CoordShape;
 import openmods.renderer.shaders.ArraysHelper;
 import openmods.renderer.shaders.BufferHelper;
 import openmods.renderer.shaders.ShaderProgram;
 import openmods.renderer.shaders.ShaderProgramBuilder;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL15;
-import org.lwjgl.opengl.GL20;
 
 public class MarkerRenderer {
 

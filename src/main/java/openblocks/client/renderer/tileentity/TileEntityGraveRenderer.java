@@ -5,11 +5,11 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
+import org.lwjgl.opengl.GL11;
+
 import openblocks.client.model.ModelGrave;
 import openblocks.common.tileentity.TileEntityGrave;
 import openmods.utils.BlockUtils;
-
-import org.lwjgl.opengl.GL11;
 
 public class TileEntityGraveRenderer extends TileEntitySpecialRenderer {
 

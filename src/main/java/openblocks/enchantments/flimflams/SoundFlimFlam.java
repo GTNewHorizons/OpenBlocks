@@ -5,10 +5,10 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.S29PacketSoundEffect;
 
+import com.google.common.collect.ImmutableList;
+
 import openblocks.api.IFlimFlamAction;
 import openmods.utils.CollectionUtils;
-
-import com.google.common.collect.ImmutableList;
 
 public class SoundFlimFlam implements IFlimFlamAction {
 

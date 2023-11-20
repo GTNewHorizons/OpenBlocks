@@ -7,6 +7,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import cpw.mods.fml.common.ModContainer;
 import openblocks.client.gui.GuiDonationStation;
 import openblocks.common.DonationUrlManager;
 import openblocks.common.container.ContainerDonationStation;
@@ -17,7 +18,6 @@ import openmods.inventory.IInventoryProvider;
 import openmods.inventory.TileEntityInventory;
 import openmods.tileentity.OpenTileEntity;
 import openmods.utils.ModIdentifier;
-import cpw.mods.fml.common.ModContainer;
 
 public class TileEntityDonationStation extends OpenTileEntity implements IHasGui, IInventoryProvider {
 

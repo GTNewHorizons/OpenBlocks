@@ -14,6 +14,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import org.lwjgl.opengl.GL11;
+
 import openblocks.client.model.ModelCartographer;
 import openblocks.client.renderer.entity.EntitySelectionHandler.ISelectionRenderer;
 import openblocks.common.entity.EntityCartographer;
@@ -21,8 +23,6 @@ import openblocks.common.entity.EntityCartographer.MapJobs;
 import openmods.renderer.DisplayListWrapper;
 import openmods.utils.BlockUtils;
 import openmods.utils.render.RenderUtils;
-
-import org.lwjgl.opengl.GL11;
 
 public class EntityCartographerRenderer extends Render {
 

@@ -18,6 +18,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import com.google.common.collect.Lists;
+
 import openblocks.OpenBlocks;
 import openblocks.client.gui.GuiVacuumHopper;
 import openblocks.common.LiquidXpUtils;
@@ -44,8 +46,6 @@ import openmods.utils.bitmap.BitMapUtils;
 import openmods.utils.bitmap.IReadableBitMap;
 import openmods.utils.bitmap.IRpcDirectionBitMap;
 import openmods.utils.bitmap.IWriteableBitMap;
-
-import com.google.common.collect.Lists;
 
 public class TileEntityVacuumHopper extends SyncedTileEntity
         implements IInventoryProvider, IActivateAwareTile, IHasGui, IEntitySelector, INeighbourAwareTile {

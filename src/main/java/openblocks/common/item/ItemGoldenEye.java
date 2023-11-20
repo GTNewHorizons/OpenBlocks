@@ -15,17 +15,16 @@ import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
+import com.google.common.base.Strings;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.Config;
 import openblocks.OpenBlocks;
 import openblocks.common.entity.EntityGoldenEye;
 import openmods.Log;
 import openmods.utils.ItemUtils;
 import openmods.world.StructureRegistry;
-
-import com.google.common.base.Strings;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemGoldenEye extends Item {
 

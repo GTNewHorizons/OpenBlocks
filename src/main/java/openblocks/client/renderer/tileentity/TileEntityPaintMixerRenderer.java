@@ -9,14 +9,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import org.lwjgl.opengl.GL11;
+
 import openblocks.OpenBlocks;
 import openblocks.client.model.ModelPaintMixer;
 import openblocks.common.tileentity.TileEntityPaintMixer;
 import openmods.utils.BlockUtils;
 import openmods.utils.ColorUtils;
 import openmods.utils.render.RenderUtils;
-
-import org.lwjgl.opengl.GL11;
 
 public class TileEntityPaintMixerRenderer extends TileEntitySpecialRenderer {
 

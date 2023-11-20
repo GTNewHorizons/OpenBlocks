@@ -6,14 +6,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.StatCollector;
 
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
+
 import openmods.gui.component.GuiComponentBook;
 import openmods.gui.component.GuiComponentLabel;
 import openmods.gui.component.page.BookScaleConfig;
 import openmods.gui.component.page.PageBase;
-
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
-import com.google.common.collect.Iterables;
 
 public class ChangelogPage extends PageBase {
 

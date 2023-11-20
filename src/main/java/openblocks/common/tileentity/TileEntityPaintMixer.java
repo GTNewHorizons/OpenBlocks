@@ -9,6 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
+import org.apache.commons.lang3.ArrayUtils;
+
+import com.google.common.collect.Maps;
+
 import openblocks.OpenBlocks;
 import openblocks.client.gui.GuiPaintMixer;
 import openblocks.common.container.ContainerPaintMixer;
@@ -29,10 +33,6 @@ import openmods.sync.drops.DroppableTileEntity;
 import openmods.sync.drops.StoreOnDrop;
 import openmods.utils.ColorUtils;
 import openmods.utils.MiscUtils;
-
-import org.apache.commons.lang3.ArrayUtils;
-
-import com.google.common.collect.Maps;
 
 public class TileEntityPaintMixer extends DroppableTileEntity
         implements IInventoryProvider, IHasGui, IInventoryCallback, IColorChanger {

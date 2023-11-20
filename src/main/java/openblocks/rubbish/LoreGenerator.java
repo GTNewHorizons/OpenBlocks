@@ -12,11 +12,11 @@ import static openmods.words.Words.word;
 import java.util.Map;
 import java.util.Random;
 
-import openmods.words.IGenerator;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Maps;
+
+import openmods.words.IGenerator;
 
 public class LoreGenerator {
 

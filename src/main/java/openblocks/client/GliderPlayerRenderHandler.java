@@ -2,12 +2,11 @@ package openblocks.client;
 
 import net.minecraft.client.entity.AbstractClientPlayer;
 
-import openblocks.common.entity.EntityHangGlider;
-import openmods.renderer.PlayerBodyRenderEvent;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import openblocks.common.entity.EntityHangGlider;
+import openmods.renderer.PlayerBodyRenderEvent;
 
 public class GliderPlayerRenderHandler {
 

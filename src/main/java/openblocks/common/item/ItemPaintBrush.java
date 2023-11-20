@@ -13,6 +13,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.OpenBlocks;
 import openblocks.api.IPaintableBlock;
 import openblocks.common.block.BlockCanvas;
@@ -21,8 +23,6 @@ import openmods.utils.ColorUtils;
 import openmods.utils.ColorUtils.ColorMeta;
 import openmods.utils.ItemUtils;
 import openmods.utils.render.PaintUtils;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @BookDocumentation(customName = "paintbrush", hasVideo = true)
 public class ItemPaintBrush extends Item {

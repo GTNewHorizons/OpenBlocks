@@ -4,10 +4,10 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
+import org.lwjgl.opengl.GL11;
+
 import openblocks.client.model.ModelVacuumHopper;
 import openblocks.common.tileentity.TileEntityVacuumHopper;
-
-import org.lwjgl.opengl.GL11;
 
 public class TileEntityVacuumHopperRenderer extends TileEntitySpecialRenderer {
 

@@ -9,12 +9,11 @@ import net.minecraft.util.IIcon;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 
-import openmods.renderer.DisplayListWrapper;
-import openmods.utils.TextureUtils;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import openmods.renderer.DisplayListWrapper;
+import openmods.utils.TextureUtils;
 
 public class ModelCartographer extends ModelBase {
 

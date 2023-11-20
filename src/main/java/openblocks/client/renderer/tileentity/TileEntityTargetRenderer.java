@@ -4,11 +4,11 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
+import org.lwjgl.opengl.GL11;
+
 import openblocks.client.model.ModelTarget;
 import openblocks.common.tileentity.TileEntityTarget;
 import openmods.utils.BlockUtils;
-
-import org.lwjgl.opengl.GL11;
 
 public class TileEntityTargetRenderer extends TileEntitySpecialRenderer {
 

@@ -6,12 +6,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
-import openblocks.client.model.ModelLuggage;
-import openblocks.common.entity.EntityLuggage;
-
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.base.Strings;
+
+import openblocks.client.model.ModelLuggage;
+import openblocks.common.entity.EntityLuggage;
 
 public class EntityLuggageRenderer extends RenderLiving {
 

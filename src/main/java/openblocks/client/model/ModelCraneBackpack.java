@@ -14,13 +14,12 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
 
-import openblocks.common.CraneRegistry;
-import openblocks.common.entity.EntityMagnet;
-import openblocks.common.item.ItemCraneBackpack;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import openblocks.common.CraneRegistry;
+import openblocks.common.entity.EntityMagnet;
+import openblocks.common.item.ItemCraneBackpack;
 
 public class ModelCraneBackpack extends ModelBiped {
 

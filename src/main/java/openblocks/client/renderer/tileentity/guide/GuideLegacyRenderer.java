@@ -2,13 +2,13 @@ package openblocks.client.renderer.tileentity.guide;
 
 import net.minecraft.client.renderer.Tessellator;
 
+import org.lwjgl.opengl.GL11;
+
 import openblocks.common.tileentity.TileEntityGuide;
 import openblocks.shapes.CoordShape;
 import openmods.renderer.DisplayListWrapper;
 import openmods.utils.Coord;
 import openmods.utils.TextureUtils;
-
-import org.lwjgl.opengl.GL11;
 
 public class GuideLegacyRenderer implements IGuideRenderer {
 

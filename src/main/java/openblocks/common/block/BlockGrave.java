@@ -12,12 +12,12 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import org.apache.logging.log4j.Level;
+
 import openblocks.Config;
 import openblocks.common.tileentity.TileEntityGrave;
 import openmods.Log;
 import openmods.block.BlockRotationMode;
-
-import org.apache.logging.log4j.Level;
 
 public class BlockGrave extends OpenBlock {
 
@@ -85,15 +85,15 @@ public class BlockGrave extends OpenBlock {
                 world.provider.dimensionId);
     }
 
-	@Override
-	public float getPlayerRelativeBlockHardness(EntityPlayer player, World world, int x, int y, int z) {
-		TileEntity tile = getTileEntity(world, x, y, z);
+    @Override
+    public float getPlayerRelativeBlockHardness(EntityPlayer player, World world, int x, int y, int z) {
+        TileEntity tile = getTileEntity(world, x, y, z);
 
         if (tile instanceof TileEntityGrave) {
             TileEntityGrave graveStone = (TileEntityGrave) tile;
             if (Objects.equals(graveStone.getUsername(), player.getDisplayName())) return 3.0F;
         }
 
-		return super.getPlayerRelativeBlockHardness(player, world, x, y, z);
-	}
+        return super.getPlayerRelativeBlockHardness(player, world, x, y, z);
+    }
 }

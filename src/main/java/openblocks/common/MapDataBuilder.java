@@ -14,15 +14,15 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 
-import openblocks.common.HeightMapData.LayerData;
-import openblocks.common.item.ItemEmptyMap;
-import openblocks.common.item.ItemHeightMap;
-import openmods.utils.BitSet;
-
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
+
+import openblocks.common.HeightMapData.LayerData;
+import openblocks.common.item.ItemEmptyMap;
+import openblocks.common.item.ItemHeightMap;
+import openmods.utils.BitSet;
 
 public class MapDataBuilder {
 

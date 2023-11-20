@@ -7,11 +7,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
+import com.google.common.collect.Maps;
+
 import openblocks.common.tileentity.TileEntityTank;
 import openmods.liquids.GenericTank;
 import openmods.utils.Diagonal;
-
-import com.google.common.collect.Maps;
 
 public class TankRenderLogic {
 

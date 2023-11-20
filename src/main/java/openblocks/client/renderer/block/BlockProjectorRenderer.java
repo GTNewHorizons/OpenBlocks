@@ -8,15 +8,15 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.ForgeHooksClient;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
 import openblocks.Config;
 import openblocks.common.block.BlockProjector;
 import openmods.renderer.IBlockRenderer;
 import openmods.tileentity.OpenTileEntity;
 import openmods.utils.ByteUtils;
 import openmods.utils.render.RenderUtils;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 public class BlockProjectorRenderer implements IBlockRenderer<BlockProjector> {
 

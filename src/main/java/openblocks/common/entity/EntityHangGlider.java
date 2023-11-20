@@ -12,19 +12,18 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
-import openblocks.Config;
-import openblocks.common.IVarioController;
-import openblocks.common.Vario;
-import openblocks.common.item.ItemHangGlider;
-import openmods.Log;
-import openmods.OpenMods;
-
 import com.google.common.collect.MapMaker;
 
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import openblocks.Config;
+import openblocks.common.IVarioController;
+import openblocks.common.Vario;
+import openblocks.common.item.ItemHangGlider;
+import openmods.Log;
+import openmods.OpenMods;
 
 public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnData {
 

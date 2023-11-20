@@ -5,13 +5,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
+import com.google.common.collect.ImmutableList;
+
+import cpw.mods.fml.common.Loader;
 import openblocks.Config;
 import openblocks.OpenBlocks;
 import openmods.infobook.ICustomBookEntryProvider;
 import openmods.item.IMetaItem;
-
-import com.google.common.collect.ImmutableList;
-import cpw.mods.fml.common.Loader;
 
 public enum MetasGeneric {
 
