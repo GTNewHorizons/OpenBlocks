@@ -5,6 +5,6 @@ dependencies {
 
     compile('openperipheral:OpenPeripheralCore-API:3.4.1')
 
-    compileOnly('com.github.GTNewHorizons:NotEnoughItems:2.2.7-GTNH:dev')
+    compileOnly('com.github.GTNewHorizons:NotEnoughItems:2.4.12-GTNH:dev')
     compileOnly('curse.maven:computercraft-67504:2269339')
 }
