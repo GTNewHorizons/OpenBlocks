@@ -19,6 +19,7 @@ public class BlockScaffolding extends OpenBlock {
         super(Material.cloth);
         setTickRandomly(true);
         setHardness(0.1F);
+        setStepSound(Block.soundTypeWood);
     }
 
     @Override

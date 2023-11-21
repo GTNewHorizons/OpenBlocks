@@ -8,6 +8,8 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.google.common.base.Throwables;
 
 import codechicken.nei.api.IConfigureNEI;
+import openblocks.common.item.MetasGeneric;
+import openblocks.common.item.MetasGenericUnstackable;
 import openmods.Log;
 
 public class NEIOpenBlocksConfig implements IConfigureNEI {
@@ -25,6 +27,14 @@ public class NEIOpenBlocksConfig implements IConfigureNEI {
 
         if (OpenBlocks.Items.heightMap != null) {
             API$hideItem(new ItemStack(OpenBlocks.Items.heightMap, 1, OreDictionary.WILDCARD_VALUE));
+        }
+
+        if (!MetasGeneric.subItemEnabled()) {
+            API$hideItem(new ItemStack(OpenBlocks.Items.generic, 1, OreDictionary.WILDCARD_VALUE));
+        }
+
+        if (!MetasGenericUnstackable.subItemEnabled()) {
+            API$hideItem(new ItemStack(OpenBlocks.Items.genericUnstackable, 1, OreDictionary.WILDCARD_VALUE));
         }
 
         Log.info("OpenBlocks NEI Integration loaded successfully");

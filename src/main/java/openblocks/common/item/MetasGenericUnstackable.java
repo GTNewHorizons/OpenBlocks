@@ -19,6 +19,11 @@ public enum MetasGenericUnstackable {
             final ItemStack whiteWool = ColorMeta.WHITE.createStack(Blocks.wool, 1);
             return new MetaPointer("pointer", new ShapedOreRecipe(result, "w  ", "ww ", "w  ", 'w', whiteWool));
         }
+
+        @Override
+        public boolean isEnabled() {
+            return OpenBlocks.Blocks.cannon != null;
+        }
     };
 
     public ItemStack newItemStack(int size) {
@@ -42,5 +47,12 @@ public enum MetasGenericUnstackable {
     public static void registerItems() {
         for (MetasGenericUnstackable m : values())
             if (m.isEnabled()) Items.genericUnstackable.registerItem(m.ordinal(), m.createMetaItem());
+    }
+
+    public static boolean subItemEnabled() {
+        for (MetasGenericUnstackable m : values()) if (m.isEnabled()) {
+            return true;
+        }
+        return false;
     }
 }

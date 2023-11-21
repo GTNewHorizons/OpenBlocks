@@ -25,6 +25,11 @@ public enum MetasGeneric {
                     new ShapedOreRecipe(result, " sl", "sll", "lll", 's', "stickWood", 'l', Items.leather),
                     new ShapedOreRecipe(result, "ls ", "lls", "lll", 's', "stickWood", 'l', Items.leather));
         }
+
+        @Override
+        public boolean isEnabled() {
+            return OpenBlocks.Items.hangGlider != null;
+        }
     },
     beam {
 
@@ -56,6 +61,11 @@ public enum MetasGeneric {
                             'y',
                             "dyeYellow"));
         }
+
+        @Override
+        public boolean isEnabled() {
+            return OpenBlocks.Items.craneBackpack != null;
+        }
     },
     craneEngine {
 
@@ -75,6 +85,11 @@ public enum MetasGeneric {
                             "stickWood",
                             'r',
                             "dustRedstone"));
+        }
+
+        @Override
+        public boolean isEnabled() {
+            return OpenBlocks.Items.craneBackpack != null;
         }
     },
     craneMagnet {
@@ -108,6 +123,12 @@ public enum MetasGeneric {
                             "dyeBlack",
                             'y',
                             "dyeYellow"));
+        }
+
+        @Override
+        public boolean isEnabled() {
+            return OpenBlocks.Items.craneBackpack != null
+                    || (Loader.isModLoaded(openmods.Mods.OPENPERIPHERALCORE) && Config.enableCraneTurtles);
         }
     },
     miracleMagnet {
@@ -156,6 +177,11 @@ public enum MetasGeneric {
                     "line",
                     new ShapedOreRecipe(result, "sss", "bbb", "sss", 's', Items.string, 'b', "slimeball"));
         }
+
+        @Override
+        public boolean isEnabled() {
+            return OpenBlocks.Items.craneBackpack != null;
+        }
     },
     mapController {
 
@@ -166,6 +192,11 @@ public enum MetasGeneric {
                     "map_controller",
                     new ShapedOreRecipe(result, " r ", "rgr", " r ", 'r', "dustRedstone", 'g', "ingotGold"));
         }
+
+        @Override
+        public boolean isEnabled() {
+            return OpenBlocks.Items.emptyMap != null;
+        }
     },
     mapMemory {
 
@@ -175,6 +206,11 @@ public enum MetasGeneric {
             return new MetaGeneric(
                     "map_memory",
                     new ShapedOreRecipe(result, "rg", "rg", "rg", 'g', "nuggetGold", 'r', "dustRedstone"));
+        }
+
+        @Override
+        public boolean isEnabled() {
+            return OpenBlocks.Items.emptyMap != null;
         }
     },
     /**
@@ -211,6 +247,11 @@ public enum MetasGeneric {
                             'r',
                             "dustRedstone"));
         }
+
+        @Override
+        public boolean isEnabled() {
+            return OpenBlocks.Items.cartographer != null;
+        }
     },
     unpreparedStencil {
 
@@ -220,6 +261,11 @@ public enum MetasGeneric {
             return new MetaGeneric(
                     "unprepared_stencil",
                     new ShapedOreRecipe(result, " p ", "pip", " p ", 'p', Items.paper, 'i', "ingotIron"));
+        }
+
+        @Override
+        public boolean isEnabled() {
+            return OpenBlocks.Blocks.drawingTable != null;
         }
     },
     sketchingPencil {
@@ -238,6 +284,11 @@ public enum MetasGeneric {
                             new ItemStack(Items.coal, 1, OreDictionary.WILDCARD_VALUE),
                             's',
                             "stickWood"));
+        }
+
+        @Override
+        public boolean isEnabled() {
+            return OpenBlocks.Blocks.drawingTable != null;
         }
     };
 
@@ -274,5 +325,12 @@ public enum MetasGeneric {
                             MetasGeneric.unpreparedStencil.newItemStack()));
         }
 
+    }
+
+    public static boolean subItemEnabled() {
+        for (MetasGeneric m : values()) if (m.isEnabled()) {
+            return true;
+        }
+        return false;
     }
 }
