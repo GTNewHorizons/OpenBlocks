@@ -26,7 +26,7 @@ public class BlockGrave extends OpenBlock {
         setRotationMode(BlockRotationMode.FOUR_DIRECTIONS);
         setBlockBounds(0, 0, 0, 1f, 0.2f, 1f);
         setResistance(2000.0F);
-        setHardness(6.0F);
+        setHardness(25.0F);
         setRenderMode(RenderMode.TESR_ONLY);
     }
 
@@ -91,7 +91,7 @@ public class BlockGrave extends OpenBlock {
 
         if (tile instanceof TileEntityGrave) {
             TileEntityGrave graveStone = (TileEntityGrave) tile;
-            if (Objects.equals(graveStone.getUsername(), player.getDisplayName())) return 3.0F;
+            if (Objects.equals(graveStone.getUsername(), player.getDisplayName())) return 2.0F;
         }
 
         return super.getPlayerRelativeBlockHardness(player, world, x, y, z);
