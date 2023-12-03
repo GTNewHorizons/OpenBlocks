@@ -91,7 +91,7 @@ public class BlockGrave extends OpenBlock {
 
         if (tile instanceof TileEntityGrave) {
             TileEntityGrave graveStone = (TileEntityGrave) tile;
-            if (Objects.equals(graveStone.getUsername(), player.getDisplayName())) return 2.0F;
+            if (Objects.equals(graveStone.getUsername(), player.getGameProfile().getName())) return 2.0F;
         }
 
         return super.getPlayerRelativeBlockHardness(player, world, x, y, z);
