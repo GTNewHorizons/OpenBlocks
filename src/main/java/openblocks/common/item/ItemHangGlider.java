@@ -3,11 +3,10 @@ package openblocks.common.item;
 import java.util.HashSet;
 import java.util.Map;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Configuration;
 
@@ -118,7 +117,7 @@ public class ItemHangGlider extends Item {
 
     private static void spawnGlider(EntityPlayer player) {
         if (isInvalidDimension(player)) {
-            player.addChatMessage(new ChatComponentText(I18n.format("item.openblocks.hangglider.invalid_dimension")));
+            player.addChatMessage(new ChatComponentTranslation("item.openblocks.hangglider.invalid_dimension"));
             return;
         }
 
