@@ -17,10 +17,6 @@
     "credits": "",
     "logoFile": "",
     "screenshots": [],
-    "parent": "",
-    "requiredMods": ["Forge","OpenMods@[0.10.1,)"],
-    "dependencies": ["OpenMods@[0.10.1,)"],
-    "dependants": [],
-    "useDependencyInformation": true
+    "parent": ""
   }]
 }
