@@ -1,10 +1,10 @@
 // Add your dependencies here
 
 dependencies {
-    api('com.github.GTNewHorizons:OpenModsLib:0.10.7:dev')
+    api('com.github.GTNewHorizons:OpenModsLib:0.11.1:dev')
 
 
     compileOnly('openperipheral:OpenPeripheralCore-API:3.4.1')
-    compileOnly('com.github.GTNewHorizons:NotEnoughItems:2.5.4-GTNH:dev')
+    compileOnly('com.github.GTNewHorizons:NotEnoughItems:2.6.8-GTNH:dev')
     compileOnly('curse.maven:computercraft-67504:2269339')
 }
