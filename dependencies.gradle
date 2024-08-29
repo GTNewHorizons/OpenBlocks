@@ -7,5 +7,5 @@ dependencies {
     compileOnly('openperipheral:OpenPeripheralCore-API:3.4.1')
     compileOnly('com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH:dev')
     compileOnly('curse.maven:computercraft-67504:2269339')
-    compileOnly('com.github.GTNewHorizons:Mobs-Info:0.4.4-GTNH-pre:dev')
+    compileOnly('com.github.GTNewHorizons:Mobs-Info:0.4.5-GTNH:dev')
 }
