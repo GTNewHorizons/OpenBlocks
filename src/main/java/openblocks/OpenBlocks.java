@@ -224,7 +224,7 @@ public class OpenBlocks {
 
     public static final String MODID = "OpenBlocks";
     public static final String NAME = "OpenBlocks";
-    public static final String VERSION = "GRADLETOKEN_VERSION";
+    public static final String VERSION = Tags.VERSION;
     public static final String PROXY_SERVER = "openblocks.common.ServerProxy";
     public static final String PROXY_CLIENT = "openblocks.client.ClientProxy";
     public static final String DEPENDENCIES = "required-after:OpenMods@[0.10.1,)";
