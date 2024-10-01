@@ -108,7 +108,7 @@ public class ItemRendererDevNull implements IItemRenderer {
     }
 
     @SubscribeEvent
-    public void onTextuteChange(TextureStitchEvent evt) {
+    public void onTextureChange(TextureStitchEvent evt) {
         if (evt.map.getTextureType() == TextureUtils.TEXTURE_MAP_ITEMS) cube.reset();
     }
 
@@ -156,15 +156,10 @@ public class ItemRendererDevNull implements IItemRenderer {
         if (type == ItemRenderType.ENTITY) {
             GL11.glTranslated(-0.25, -0.25, -0.25);
             GL11.glScaled(0.5, 0.5, 0.5);
-            RenderUtils.disableLightmap();
         }
 
         TextureUtils.bindDefaultItemsTexture();
         cube.render();
-
-        if (type == ItemRenderType.ENTITY) {
-            RenderUtils.enableLightmap();
-        }
 
         if (containedStack != null && (containedStack.getItem() instanceof ItemBlock)) {
             GL11.glTranslated(0.5, 0.5, 0.5);
