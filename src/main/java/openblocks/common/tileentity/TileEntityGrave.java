@@ -3,7 +3,6 @@ package openblocks.common.tileentity;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -45,7 +44,7 @@ public class TileEntityGrave extends SyncedTileEntity
 
     private IChatComponent deathMessage;
 
-    private GenericInventory inventory = registerInventoryCallback(new GenericInventory("grave", false, 1));
+    private final GenericInventory inventory = registerInventoryCallback(new GenericInventory("grave", false, 1));
 
     public TileEntityGrave() {}
 
@@ -56,14 +55,13 @@ public class TileEntityGrave extends SyncedTileEntity
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void updateEntity() {
         super.updateEntity();
 
         if (!worldObj.isRemote) {
             if (Config.spawnSkeletons && worldObj.difficultySetting != EnumDifficulty.PEACEFUL
                     && worldObj.rand.nextDouble() < Config.skeletonSpawnRate) {
-                List<Entity> mobs = worldObj.getEntitiesWithinAABB(IMob.class, getBB().expand(7, 7, 7));
+                List<IMob> mobs = worldObj.getEntitiesWithinAABB(IMob.class, getBB().expand(7, 7, 7));
                 if (mobs.size() < 5) {
                     double chance = worldObj.rand.nextDouble();
                     EntityLiving living = chance < 0.5 ? new EntitySkeleton(worldObj) : new EntityBat(worldObj);
@@ -105,8 +103,7 @@ public class TileEntityGrave extends SyncedTileEntity
     @Override
     public void onBlockPlacedBy(EntityLivingBase placer, ItemStack stack) {
         if (!worldObj.isRemote) {
-            if ((placer instanceof EntityPlayer) && !(placer instanceof FakePlayer)) {
-                EntityPlayer player = (EntityPlayer) placer;
+            if ((placer instanceof EntityPlayer player) && !(placer instanceof FakePlayer)) {
 
                 if (stack.hasDisplayName()) setUsername(stack.getDisplayName());
                 else setUsername(player.getGameProfile().getName());
