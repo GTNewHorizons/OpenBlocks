@@ -47,7 +47,7 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
     private static final int PROPERTY_DEPLOYED = 17;
 
-    private static HashMap<EntityPlayer, EntityHangGlider> gliderMap = new HashMap<EntityPlayer, EntityHangGlider>();
+    private static Map<EntityPlayer, EntityHangGlider> gliderMap = new HashMap<>();
 
     private IVarioController varioControl = IVarioController.NULL;
 
