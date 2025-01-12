@@ -1,7 +1,6 @@
 package openblocks.common.item;
 
 import java.util.HashSet;
-import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -10,8 +9,6 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Configuration;
 
-import com.google.common.collect.MapMaker;
-
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import openblocks.OpenBlocks;
 import openblocks.common.entity.EntityHangGlider;
@@ -19,9 +16,6 @@ import openmods.infobook.BookDocumentation;
 
 @BookDocumentation(hasVideo = true)
 public class ItemHangGlider extends Item {
-
-    private static final Map<EntityPlayer, EntityHangGlider> spawnedGlidersMap = new MapMaker().weakKeys().weakValues()
-            .makeMap();
 
     private static HashSet<Integer> blacklistedDimensions = new HashSet<>();
 
@@ -103,7 +97,7 @@ public class ItemHangGlider extends Item {
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
         if (!world.isRemote && player != null) {
-            EntityHangGlider glider = spawnedGlidersMap.get(player);
+            EntityHangGlider glider = EntityHangGlider.getEntityHangGlider(player);
             if (glider != null) despawnGlider(player, glider);
             else spawnGlider(player);
         }
@@ -112,7 +106,6 @@ public class ItemHangGlider extends Item {
 
     private static void despawnGlider(EntityPlayer player, EntityHangGlider glider) {
         glider.setDead();
-        spawnedGlidersMap.remove(player);
     }
 
     private static void spawnGlider(EntityPlayer player) {
@@ -124,7 +117,6 @@ public class ItemHangGlider extends Item {
         EntityHangGlider glider = new EntityHangGlider(player.worldObj, player);
         glider.setPositionAndRotation(player.posX, player.posY, player.posZ, player.rotationPitch, player.rotationYaw);
         player.worldObj.spawnEntityInWorld(glider);
-        spawnedGlidersMap.put(player, glider);
     }
 
     private static boolean isInvalidDimension(EntityPlayer player) {
