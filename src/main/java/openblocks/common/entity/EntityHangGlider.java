@@ -1,6 +1,7 @@
 package openblocks.common.entity;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -11,8 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
-
-import com.google.common.collect.MapMaker;
 
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
@@ -48,7 +47,7 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
     private static final int PROPERTY_DEPLOYED = 17;
 
-    private static Map<EntityPlayer, EntityHangGlider> gliderMap = new MapMaker().weakKeys().weakValues().makeMap();
+    private static Map<EntityPlayer, EntityHangGlider> gliderMap = new HashMap<>();
 
     private IVarioController varioControl = IVarioController.NULL;
 
@@ -60,6 +59,10 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
     public static boolean isGliderDeployed(Entity player) {
         EntityHangGlider glider = gliderMap.get(player);
         return glider != null && glider.isDeployed();
+    }
+
+    public static EntityHangGlider getEntityHangGlider(Entity player) {
+        return gliderMap.get(player);
     }
 
     private static boolean isGliderValid(EntityPlayer player, EntityHangGlider glider) {
