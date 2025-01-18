@@ -90,8 +90,10 @@ public class TileEntityTrophy extends SyncedTileEntity
         final Trophy trophy = getTrophy();
         if (trophy != null) {
             ItemStack stack = trophy.getItemStack();
-            NBTTagCompound tag = ItemUtils.getItemTag(stack);
-            tag.setInteger(TAG_COOLDOWN, cooldown);
+            if (cooldown > 0) {
+                NBTTagCompound tag = ItemUtils.getItemTag(stack);
+                tag.setInteger(TAG_COOLDOWN, cooldown);
+            }
             return stack;
         }
 
