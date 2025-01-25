@@ -61,8 +61,12 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
         return glider != null && glider.isDeployed();
     }
 
-    public static EntityHangGlider getEntityHangGlider(Entity player) {
+    public static EntityHangGlider getEntityHangGlider(EntityPlayer player) {
         return gliderMap.get(player);
+    }
+
+    public static EntityHangGlider setEntityHangGlider(EntityPlayer player, EntityHangGlider glider) {
+        return gliderMap.put(player, glider);
     }
 
     private static boolean isGliderValid(EntityPlayer player, EntityHangGlider glider) {

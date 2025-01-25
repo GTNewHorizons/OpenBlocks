@@ -116,6 +116,7 @@ public class ItemHangGlider extends Item {
 
         EntityHangGlider glider = new EntityHangGlider(player.worldObj, player);
         glider.setPositionAndRotation(player.posX, player.posY, player.posZ, player.rotationPitch, player.rotationYaw);
+        EntityHangGlider.setEntityHangGlider(player, glider);
         player.worldObj.spawnEntityInWorld(glider);
     }
 
