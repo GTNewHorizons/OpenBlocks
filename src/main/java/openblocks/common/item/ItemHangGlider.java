@@ -98,14 +98,10 @@ public class ItemHangGlider extends Item {
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
         if (!world.isRemote && player != null) {
             EntityHangGlider glider = EntityHangGlider.getEntityHangGlider(player);
-            if (glider != null) despawnGlider(player, glider);
+            if (glider != null) glider.setDead();
             else spawnGlider(player);
         }
         return itemStack;
-    }
-
-    private static void despawnGlider(EntityPlayer player, EntityHangGlider glider) {
-        glider.setDead();
     }
 
     private static void spawnGlider(EntityPlayer player) {
