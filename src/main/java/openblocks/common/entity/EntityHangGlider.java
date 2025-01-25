@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -79,7 +78,7 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
         for (Map.Entry<EntityPlayer, EntityHangGlider> e : gliderMap.entrySet()) {
             EntityPlayer player = e.getKey();
             EntityHangGlider glider = e.getValue();
-            if (isGliderValid(player, glider)) glider.fixPositions(player, player instanceof EntityPlayerSP);
+            if (isGliderValid(player, glider)) glider.fixPositions(player, true);
             else glider.setDead();
         }
     }
@@ -124,6 +123,7 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
             data.writeInt(-42);
         } else {
             data.writeInt(player.getEntityId());
+            gliderMap.put(player, this);
         }
     }
 
