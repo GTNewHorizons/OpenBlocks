@@ -6,6 +6,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -27,9 +28,9 @@ public class ItemHeightMap extends Item {
         HeightMapData data = MapDataManager.getMapData(player.worldObj, mapId);
 
         if (data.isValid()) {
-            result.add(String.format("Center X: %d", data.centerX));
-            result.add(String.format("Center Z: %d", data.centerZ));
-            result.add(String.format("Scale: 1:%d", 1 << data.scale));
+            result.add(StatCollector.translateToLocalFormatted("openblocks.misc.map.scale.center_x", data.centerX));
+            result.add(StatCollector.translateToLocalFormatted("openblocks.misc.map.scale.center_z", data.centerZ));
+            result.add(StatCollector.translateToLocalFormatted("openblocks.misc.map.scale", 1 << data.scale));
         } else if (data.isEmpty()) {
             MapDataManager.requestMapData(player.worldObj, mapId);
         }
