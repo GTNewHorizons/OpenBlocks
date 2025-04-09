@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
@@ -30,7 +31,7 @@ public class ItemEmptyMap extends Item {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void addInformation(ItemStack item, EntityPlayer player, List result, boolean extended) {
         NBTTagCompound tag = ItemUtils.getItemTag(item);
-        result.add(String.format("Scale: 1:%d", 1 << tag.getByte(TAG_SCALE)));
+        result.add(StatCollector.translateToLocalFormatted("openblocks.misc.map.scale", 1 << tag.getByte(TAG_SCALE)));
     }
 
     public ItemStack createMap(int scale) {
