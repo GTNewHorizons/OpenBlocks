@@ -1,7 +1,7 @@
 // Add your dependencies here
 
 dependencies {
-    api('com.github.GTNewHorizons:OpenModsLib:0.11.1:dev')
+    api('com.github.GTNewHorizons:OpenModsLib:0.10.10:dev')
 
     devOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.7.34-GTNH:dev')
     compileOnly('openperipheral:OpenPeripheralCore-API:3.4.1')
