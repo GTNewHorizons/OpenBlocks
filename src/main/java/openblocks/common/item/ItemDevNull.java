@@ -10,6 +10,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
@@ -66,12 +67,10 @@ public class ItemDevNull extends Item {
         }
     }
 
-    public EventHandler handler;
-
     public ItemDevNull() {
         setCreativeTab(OpenBlocks.tabOpenBlocks);
         setMaxStackSize(1);
-        handler = new EventHandler();
+        MinecraftForge.EVENT_BUS.register(new EventHandler());
     }
 
     private static int calculateDepth(ItemStack stack) {
