@@ -66,9 +66,12 @@ public class ItemDevNull extends Item {
         }
     }
 
+    public EventHandler handler;
+
     public ItemDevNull() {
         setCreativeTab(OpenBlocks.tabOpenBlocks);
         setMaxStackSize(1);
+        handler = new EventHandler();
     }
 
     private static int calculateDepth(ItemStack stack) {
@@ -147,36 +150,6 @@ public class ItemDevNull extends Item {
     private static final IEqualityTester tester = new StackEqualityTesterBuilder().useItem().useDamage().useNBT()
             .build();
 
-    @SubscribeEvent
-    public void onItemPickUp(EntityItemPickupEvent evt) {
-
-        final EntityPlayer player = evt.entityPlayer;
-        final ItemStack pickedStack = evt.item.getEntityItem();
-
-        if (pickedStack == null || player == null) return;
-
-        boolean foundMatchingContainer = false;
-
-        for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
-            final ItemStack stack = player.inventory.getStackInSlot(i);
-
-            if (stack != null && stack.getItem() == this) {
-                final ItemInventory inventory = new ItemInventory(stack, 1);
-                final ItemStack containedStack = inventory.getStackInSlot(0);
-                if (containedStack != null) {
-                    final boolean isMatching = tester.isEqual(pickedStack, containedStack);
-                    if (isMatching) {
-                        ItemDistribution.tryInsertStack(inventory, 0, pickedStack, true);
-                        if (pickedStack.stackSize == 0) return;
-                        foundMatchingContainer = true;
-                    }
-                }
-            }
-        }
-
-        if (foundMatchingContainer) pickedStack.stackSize = 0;
-    }
-
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister register) {
@@ -184,5 +157,39 @@ public class ItemDevNull extends Item {
         Icons.iconTransparent = register.registerIcon("openblocks:devnull");
         Icons.iconFull = register.registerIcon("openblocks:devfull");
         Icons.iconOverload = register.registerIcon("openblocks:devzerooverzero");
+    }
+
+    public class EventHandler {
+
+        @SubscribeEvent
+        public void onItemPickUp(EntityItemPickupEvent evt) {
+
+            final EntityPlayer player = evt.entityPlayer;
+            final ItemStack pickedStack = evt.item.getEntityItem();
+
+            if (pickedStack == null || player == null) return;
+
+            boolean foundMatchingContainer = false;
+
+            for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+                final ItemStack stack = player.inventory.getStackInSlot(i);
+
+                if (stack != null && stack.getItem() == ItemDevNull.this) {
+                    final ItemInventory inventory = new ItemInventory(stack, 1);
+                    final ItemStack containedStack = inventory.getStackInSlot(0);
+                    if (containedStack != null) {
+                        final boolean isMatching = tester.isEqual(pickedStack, containedStack);
+                        if (isMatching) {
+                            ItemDistribution.tryInsertStack(inventory, 0, pickedStack, true);
+                            if (pickedStack.stackSize == 0) return;
+                            foundMatchingContainer = true;
+                        }
+                    }
+                }
+            }
+
+            if (foundMatchingContainer) pickedStack.stackSize = 0;
+        }
+
     }
 }

@@ -1390,7 +1390,7 @@ public class Config {
         }
 
         if (OpenBlocks.Items.devNull != null) {
-            MinecraftForge.EVENT_BUS.register(OpenBlocks.Items.devNull);
+            MinecraftForge.EVENT_BUS.register(OpenBlocks.Items.devNull.handler);
             recipeList.add(new ShapelessOreRecipe(new ItemStack(OpenBlocks.Items.devNull), "cobblestone", Items.apple));
         }
 
