@@ -2,6 +2,7 @@ package openblocks.common.entity;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
@@ -75,12 +76,19 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
     @SideOnly(Side.CLIENT)
     public static void updateGliders(World worldObj) {
-        for (Map.Entry<EntityPlayer, EntityHangGlider> e : gliderMap.entrySet()) {
-            EntityPlayer player = e.getKey();
-            EntityHangGlider glider = e.getValue();
-            if (isGliderValid(player, glider)) glider.fixPositions(player, true);
-            else glider.setDead();
-        }
+		Iterator<Map.Entry<EntityPlayer, EntityHangGlider>> iterator = gliderMap.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Map.Entry<EntityPlayer, EntityHangGlider> e = iterator.next();
+			EntityPlayer player = e.getKey();
+			EntityHangGlider glider = e.getValue();
+
+			if (isGliderValid(player, glider)) {
+				glider.fixPositions(player, true);
+			} else {
+				iterator.remove();
+				glider.setDeadUnsafe();
+			}
+		}
     }
 
     private EntityPlayer player;
@@ -245,16 +253,20 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
     @Override
     public void setDead() {
-        super.setDead();
         gliderMap.remove(player);
-
-        if (varioControl.isValid()) {
-            varioControl.kill();
-            varioControl.release();
-            ticksSinceLastVarioUpdate = 0;
-            verticalMotionSinceLastVarioUpdate = 0;
-        }
+        setDeadUnsafe();
     }
+
+	private void setDeadUnsafe() {
+		super.setDead();
+
+		if (varioControl.isValid()) {
+			varioControl.kill();
+			varioControl.release();
+			ticksSinceLastVarioUpdate = 0;
+			verticalMotionSinceLastVarioUpdate = 0;
+		}
+	}
 
     private void fixPositions(EntityPlayer thePlayer, boolean localPlayer) {
         this.lastTickPosX = prevPosX = player.prevPosX;
