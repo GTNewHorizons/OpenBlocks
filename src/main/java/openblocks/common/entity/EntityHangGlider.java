@@ -76,19 +76,19 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
     @SideOnly(Side.CLIENT)
     public static void updateGliders(World worldObj) {
-		Iterator<Map.Entry<EntityPlayer, EntityHangGlider>> iterator = gliderMap.entrySet().iterator();
-		while (iterator.hasNext()) {
-			Map.Entry<EntityPlayer, EntityHangGlider> e = iterator.next();
-			EntityPlayer player = e.getKey();
-			EntityHangGlider glider = e.getValue();
+        Iterator<Map.Entry<EntityPlayer, EntityHangGlider>> iterator = gliderMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<EntityPlayer, EntityHangGlider> e = iterator.next();
+            EntityPlayer player = e.getKey();
+            EntityHangGlider glider = e.getValue();
 
-			if (isGliderValid(player, glider)) {
-				glider.fixPositions(player, true);
-			} else {
-				iterator.remove();
-				glider.setDeadUnsafe();
-			}
-		}
+            if (isGliderValid(player, glider)) {
+                glider.fixPositions(player, true);
+            } else {
+                iterator.remove();
+                glider.setDeadUnsafe();
+            }
+        }
     }
 
     private EntityPlayer player;
@@ -257,16 +257,16 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
         setDeadUnsafe();
     }
 
-	private void setDeadUnsafe() {
-		super.setDead();
+    private void setDeadUnsafe() {
+        super.setDead();
 
-		if (varioControl.isValid()) {
-			varioControl.kill();
-			varioControl.release();
-			ticksSinceLastVarioUpdate = 0;
-			verticalMotionSinceLastVarioUpdate = 0;
-		}
-	}
+        if (varioControl.isValid()) {
+            varioControl.kill();
+            varioControl.release();
+            ticksSinceLastVarioUpdate = 0;
+            verticalMotionSinceLastVarioUpdate = 0;
+        }
+    }
 
     private void fixPositions(EntityPlayer thePlayer, boolean localPlayer) {
         this.lastTickPosX = prevPosX = player.prevPosX;
