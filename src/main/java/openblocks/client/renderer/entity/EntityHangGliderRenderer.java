@@ -83,7 +83,7 @@ public class EntityHangGliderRenderer extends Render {
                 GL11.glTranslated(0, +0.2, +0.3);
             } else {
                 // move closer to back and forward when flying
-                GL11.glTranslated(0, -0.5, -1.0);
+                GL11.glTranslated(0, +0.8, -1.0);
             }
         }
 
