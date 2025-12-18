@@ -86,6 +86,7 @@ openblocks.misc.locked=Zablokowany
 #openblocks.misc.change_mode=Changing to %s mode ## NEEDS TRANSLATION ##
 #openblocks.misc.change_size=Changing size to %sx%sx%s ## NEEDS TRANSLATION ##
 #openblocks.misc.change_box_size=Changing size to (%d,%d,%d):(%d,%d,%d) ## NEEDS TRANSLATION ##
+#openblocks.misc.change_area_size=Changing size to (%d,%d):(%d,%d) ## NEEDS TRANSLATION ##
 #openblocks.misc.total_blocks=Total block count: %d ## NEEDS TRANSLATION ##
 #openblocks.misc.get_witched=Get witched! ## NEEDS TRANSLATION ##
 #openblocks.misc.page=Page %d of %d ## NEEDS TRANSLATION ##

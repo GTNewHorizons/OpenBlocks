@@ -86,6 +86,7 @@ openblocks.misc.pointed_cannon=Пушка направлена на %s, %s, %s
 openblocks.misc.change_mode=Изменение режима на %s
 openblocks.misc.change_size=Изменение размера на %sx%sx%s
 #openblocks.misc.change_box_size=Changing size to (%d,%d,%d):(%d,%d,%d) ## NEEDS TRANSLATION ##
+#openblocks.misc.change_area_size=Changing size to (%d,%d):(%d,%d) ## NEEDS TRANSLATION ##
 openblocks.misc.total_blocks=Общее количество блоков: %d
 openblocks.misc.get_witched=Get witched!
 openblocks.misc.page=Страница %d из %d

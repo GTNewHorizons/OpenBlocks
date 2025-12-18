@@ -89,6 +89,7 @@ openblocks.misc.pointed_cannon=加农炮已瞄准 %s, %s, %s
 openblocks.misc.change_mode=改变至%s模式
 openblocks.misc.change_size=改变规模至 %s x %s x %s
 openblocks.misc.change_box_size=Changing size to (%d,%d,%d):(%d,%d,%d)
+openblocks.misc.change_area_size=Changing size to (%d,%d):(%d,%d)
 openblocks.misc.total_blocks=搭建共需要: %d 个方块
 openblocks.misc.get_witched=为之沉迷!
 openblocks.misc.page=%d / %d 页
