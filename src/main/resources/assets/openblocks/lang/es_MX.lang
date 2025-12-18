@@ -86,6 +86,7 @@ openblocks.misc.pointed_cannon=Cañón apuntado a %s, %s, %s
 openblocks.misc.change_mode=Cambiando a modo %s
 openblocks.misc.change_size=Cambiando tamaño a %sx%sx%s
 #openblocks.misc.change_box_size=Changing size to (%d,%d,%d):(%d,%d,%d) ## NEEDS TRANSLATION ##
+#openblocks.misc.change_area_size=Changing size to (%d,%d):(%d,%d) ## NEEDS TRANSLATION ##
 openblocks.misc.total_blocks=Número Total de Bloques: %d
 openblocks.misc.get_witched=¡Embrújate!
 openblocks.misc.page=Página %d de %d
@@ -273,7 +274,7 @@ tile.openblocks.drawingtable.description=La mesa de dibujo se usa para crear pla
 
 tile.openblocks.grave.name=Tumba
 tile.openblocks.trophy.name=Trofeo
-tile.openblocks.trophy.entity.name=Trofeo de %s 
+tile.openblocks.trophy.entity.name=Trofeo de %s
 tile.openblocks.canvasglass.name=Lienzo de cristal
 tile.openblocks.paintcan.name=Lata de pintura
 

@@ -86,6 +86,7 @@ openblocks.misc.pointed_cannon=대포의 발사위치 %s, %s, %s
 openblocks.misc.change_mode=%s 모드로 변경
 openblocks.misc.change_size=%sx%sx%s크기로 변경
 #openblocks.misc.change_box_size=Changing size to (%d,%d,%d):(%d,%d,%d) ## NEEDS TRANSLATION ##
+#openblocks.misc.change_area_size=Changing size to (%d,%d):(%d,%d) ## NEEDS TRANSLATION ##
 openblocks.misc.total_blocks=총 블럭 갯수: %d
 openblocks.misc.get_witched=마녀를 얻었다!
 openblocks.misc.page=%d 중 %d 페이지
