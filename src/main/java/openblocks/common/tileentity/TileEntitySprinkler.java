@@ -98,6 +98,7 @@ public class TileEntitySprinkler extends SyncedTileEntity
                     for (int i = -1; i <= 1; i++) {
                         int y = yCoord + i;
 
+						if (!worldObj.blockExists(x, y, z)) break;
                         if (ItemDye.applyBonemeal(BONEMEAL.copy(), worldObj, x, y, z, fakePlayer)) break;
 
                     }
