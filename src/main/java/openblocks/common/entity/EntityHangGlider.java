@@ -70,6 +70,7 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
         ItemStack held = player.getHeldItem();
         if (held == null || !(held.getItem() instanceof ItemHangGlider)) return false;
+        if (player.isRiding()) return false;
         if (player.worldObj.provider.dimensionId != glider.worldObj.provider.dimensionId) return false;
         return true;
     }
@@ -157,7 +158,9 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
         varioControl.keepAlive();
 
-        boolean isDeployed = !player.onGround && !player.isInWater() && !player.isPlayerSleeping();
+        boolean isDeployed = !player.onGround && !player.isInWater()
+                && !player.isPlayerSleeping()
+                && !player.isRiding();
 
         if (!worldObj.isRemote) {
             this.dataWatcher.updateObject(PROPERTY_DEPLOYED, (byte) (isDeployed ? 1 : 0));
