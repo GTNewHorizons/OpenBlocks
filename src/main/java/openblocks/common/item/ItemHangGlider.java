@@ -108,6 +108,8 @@ public class ItemHangGlider extends Item {
         if (isInvalidDimension(player)) {
             player.addChatMessage(new ChatComponentTranslation("item.openblocks.hangglider.invalid_dimension"));
             return;
+        } else if (player.isRiding()) {
+            return;
         }
 
         EntityHangGlider glider = new EntityHangGlider(player.worldObj, player);
