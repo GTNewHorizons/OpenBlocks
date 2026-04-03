@@ -3,7 +3,7 @@
 dependencies {
     api('com.github.GTNewHorizons:OpenModsLib:0.10.13:dev')
 
-    devOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.8.71-GTNH:dev')
+    devOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.8.84-GTNH:dev')
     compileOnly('openperipheral:OpenPeripheralCore-API:3.4.1')
     compileOnly('curse.maven:computercraft-67504:2269339')
     compileOnly('com.github.GTNewHorizons:Mobs-Info:0.5.10-GTNH:dev')
