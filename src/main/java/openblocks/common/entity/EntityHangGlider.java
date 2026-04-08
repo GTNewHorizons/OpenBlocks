@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,6 +24,7 @@ import openblocks.common.Vario;
 import openblocks.common.item.ItemHangGlider;
 import openmods.Log;
 import openmods.OpenMods;
+import xonin.backhand.api.core.BackhandUtils;
 
 public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnData {
 
@@ -47,6 +49,8 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
     private static final int PROPERTY_DEPLOYED = 17;
 
+    private static final boolean isBackhandLoaded = Loader.isModLoaded("backhand");
+
     private static Map<EntityPlayer, EntityHangGlider> gliderMap = new HashMap<>();
 
     private IVarioController varioControl = IVarioController.NULL;
@@ -69,10 +73,16 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
         if (player == null || player.isDead || glider == null || glider.isDead) return false;
 
         ItemStack held = player.getHeldItem();
+        if (isBackhandLoaded) {
+            ItemStack offhand = BackhandUtils.getOffhandItem(player);
+            if (offhand != null && offhand.getItem() instanceof ItemHangGlider) {
+                held = offhand;
+            }
+        }
+
         if (held == null || !(held.getItem() instanceof ItemHangGlider)) return false;
         if (player.isRiding()) return false;
-        if (player.worldObj.provider.dimensionId != glider.worldObj.provider.dimensionId) return false;
-        return true;
+        return player.worldObj.provider.dimensionId == glider.worldObj.provider.dimensionId;
     }
 
     @SideOnly(Side.CLIENT)
