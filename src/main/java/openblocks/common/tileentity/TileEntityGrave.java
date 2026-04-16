@@ -173,7 +173,9 @@ public class TileEntityGrave extends SyncedTileEntity
             return true;
         }
 
-        if (deathMessage != null) player.addChatMessage(deathMessage);
+        if (deathMessage != null) {
+            player.addChatMessage(deathMessage.createCopy());
+        }
         return true;
     }
 
