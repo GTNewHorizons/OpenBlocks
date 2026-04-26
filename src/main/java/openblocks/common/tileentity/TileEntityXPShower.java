@@ -20,7 +20,9 @@ public class TileEntityXPShower extends SyncedTileEntity implements INeighbourAw
 
     private static final int DRAIN_PER_CYCLE = 50;
 
-    private GenericTank bufferTank = new GenericTank(FluidContainerRegistry.BUCKET_VOLUME, OpenBlocks.Fluids.xpJuice);
+    private final GenericTank bufferTank = new GenericTank(
+            FluidContainerRegistry.BUCKET_VOLUME,
+            OpenBlocks.Fluids.xpJuice);
 
     private SyncableBoolean isOn;
     private SyncableBoolean particleSpawnerActive;

@@ -16,7 +16,7 @@ public class EntityAICollectItem extends EntityAIBase {
 
     private EntityLuggage luggage = null;
 
-    private PathNavigate pathFinder;
+    private final PathNavigate pathFinder;
 
     private EntityItem targetItem = null;
 

@@ -12,7 +12,7 @@ import openmods.utils.BlockUtils;
 
 public class TileEntityXPShowerRenderer extends TileEntitySpecialRenderer {
 
-    private ModelXPShower model = new ModelXPShower();
+    private final ModelXPShower model = new ModelXPShower();
     private static final ResourceLocation texture = new ResourceLocation("openblocks", "textures/models/xpshower.png");
 
     @Override

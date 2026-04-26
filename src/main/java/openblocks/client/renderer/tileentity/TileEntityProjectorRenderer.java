@@ -20,7 +20,7 @@ public class TileEntityProjectorRenderer extends TileEntitySpecialRenderer {
     private final static ResourceLocation TEXTURE = new ResourceLocation("openblocks", "textures/models/projector.png");
     private static final float BLOCK_CENTRE_TRANSLATION = 0.5F;
 
-    private static ModelProjector model = new ModelProjector();
+    private static final ModelProjector model = new ModelProjector();
 
     @Override
     public void renderTileEntityAt(final TileEntity te, final double x, final double y, final double z,

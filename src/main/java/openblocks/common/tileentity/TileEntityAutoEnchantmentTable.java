@@ -99,7 +99,7 @@ public class TileEntityAutoEnchantmentTable extends SyncedTileEntity implements 
     public float bookRotation2;
     public float bookRotationPrev;
     public float bookRotation;
-    private static Random rand = new Random();
+    private static final Random rand = new Random();
 
     public TileEntityAutoEnchantmentTable() {
         slotSides.registerSlot(Slots.input, inputSides, true, false);

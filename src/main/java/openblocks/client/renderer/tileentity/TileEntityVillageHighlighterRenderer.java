@@ -16,7 +16,7 @@ import openmods.utils.BlockUtils;
 public class TileEntityVillageHighlighterRenderer extends TileEntitySpecialRenderer {
 
     private static final AxisAlignedBB BOUNDING_BOX = AxisAlignedBB.getBoundingBox(-8, -3, -8, 8, 3, 8);
-    private ModelVillage model = new ModelVillage();
+    private final ModelVillage model = new ModelVillage();
     private static final ResourceLocation texture = new ResourceLocation("openblocks", "textures/models/village.png");
 
     @Override

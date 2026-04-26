@@ -10,7 +10,7 @@ import openmods.container.ContainerBase;
 
 public class ContainerDevNull extends ContainerBase<Void> {
 
-    private InventoryPlayer playerInventory;
+    private final InventoryPlayer playerInventory;
 
     private final int protectedSlot;
 

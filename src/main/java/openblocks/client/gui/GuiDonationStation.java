@@ -26,9 +26,9 @@ public class GuiDonationStation extends BaseGuiContainer<ContainerDonationStatio
     private final int PROMPT_REPLY_ACTION = 0;
 
     private URI displayedURI = null;
-    private GuiComponentLabel lblModName;
-    private GuiComponentTextButton buttonDonate;
-    private GuiComponentLabel lblAuthors;
+    private final GuiComponentLabel lblModName;
+    private final GuiComponentTextButton buttonDonate;
+    private final GuiComponentLabel lblAuthors;
 
     public GuiDonationStation(ContainerDonationStation container) {
         super(container, 176, 172, "openblocks.gui.donationstation");

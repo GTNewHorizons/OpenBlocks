@@ -41,8 +41,8 @@ public class ItemPedometer extends Item {
         player.addChatComponentMessage(new ChatComponentTranslation(format, args));
     }
 
-    private SpeedUnit speedUnit = SpeedUnit.M_PER_TICK;
-    private DistanceUnit distanceUnit = DistanceUnit.M;
+    private final SpeedUnit speedUnit = SpeedUnit.M_PER_TICK;
+    private final DistanceUnit distanceUnit = DistanceUnit.M;
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

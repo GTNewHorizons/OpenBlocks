@@ -8,7 +8,7 @@ import openblocks.common.tileentity.TileEntityTank;
 
 public class NeighbourMap implements INeighbourMap {
 
-    private boolean[] neighbors = new boolean[64];
+    private final boolean[] neighbors = new boolean[64];
 
     public NeighbourMap(World world, int x, int y, int z, FluidStack fluid) {
         if (world == null) return;

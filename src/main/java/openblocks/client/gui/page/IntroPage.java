@@ -9,7 +9,7 @@ import openmods.utils.render.FakeIcon;
 
 public class IntroPage extends PageBase {
 
-    private GuiComponentSprite image;
+    private final GuiComponentSprite image;
 
     private static final ResourceLocation texture = new ResourceLocation("openblocks:textures/gui/bookimage.png");
     public static IIcon iconImage = new FakeIcon(0, 0.7421875f, 0, 0.546875f, 95, 70);

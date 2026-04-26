@@ -8,15 +8,15 @@ import openblocks.common.tileentity.TileEntityCannon;
 
 public class ModelCannon extends ModelBase {
 
-    private double[] keyframes = new double[] { 0, 0.5, 1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0 };
+    private final double[] keyframes = new double[] { 0, 0.5, 1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0 };
 
     ModelRenderer body;
     ModelRenderer shooter;
     ModelRenderer base;
     ModelRenderer wheel;
 
-    private float deg30 = (float) Math.toRadians(30);
-    private float deg180 = (float) Math.toRadians(180);
+    private final float deg30 = (float) Math.toRadians(30);
+    private final float deg180 = (float) Math.toRadians(180);
 
     public ModelCannon() {
         textureWidth = 64;

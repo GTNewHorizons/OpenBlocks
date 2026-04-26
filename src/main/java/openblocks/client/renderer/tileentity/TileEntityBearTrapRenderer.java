@@ -12,7 +12,7 @@ import openmods.utils.BlockUtils;
 
 public class TileEntityBearTrapRenderer extends TileEntitySpecialRenderer {
 
-    private ModelBearTrap model = new ModelBearTrap();
+    private final ModelBearTrap model = new ModelBearTrap();
 
     private static final ResourceLocation texture = new ResourceLocation("openblocks", "textures/models/beartrap.png");
 
