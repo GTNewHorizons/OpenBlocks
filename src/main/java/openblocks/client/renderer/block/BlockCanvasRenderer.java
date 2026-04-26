@@ -71,6 +71,8 @@ public class BlockCanvasRenderer implements IBlockRenderer<BlockCanvas> {
             RenderUtils.resetFacesOnRenderer(renderBlocks);
         }
 
+        renderBlocks.setWorld(null);
+
         return visible;
     }
 }

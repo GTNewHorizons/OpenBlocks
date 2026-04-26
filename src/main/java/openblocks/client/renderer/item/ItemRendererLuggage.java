@@ -39,16 +39,20 @@ public class ItemRendererLuggage implements IItemRenderer {
             GL11.glPushMatrix();
 
             EntityLuggage luggage = this.luggage.get();
-            luggage.worldObj = Minecraft.getMinecraft().theWorld;
+            try {
+                luggage.worldObj = Minecraft.getMinecraft().theWorld;
 
-            GL11.glTranslatef(0.5f, 0, 0.5f);
-            luggage.getInventory().clearAndSetSlotCount(27);
-            if (item.hasTagCompound()) {
-                luggage.getInventory().readFromNBT(item.getTagCompound());
-            }
-            Render renderer = RenderManager.instance.getEntityRenderObject(luggage);
-            if (renderer.getFontRendererFromRenderManager() != null) {
-                renderer.doRender(luggage, 0, 0, 0, 0, 0.5f);
+                GL11.glTranslatef(0.5f, 0, 0.5f);
+                luggage.getInventory().clearAndSetSlotCount(27);
+                if (item.hasTagCompound()) {
+                    luggage.getInventory().readFromNBT(item.getTagCompound());
+                }
+                Render renderer = RenderManager.instance.getEntityRenderObject(luggage);
+                if (renderer.getFontRendererFromRenderManager() != null) {
+                    renderer.doRender(luggage, 0, 0, 0, 0, 0.5f);
+                }
+            } finally {
+                luggage.worldObj = null;
             }
             GL11.glPopMatrix();
             GL11.glEnable(GL11.GL_TEXTURE_2D);
