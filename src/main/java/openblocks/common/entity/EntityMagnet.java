@@ -50,7 +50,7 @@ public class EntityMagnet extends EntitySmoothMove implements IEntityAdditionalS
 
     private static class EntityPlayerTarget implements IOwner {
 
-        private WeakReference<EntityPlayer> owner;
+        private final WeakReference<EntityPlayer> owner;
 
         public EntityPlayerTarget(EntityPlayer owner) {
             this.owner = new WeakReference<EntityPlayer>(owner);

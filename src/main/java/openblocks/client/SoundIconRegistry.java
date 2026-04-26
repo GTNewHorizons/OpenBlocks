@@ -126,8 +126,8 @@ public class SoundIconRegistry {
 
     private static class MobSounds implements ISoundCategory {
 
-        private Map<String, MobIcons> mobs = Maps.newHashMap();
-        private MobIcons unknownMob;
+        private final Map<String, MobIcons> mobs = Maps.newHashMap();
+        private final MobIcons unknownMob;
 
         private static MobIcons createMobIcons(String innerIcon, int innerColor, int frameColor) {
             IDrawableIcon frame = itemIcon(ICON_FRAME, frameColor);
@@ -205,7 +205,7 @@ public class SoundIconRegistry {
 
     private final Map<String, MappedCategory> roots = Maps.newHashMap();
 
-    private Map<ResourceLocation, IDrawableIcon> iconCache = Maps.newConcurrentMap();
+    private final Map<ResourceLocation, IDrawableIcon> iconCache = Maps.newConcurrentMap();
 
     public static final int DEFAULT_COLOR = 0xFFFFFF;
 

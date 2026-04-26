@@ -51,7 +51,7 @@ public class EntityCartographer extends EntityAssistant implements ISelectAware,
 
     public static class MapJobs extends SyncableObjectBase {
 
-        private BitSet bits = new BitSet();
+        private final BitSet bits = new BitSet();
         private Set<ChunkJob> jobs;
         private int size;
 

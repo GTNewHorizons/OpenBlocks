@@ -51,7 +51,7 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
     private static final boolean isBackhandLoaded = Loader.isModLoaded("backhand");
 
-    private static Map<EntityPlayer, EntityHangGlider> gliderMap = new HashMap<>();
+    private static final Map<EntityPlayer, EntityHangGlider> gliderMap = new HashMap<>();
 
     private IVarioController varioControl = IVarioController.NULL;
 
@@ -103,7 +103,7 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
     }
 
     private EntityPlayer player;
-    private NoiseGeneratorPerlin noiseGen;
+    private final NoiseGeneratorPerlin noiseGen;
     private int ticksSinceLastVarioUpdate = 0;
     private double verticalMotionSinceLastVarioUpdate = 0;
     private double lastMotionY = 0;

@@ -98,7 +98,7 @@ public class MapDataManager {
 
     private Set<Block> blockBlacklist;
 
-    private Set<Integer> mapsToUpdate = Sets.newHashSet();
+    private final Set<Integer> mapsToUpdate = Sets.newHashSet();
 
     public static int createNewMap(World world, byte scale) {
         int id = world.getUniqueDataId("height_map");
