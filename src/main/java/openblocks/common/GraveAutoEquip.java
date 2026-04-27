@@ -66,7 +66,8 @@ public class GraveAutoEquip {
 
         static boolean equip(EntityPlayer player, ItemStack stack) {
             if (!(stack.getItem() instanceof tconstruct.library.accessory.IAccessory)) return false;
-            tconstruct.library.accessory.IAccessory accessory = (tconstruct.library.accessory.IAccessory) stack.getItem();
+            tconstruct.library.accessory.IAccessory accessory = (tconstruct.library.accessory.IAccessory) stack
+                    .getItem();
             tconstruct.armor.player.TPlayerStats stats = tconstruct.armor.player.TPlayerStats.get(player);
             if (stats == null) return false;
             tconstruct.armor.player.ArmorExtended armor = stats.armor;
