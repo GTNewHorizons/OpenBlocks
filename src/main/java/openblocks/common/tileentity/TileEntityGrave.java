@@ -200,17 +200,19 @@ public class TileEntityGrave extends SyncedTileEntity
         int leftover = 0;
         for (int i = 0; i < inventory.getSizeInventory(); i++) {
             final ItemStack stack = inventory.getStackInSlot(i);
-            if (stack != null) {
-                ItemStack remainder = GraveAutoEquip.tryEquipOrDrop(player, stack);
-                if (remainder == null) {
-                    inventory.setInventorySlotContents(i, null);
-                    equipped++;
-                } else if (player.inventory.addItemStackToInventory(remainder)) {
-                    inventory.setInventorySlotContents(i, null);
-                    toInventory++;
-                } else {
-                    leftover++;
-                }
+            if (stack == null) continue;
+            ItemStack copy = stack.copy();
+            ItemStack remainder = GraveAutoEquip.tryEquipOrDrop(player, copy);
+            if (remainder == null) {
+                inventory.setInventorySlotContents(i, null);
+                equipped++;
+            } else if (player.inventory.addItemStackToInventory(copy)) {
+                inventory.setInventorySlotContents(i, null);
+                toInventory++;
+            } else {
+                // copy may have been partially consumed — write back the actual remainder
+                inventory.setInventorySlotContents(i, copy.stackSize > 0 ? copy : null);
+                leftover++;
             }
         }
         if (equipped > 0 || toInventory > 0) {
