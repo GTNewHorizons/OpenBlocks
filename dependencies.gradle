@@ -14,7 +14,7 @@ dependencies {
     devOnlyNonPublishable("com.github.GTNewHorizons:Baubles-Expanded:2.2.13-GTNH:dev") { transitive = false }
     devOnlyNonPublishable("com.github.GTNewHorizons:AdventureBackpack2:1.4.19-GTNH:dev") { transitive = false }
     devOnlyNonPublishable("com.github.GTNewHorizons:Minecraft-Backpack-Mod:2.6.11-GTNH:dev") { transitive = false }
-    compileOnly("com.github.GTNewHorizons:TinkersConstruct:1.14.59-GTNH-pre:dev") { transitive = false }
-    devOnlyNonPublishable("com.github.GTNewHorizons:TinkersConstruct:1.14.59-GTNH-pre:dev") { transitive = true }
+    compileOnly("com.github.GTNewHorizons:TinkersConstruct:1.14.58-GTNH:dev") { transitive = false }
+    devOnlyNonPublishable("com.github.GTNewHorizons:TinkersConstruct:1.14.58-GTNH:dev") { transitive = true }
     devOnlyNonPublishable("com.github.GTNewHorizons:HoloInventory:2.5.12-GTNH:dev") { transitive = true }
 }
