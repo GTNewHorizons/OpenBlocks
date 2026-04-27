@@ -1,9 +1,9 @@
 package openblocks.common.tileentity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -15,8 +15,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import openmods.api.INeighbourAwareTile;
-import openmods.fakeplayer.BreakBlockAction;
-import openmods.fakeplayer.FakePlayerPool;
 import openmods.include.IncludeInterface;
 import openmods.inventory.GenericInventory;
 import openmods.inventory.legacy.ItemDistribution;
@@ -125,21 +123,33 @@ public class TileEntityBlockBreaker extends SyncedTileEntity implements INeighbo
         final Block block = worldObj.getBlock(x, y, z);
         if (!canBreakBlock(block, x, y, z)) return;
 
-        final List<EntityItem> drops = FakePlayerPool.instance
-                .executeOnPlayer((WorldServer) worldObj, new BreakBlockAction(worldObj, x, y, z));
-        tryInjectItems(drops, direction.getOpposite());
+        final List<ItemStack> drops = getBlockDrops(x, y, z);
+        if (tryStore(drops, direction.getOpposite())) worldObj.setBlock(x, y, z, Blocks.air, 0, 3);;
     }
 
-    private void tryInjectItems(List<EntityItem> drops, ForgeDirection direction) {
-        TileEntity targetInventory = getTileInDirection(direction);
-        if (targetInventory == null) return;
+    public List<ItemStack> getBlockDrops(final int x, final int y, final int z) {
+        List<ItemStack> out = new ArrayList<>();
+        final Block which = worldObj.getBlock(x, y, z);
 
-        for (EntityItem drop : drops) {
-            ItemStack stack = drop.getEntityItem();
-            ItemDistribution.insertItemInto(stack, targetInventory, direction, true);
-
-            if (stack.stackSize <= 0) drop.setDead();
+        if (which != null) {
+            out = which.getDrops(worldObj, x, y, z, worldObj.getBlockMetadata(x, y, z), 0);
         }
+
+        if (out == null) {
+            return new ArrayList<>();
+        }
+        return out;
+    }
+
+    private boolean tryStore(List<ItemStack> drops, ForgeDirection direction) {
+        TileEntity targetInventory = getTileInDirection(direction);
+        if (targetInventory == null) return false;
+
+        boolean anyInserted = false;
+        for (ItemStack stack : drops) {
+            anyInserted |= ItemDistribution.insertItemInto(stack, targetInventory, direction, true);
+        }
+        return anyInserted;
     }
 
     @Override
