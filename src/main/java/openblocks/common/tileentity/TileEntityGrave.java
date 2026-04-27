@@ -9,11 +9,13 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.storage.WorldInfo;
@@ -24,6 +26,7 @@ import com.google.common.base.Strings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.Config;
+import openblocks.common.GraveAutoEquip;
 import openmods.api.IActivateAwareTile;
 import openmods.api.IAddAwareTile;
 import openmods.api.INeighbourAwareTile;
@@ -173,10 +176,60 @@ public class TileEntityGrave extends SyncedTileEntity
             return true;
         }
 
+        if (held == null && player.isSneaking()) {
+            autoEquipAll(player);
+            return true;
+        }
+
         if (deathMessage != null) {
             player.addChatMessage(deathMessage.createCopy());
         }
         return true;
+    }
+
+    public boolean isInventoryEmpty() {
+        for (int i = 0; i < inventory.getSizeInventory(); i++) {
+            if (inventory.getStackInSlot(i) != null) return false;
+        }
+        return true;
+    }
+
+    public void autoEquipAll(EntityPlayer player) {
+        int equipped = 0;
+        int toInventory = 0;
+        int leftover = 0;
+        for (int i = 0; i < inventory.getSizeInventory(); i++) {
+            final ItemStack stack = inventory.getStackInSlot(i);
+            if (stack != null) {
+                ItemStack remainder = GraveAutoEquip.tryEquipOrDrop(player, stack);
+                if (remainder == null) {
+                    inventory.setInventorySlotContents(i, null);
+                    equipped++;
+                } else if (player.inventory.addItemStackToInventory(remainder)) {
+                    inventory.setInventorySlotContents(i, null);
+                    toInventory++;
+                } else {
+                    leftover++;
+                }
+            }
+        }
+        if (equipped > 0 || toInventory > 0) {
+            markDirty();
+            sync();
+            player.inventory.markDirty();
+            if (player instanceof EntityPlayerMP) {
+                player.inventoryContainer.detectAndSendChanges();
+            }
+        }
+        if (equipped > 0) {
+            player.addChatMessage(new ChatComponentTranslation("openblocks.misc.grave_equipped", equipped));
+        }
+        if (toInventory > 0) {
+            player.addChatMessage(new ChatComponentTranslation("openblocks.misc.grave_to_inventory", toInventory));
+        }
+        if (leftover > 0) {
+            player.addChatMessage(new ChatComponentTranslation("openblocks.misc.grave_skipped", leftover));
+        }
     }
 
     protected void robGrave(EntityPlayer player, ItemStack held) {
@@ -185,7 +238,10 @@ public class TileEntityGrave extends SyncedTileEntity
             final ItemStack stack = inventory.getStackInSlot(i);
             if (stack != null) {
                 dropped = true;
-                BlockUtils.dropItemStackInWorld(worldObj, xCoord, yCoord, zCoord, stack);
+                ItemStack remainder = GraveAutoEquip.tryEquipOrDrop(player, stack);
+                if (remainder != null) {
+                    BlockUtils.dropItemStackInWorld(worldObj, xCoord, yCoord, zCoord, remainder);
+                }
             }
         }
 
