@@ -1,6 +1,8 @@
 package openblocks.common.tileentity;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -14,6 +16,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
@@ -27,6 +30,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.Config;
 import openblocks.common.GraveAutoEquip;
+import openblocks.common.GraveSlotOrigin;
 import openmods.api.IActivateAwareTile;
 import openmods.api.IAddAwareTile;
 import openmods.api.INeighbourAwareTile;
@@ -42,10 +46,15 @@ public class TileEntityGrave extends SyncedTileEntity
         implements IPlacerAwareTile, IInventoryProvider, INeighbourAwareTile, IActivateAwareTile, IAddAwareTile {
 
     private static final String TAG_MESSAGE = "Message";
+    private static final String TAG_ORIGINS = "SlotOrigins";
     private SyncableString perishedUsername;
     public SyncableBoolean onSoil;
+    private SyncableBoolean inventoryEmpty;
 
     private IChatComponent deathMessage;
+
+    /** grave slot index → origin slot at death; may be empty if grave predates this feature */
+    private final Map<Integer, GraveSlotOrigin> slotOrigins = new HashMap<Integer, GraveSlotOrigin>();
 
     private final GenericInventory inventory = registerInventoryCallback(new GenericInventory("grave", false, 1));
 
@@ -55,6 +64,7 @@ public class TileEntityGrave extends SyncedTileEntity
     protected void createSyncedFields() {
         perishedUsername = new SyncableString();
         onSoil = new SyncableBoolean(true);
+        inventoryEmpty = new SyncableBoolean(false);
     }
 
     @Override
@@ -94,9 +104,15 @@ public class TileEntityGrave extends SyncedTileEntity
         this.perishedUsername.setValue(username);
     }
 
+    public void setSlotOrigins(Map<Integer, GraveSlotOrigin> origins) {
+        slotOrigins.clear();
+        slotOrigins.putAll(origins);
+    }
+
     public void setLoot(IInventory invent) {
         inventory.clearAndSetSlotCount(invent.getSizeInventory());
         inventory.copyFrom(invent);
+        refreshEmptyFlag();
     }
 
     public boolean isOnSoil() {
@@ -126,12 +142,32 @@ public class TileEntityGrave extends SyncedTileEntity
             String serialized = IChatComponent.Serializer.func_150696_a(deathMessage);
             tag.setString(TAG_MESSAGE, serialized);
         }
+
+        if (!slotOrigins.isEmpty()) {
+            NBTTagList list = new NBTTagList();
+            for (Map.Entry<Integer, GraveSlotOrigin> entry : slotOrigins.entrySet()) {
+                NBTTagCompound entry_tag = entry.getValue().toNBT();
+                entry_tag.setInteger("graveSlot", entry.getKey());
+                list.appendTag(entry_tag);
+            }
+            tag.setTag(TAG_ORIGINS, list);
+        }
     }
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         inventory.readFromNBT(tag);
+
+        slotOrigins.clear();
+        if (tag.hasKey(TAG_ORIGINS)) {
+            NBTTagList list = tag.getTagList(TAG_ORIGINS, 10); // 10 = TAG_Compound
+            for (int i = 0; i < list.tagCount(); i++) {
+                NBTTagCompound entry_tag = list.getCompoundTagAt(i);
+                int graveSlot = entry_tag.getInteger("graveSlot");
+                slotOrigins.put(graveSlot, GraveSlotOrigin.fromNBT(entry_tag));
+            }
+        }
 
         String serializedMsg = tag.getString(TAG_MESSAGE);
 
@@ -167,6 +203,10 @@ public class TileEntityGrave extends SyncedTileEntity
         return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1);
     }
 
+    public boolean isOwner(EntityPlayer player) {
+        return player.getGameProfile().getName().equals(perishedUsername.getValue());
+    }
+
     @Override
     public boolean onBlockActivated(EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
         if (player.worldObj.isRemote) return false;
@@ -177,7 +217,11 @@ public class TileEntityGrave extends SyncedTileEntity
         }
 
         if (held == null && player.isSneaking()) {
-            autoEquipAll(player);
+            if (isOwner(player)) {
+                autoEquipAll(player);
+            } else {
+                player.addChatMessage(new ChatComponentTranslation("openblocks.misc.grave_not_owner"));
+            }
             return true;
         }
 
@@ -188,10 +232,17 @@ public class TileEntityGrave extends SyncedTileEntity
     }
 
     public boolean isInventoryEmpty() {
+        return inventoryEmpty.get();
+    }
+
+    private void refreshEmptyFlag() {
         for (int i = 0; i < inventory.getSizeInventory(); i++) {
-            if (inventory.getStackInSlot(i) != null) return false;
+            if (inventory.getStackInSlot(i) != null) {
+                inventoryEmpty.set(false);
+                return;
+            }
         }
-        return true;
+        inventoryEmpty.set(true);
     }
 
     public void autoEquipAll(EntityPlayer player) {
@@ -202,7 +253,9 @@ public class TileEntityGrave extends SyncedTileEntity
             final ItemStack stack = inventory.getStackInSlot(i);
             if (stack == null) continue;
             ItemStack copy = stack.copy();
-            ItemStack remainder = GraveAutoEquip.tryEquipOrDrop(player, copy);
+            GraveSlotOrigin origin = slotOrigins.get(i);
+            boolean restoredToOrigin = origin != null && GraveAutoEquip.tryRestoreToOrigin(player, copy, origin);
+            ItemStack remainder = restoredToOrigin ? null : GraveAutoEquip.tryEquipOrDrop(player, copy);
             if (remainder == null) {
                 inventory.setInventorySlotContents(i, null);
                 equipped++;
@@ -215,6 +268,7 @@ public class TileEntityGrave extends SyncedTileEntity
                 leftover++;
             }
         }
+        refreshEmptyFlag();
         if (equipped > 0 || toInventory > 0) {
             markDirty();
             sync();
@@ -231,6 +285,9 @@ public class TileEntityGrave extends SyncedTileEntity
         }
         if (leftover > 0) {
             player.addChatMessage(new ChatComponentTranslation("openblocks.misc.grave_skipped", leftover));
+        }
+        if (leftover == 0 && (equipped > 0 || toInventory > 0)) {
+            worldObj.setBlockToAir(xCoord, yCoord, zCoord);
         }
     }
 
@@ -253,6 +310,7 @@ public class TileEntityGrave extends SyncedTileEntity
             worldObj.playAuxSFXAtEntity(null, 2001, xCoord, yCoord, zCoord, Block.getIdFromBlock(Blocks.dirt));
             if (worldObj.rand.nextDouble() < Config.graveSpecialAction) ohNoes(player);
             held.damageItem(2, player);
+            worldObj.setBlockToAir(xCoord, yCoord, zCoord);
         }
     }
 

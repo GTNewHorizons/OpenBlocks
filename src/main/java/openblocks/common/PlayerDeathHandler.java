@@ -4,8 +4,11 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
@@ -25,6 +28,7 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 
 import org.apache.logging.log4j.Level;
@@ -56,6 +60,8 @@ import openmods.utils.TagUtils;
 import openmods.world.DelayedActionTickHandler;
 
 public class PlayerDeathHandler {
+
+    private static final Map<UUID, GraveInventorySnapshot> pendingSnapshots = new HashMap<UUID, GraveInventorySnapshot>();
 
     private static final Comparator<Coord> SEARCH_COMPARATOR = new Comparator<Coord>() {
 
@@ -153,7 +159,10 @@ public class PlayerDeathHandler {
 
         private final WeakReference<EntityPlayer> exPlayer;
 
-        public GraveCallable(World world, EntityPlayer exPlayer, List<EntityItem> loot) {
+        private final GraveInventorySnapshot snapshot;
+
+        public GraveCallable(World world, EntityPlayer exPlayer, List<EntityItem> loot,
+                GraveInventorySnapshot snapshot) {
             this.posX = MathHelper.floor_double(exPlayer.posX);
             this.posY = MathHelper.floor_double(exPlayer.posY);
             this.posZ = MathHelper.floor_double(exPlayer.posZ);
@@ -168,6 +177,7 @@ public class PlayerDeathHandler {
             this.cause = new ChatComponentTranslation("openblocks.misc.grave_msg", deathCause, day);
 
             this.loot = ImmutableList.copyOf(loot);
+            this.snapshot = snapshot;
         }
 
         private static IChatComponent formatDate(World world) {
@@ -202,7 +212,8 @@ public class PlayerDeathHandler {
 
             TileEntityGrave grave = (TileEntityGrave) tile;
 
-            IInventory loot = getLoot();
+            Map<Integer, GraveSlotOrigin> origins = new HashMap<Integer, GraveSlotOrigin>();
+            IInventory loot = getLootWithOrigins(origins);
 
             if (Config.backupGraves) backupGrave(world, loot, new ExtrasFiller() {
 
@@ -218,17 +229,25 @@ public class PlayerDeathHandler {
 
             grave.setUsername(gravestoneText);
             grave.setLoot(loot);
+            grave.setSlotOrigins(origins);
             grave.setDeathMessage(deathMessage);
             return true;
         }
 
         protected IInventory getLoot() {
-            IInventory loot = new GenericInventory("tmpplayer", false, this.loot.size());
+            return getLootWithOrigins(null);
+        }
+
+        protected IInventory getLootWithOrigins(Map<Integer, GraveSlotOrigin> originsOut) {
+            if (snapshot != null && originsOut != null) {
+                return snapshot.buildLoot(loot, originsOut);
+            }
+            IInventory inv = new GenericInventory("tmpplayer", false, this.loot.size());
             for (EntityItem entityItem : this.loot) {
                 ItemStack stack = entityItem.getEntityItem();
-                if (stack != null) ItemDistribution.insertItemIntoInventory(loot, stack.copy());
+                if (stack != null) ItemDistribution.insertItemIntoInventory(inv, stack.copy());
             }
-            return loot;
+            return inv;
         }
 
         private boolean trySpawnGrave(EntityPlayer player, World world) {
@@ -338,6 +357,16 @@ public class PlayerDeathHandler {
         return Config.debugGraves ? Level.INFO : Level.DEBUG;
     }
 
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public void onPlayerDeath(LivingDeathEvent event) {
+        if (!(event.entity instanceof EntityPlayer)) return;
+        EntityPlayer player = (EntityPlayer) event.entity;
+        if (player.worldObj.isRemote) return;
+        if (player instanceof FakePlayer) return;
+        UUID uuid = player.getGameProfile().getId();
+        pendingSnapshots.put(uuid, new GraveInventorySnapshot(player));
+    }
+
     @SubscribeEvent(priority = EventPriority.LOW, receiveCanceled = true)
     public void onPlayerDrops(PlayerDropsEvent event) {
         World world = event.entityPlayer.worldObj;
@@ -422,7 +451,8 @@ public class PlayerDeathHandler {
                 graveLoot.size(),
                 drops.size());
 
-        DelayedActionTickHandler.INSTANCE.addTickCallback(world, new GraveCallable(world, player, graveLoot));
+        GraveInventorySnapshot snapshot = pendingSnapshots.remove(player.getGameProfile().getId());
+        DelayedActionTickHandler.INSTANCE.addTickCallback(world, new GraveCallable(world, player, graveLoot, snapshot));
     }
 
     // TODO: candidate for scripting

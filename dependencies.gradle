@@ -6,15 +6,16 @@ dependencies {
     devOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.8.93-GTNH:dev')
     compileOnly('openperipheral:OpenPeripheralCore-API:3.4.1')
     compileOnly('curse.maven:computercraft-67504:2269339')
-    compileOnly('com.github.GTNewHorizons:Mobs-Info:0.5.12-GTNH:dev')
+    compileOnly('com.github.GTNewHorizons:Mobs-Info:0.5.13-GTNH:dev')
     compileOnly("com.github.GTNewHorizons:Backhand:1.8.8:dev") { transitive = false }
     compileOnly("com.github.GTNewHorizons:Baubles-Expanded:2.2.13-GTNH:dev") { transitive = false }
     compileOnly("com.github.GTNewHorizons:AdventureBackpack2:1.4.19-GTNH:dev") { transitive = false }
     compileOnly("com.github.GTNewHorizons:Minecraft-Backpack-Mod:2.6.11-GTNH:dev") { transitive = false }
+    compileOnly("com.github.GTNewHorizons:TinkersConstruct:1.14.58-GTNH:dev") { transitive = false }
     devOnlyNonPublishable("com.github.GTNewHorizons:Baubles-Expanded:2.2.13-GTNH:dev") { transitive = false }
     devOnlyNonPublishable("com.github.GTNewHorizons:AdventureBackpack2:1.4.19-GTNH:dev") { transitive = false }
     devOnlyNonPublishable("com.github.GTNewHorizons:Minecraft-Backpack-Mod:2.6.11-GTNH:dev") { transitive = false }
-    compileOnly("com.github.GTNewHorizons:TinkersConstruct:1.14.58-GTNH:dev") { transitive = false }
+    devOnlyNonPublishable("com.github.GTNewHorizons:waila:1.19.23:dev") { transitive = true }
     devOnlyNonPublishable("com.github.GTNewHorizons:TinkersConstruct:1.14.58-GTNH:dev") { transitive = true }
     devOnlyNonPublishable("com.github.GTNewHorizons:HoloInventory:2.5.12-GTNH:dev") { transitive = true }
 }

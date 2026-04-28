@@ -26,7 +26,7 @@ public class BlockGrave extends OpenBlock {
         setRotationMode(BlockRotationMode.FOUR_DIRECTIONS);
         setBlockBounds(0, 0, 0, 1f, 0.2f, 1f);
         setResistance(2000.0F);
-        setHardness(25.0F);
+        setHardness(5.0F);
         setRenderMode(RenderMode.TESR_ONLY);
     }
 
@@ -92,7 +92,12 @@ public class BlockGrave extends OpenBlock {
         if (tile instanceof TileEntityGrave) {
             TileEntityGrave grave = (TileEntityGrave) tile;
             if (!grave.isInventoryEmpty()) {
-                grave.autoEquipAll(player);
+                if (grave.isOwner(player)) {
+                    grave.autoEquipAll(player);
+                } else {
+                    player.addChatMessage(
+                            new net.minecraft.util.ChatComponentTranslation("openblocks.misc.grave_not_owner"));
+                }
             }
         }
     }
