@@ -14,8 +14,8 @@ import openmods.utils.WorldUtils;
 
 public class EntityAIPickupPlayer extends EntityAIBase {
 
-    private EntityMiniMe minime;
-    private PathNavigate pathFinder;
+    private final EntityMiniMe minime;
+    private final PathNavigate pathFinder;
     private EntityPlayer targetPlayer;
 
     public EntityAIPickupPlayer(EntityMiniMe entity) {

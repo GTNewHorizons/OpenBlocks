@@ -17,7 +17,7 @@ import openmods.infobook.BookDocumentation;
 @BookDocumentation(hasVideo = true)
 public class ItemHangGlider extends Item {
 
-    private static HashSet<Integer> blacklistedDimensions = new HashSet<>();
+    private static final HashSet<Integer> blacklistedDimensions = new HashSet<>();
 
     public ItemHangGlider() {
         setCreativeTab(OpenBlocks.tabOpenBlocks);

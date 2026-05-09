@@ -15,7 +15,7 @@ public class DonationUrlManager {
         return instance;
     }
 
-    private HashMap<String, String> donationUrls = new HashMap<String, String>();
+    private final HashMap<String, String> donationUrls = new HashMap<String, String>();
 
     public DonationUrlManager() {
         addUrl(Mods.OPENBLOCKS, "https://www.patreon.com/openmods");

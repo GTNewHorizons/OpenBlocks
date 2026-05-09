@@ -19,7 +19,7 @@ public class GuiDrawingTable extends BaseGuiContainer<ContainerDrawingTable> {
 
     public static final int BUTTON_DRAW = 0;
 
-    private GuiComponentSprite iconDisplay;
+    private final GuiComponentSprite iconDisplay;
 
     private int patternIndex = 0;
 

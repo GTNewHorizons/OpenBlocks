@@ -15,7 +15,7 @@ import openblocks.common.entity.EntityLuggage;
 
 public class EntityLuggageRenderer extends RenderLiving {
 
-    private static ModelBase luggageModel = new ModelLuggage();
+    private static final ModelBase luggageModel = new ModelLuggage();
 
     private static final ResourceLocation texture = new ResourceLocation("openblocks", "textures/models/luggage.png");
     private static final ResourceLocation textureSpecial = new ResourceLocation(

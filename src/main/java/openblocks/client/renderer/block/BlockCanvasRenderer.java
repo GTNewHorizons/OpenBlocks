@@ -19,7 +19,7 @@ import openmods.utils.render.RenderUtils;
 
 public class BlockCanvasRenderer implements IBlockRenderer<BlockCanvas> {
 
-    public FixedRenderBlocks renderBlocks = new FixedRenderBlocks();
+    private final FixedRenderBlocks renderBlocks = new FixedRenderBlocks();
 
     @Override
     public void renderInventoryBlock(BlockCanvas block, int metadata, int modelID, RenderBlocks renderer) {
@@ -70,6 +70,8 @@ public class BlockCanvasRenderer implements IBlockRenderer<BlockCanvas> {
             }
             RenderUtils.resetFacesOnRenderer(renderBlocks);
         }
+
+        renderBlocks.setWorld(null);
 
         return visible;
     }

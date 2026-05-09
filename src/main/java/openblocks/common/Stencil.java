@@ -26,7 +26,7 @@ public enum Stencil {
 
     private IIcon blockIcon;
     private IIcon coverBlockIcon;
-    private String iconName;
+    private final String iconName;
 
     Stencil(String iconName) {
         this.iconName = iconName;

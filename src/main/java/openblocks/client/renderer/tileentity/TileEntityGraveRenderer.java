@@ -13,7 +13,7 @@ import openmods.utils.BlockUtils;
 
 public class TileEntityGraveRenderer extends TileEntitySpecialRenderer {
 
-    private ModelGrave model = new ModelGrave();
+    private final ModelGrave model = new ModelGrave();
     private static final ResourceLocation texture = new ResourceLocation("openblocks", "textures/models/grave.png");
 
     @Override

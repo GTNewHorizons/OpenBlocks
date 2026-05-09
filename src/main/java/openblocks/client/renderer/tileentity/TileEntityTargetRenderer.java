@@ -12,7 +12,7 @@ import openmods.utils.BlockUtils;
 
 public class TileEntityTargetRenderer extends TileEntitySpecialRenderer {
 
-    private ModelTarget model = new ModelTarget();
+    private final ModelTarget model = new ModelTarget();
     private static final ResourceLocation texture = new ResourceLocation("openblocks", "textures/models/target.png");
 
     @Override

@@ -12,7 +12,7 @@ import openmods.utils.BlockUtils;
 
 public class TileEntitySprinklerRenderer extends TileEntitySpecialRenderer {
 
-    private ModelSprinkler model = new ModelSprinkler();
+    private final ModelSprinkler model = new ModelSprinkler();
     private static final ResourceLocation texture = new ResourceLocation("openblocks", "textures/models/sprinkler.png");
 
     @Override

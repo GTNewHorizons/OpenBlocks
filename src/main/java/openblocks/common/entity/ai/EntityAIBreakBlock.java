@@ -22,11 +22,11 @@ import openmods.utils.Coord;
 
 public class EntityAIBreakBlock extends EntityAIBase {
 
-    private EntityLiving entity;
-    private PathNavigate pathFinder;
+    private final EntityLiving entity;
+    private final PathNavigate pathFinder;
     private Coord blockCoord;
     private int tickOffset = 0;
-    private Random rand;
+    private final Random rand;
 
     public EntityAIBreakBlock(EntityLiving minime) {
         this.entity = minime;

@@ -11,7 +11,7 @@ import openblocks.common.tileentity.TileEntityFan;
 
 public class TileEntityFanRenderer extends TileEntitySpecialRenderer {
 
-    private ModelFan model = new ModelFan();
+    private final ModelFan model = new ModelFan();
     private static final ResourceLocation texture = new ResourceLocation("openblocks", "textures/models/fan.png");
 
     @Override

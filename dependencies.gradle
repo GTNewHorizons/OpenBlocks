@@ -7,4 +7,5 @@ dependencies {
     compileOnly('openperipheral:OpenPeripheralCore-API:3.4.1')
     compileOnly('curse.maven:computercraft-67504:2269339')
     compileOnly('com.github.GTNewHorizons:Mobs-Info:0.5.10-GTNH:dev')
+    compileOnly("com.github.GTNewHorizons:Backhand:1.8.8:dev") { transitive = false }
 }

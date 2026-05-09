@@ -12,7 +12,7 @@ import openmods.utils.BlockUtils;
 
 public class TileEntityDonationStationRenderer extends TileEntitySpecialRenderer {
 
-    private ModelPiggy model = new ModelPiggy();
+    private final ModelPiggy model = new ModelPiggy();
     private static final ResourceLocation texture = new ResourceLocation("openblocks", "textures/models/piggy.png");
 
     @Override
