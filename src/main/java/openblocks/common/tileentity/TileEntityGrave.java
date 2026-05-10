@@ -169,6 +169,8 @@ public class TileEntityGrave extends SyncedTileEntity
             }
         }
 
+        refreshEmptyFlag();
+
         String serializedMsg = tag.getString(TAG_MESSAGE);
 
         if (!Strings.isNullOrEmpty(serializedMsg)) {

@@ -371,6 +371,8 @@ public class PlayerDeathHandler {
     public void onPlayerDrops(PlayerDropsEvent event) {
         World world = event.entityPlayer.worldObj;
         if (world.isRemote) return;
+        // Remove snapshot eagerly so it is never leaked on early returns
+        final GraveInventorySnapshot snapshot = pendingSnapshots.remove(event.entityPlayer.getGameProfile().getId());
 
         if (Config.debugGraves) dumpDebugInfo(event);
 
@@ -451,7 +453,6 @@ public class PlayerDeathHandler {
                 graveLoot.size(),
                 drops.size());
 
-        GraveInventorySnapshot snapshot = pendingSnapshots.remove(player.getGameProfile().getId());
         DelayedActionTickHandler.INSTANCE.addTickCallback(world, new GraveCallable(world, player, graveLoot, snapshot));
     }
 
