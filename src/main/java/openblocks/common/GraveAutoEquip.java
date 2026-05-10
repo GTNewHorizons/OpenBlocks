@@ -20,8 +20,6 @@ public class GraveAutoEquip {
                     return restoreToMain(player, stack, origin.slot);
                 case GraveSlotOrigin.INV_ARMOR:
                     return restoreToArmor(player, stack, origin.slot);
-                case GraveSlotOrigin.INV_TCONSTRUCT:
-                    return restoreToTConstruct(player, stack, origin.slot);
                 case GraveSlotOrigin.INV_BAUBLES:
                     return restoreToBaubles(player, stack, origin.slot);
                 case GraveSlotOrigin.INV_ADVENTURE_BACKPACK:
@@ -54,28 +52,6 @@ public class GraveAutoEquip {
         if (player.inventory.armorInventory[slot] != null) return false;
         player.inventory.armorInventory[slot] = stack.copy();
         return true;
-    }
-
-    private static boolean restoreToTConstruct(EntityPlayer player, ItemStack stack, int slot) {
-        try {
-            Class.forName("tconstruct.armor.player.TPlayerStats");
-        } catch (ClassNotFoundException ignored) {
-            return false;
-        }
-        return TConstructRestoreHelper.restore(player, stack, slot);
-    }
-
-    private static final class TConstructRestoreHelper {
-
-        static boolean restore(EntityPlayer player, ItemStack stack, int slot) {
-            tconstruct.armor.player.TPlayerStats stats = tconstruct.armor.player.TPlayerStats.get(player);
-            if (stats == null) return false;
-            tconstruct.armor.player.ArmorExtended armor = stats.armor;
-            if (slot < 0 || slot >= armor.getSizeInventory()) return false;
-            if (armor.getStackInSlot(slot) != null) return false;
-            armor.setInventorySlotContents(slot, stack.copy());
-            return true;
-        }
     }
 
     private static boolean restoreToBaubles(EntityPlayer player, ItemStack stack, int slot) {
@@ -151,12 +127,6 @@ public class GraveAutoEquip {
         if (stack == null) return null;
 
         try {
-            if (tryEquipTConstructAccessory(player, stack)) return null;
-        } catch (Exception e) {
-            Log.warn("GraveAutoEquip: error equipping tconstruct accessory %s: %s", stack.getDisplayName(), e);
-        }
-
-        try {
             if (tryEquipVanillaArmor(player, stack)) return null;
         } catch (Exception e) {
             Log.warn("GraveAutoEquip: error equipping vanilla armor %s: %s", stack.getDisplayName(), e);
@@ -181,38 +151,6 @@ public class GraveAutoEquip {
         }
 
         return stack;
-    }
-
-    // -------------------------------------------------------------------------
-    // Tinkers' Construct accessories (soft dependency) — must run BEFORE vanilla armor
-    // -------------------------------------------------------------------------
-
-    private static boolean tryEquipTConstructAccessory(EntityPlayer player, ItemStack stack) {
-        try {
-            Class.forName("tconstruct.library.accessory.IAccessory");
-        } catch (ClassNotFoundException ignored) {
-            return false;
-        }
-        return TConstructAccessoryHelper.equip(player, stack);
-    }
-
-    private static final class TConstructAccessoryHelper {
-
-        static boolean equip(EntityPlayer player, ItemStack stack) {
-            if (!(stack.getItem() instanceof tconstruct.library.accessory.IAccessory)) return false;
-            tconstruct.library.accessory.IAccessory accessory = (tconstruct.library.accessory.IAccessory) stack
-                    .getItem();
-            tconstruct.armor.player.TPlayerStats stats = tconstruct.armor.player.TPlayerStats.get(player);
-            if (stats == null) return false;
-            tconstruct.armor.player.ArmorExtended armor = stats.armor;
-            for (int i = 0; i < armor.getSizeInventory(); i++) {
-                if (armor.getStackInSlot(i) == null && accessory.canEquipAccessory(stack, i)) {
-                    armor.setInventorySlotContents(i, stack.copy());
-                    return true;
-                }
-            }
-            return false;
-        }
     }
 
     // -------------------------------------------------------------------------

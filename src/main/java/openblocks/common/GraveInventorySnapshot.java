@@ -30,7 +30,6 @@ public class GraveInventorySnapshot {
     public GraveInventorySnapshot(EntityPlayer player) {
         captureMain(player);
         captureArmor(player);
-        captureTConstruct(player);
         captureBaubles(player);
         captureAdventureBackpack(player);
         captureMcBackpack(player);
@@ -49,33 +48,6 @@ public class GraveInventorySnapshot {
             ItemStack stack = player.inventory.armorInventory[i];
             if (stack != null)
                 entries.add(new OriginatedStack(new GraveSlotOrigin(GraveSlotOrigin.INV_ARMOR, i), stack));
-        }
-    }
-
-    private void captureTConstruct(EntityPlayer player) {
-        try {
-            Class.forName("tconstruct.armor.player.TPlayerStats");
-        } catch (ClassNotFoundException ignored) {
-            return;
-        }
-        try {
-            TConstructCaptureHelper.capture(player, entries);
-        } catch (Exception e) {
-            Log.warn("GraveInventorySnapshot: failed to capture TConstruct slots: %s", e);
-        }
-    }
-
-    private static final class TConstructCaptureHelper {
-
-        static void capture(EntityPlayer player, List<OriginatedStack> out) {
-            tconstruct.armor.player.TPlayerStats stats = tconstruct.armor.player.TPlayerStats.get(player);
-            if (stats == null) return;
-            tconstruct.armor.player.ArmorExtended armor = stats.armor;
-            for (int i = 0; i < armor.getSizeInventory(); i++) {
-                ItemStack stack = armor.getStackInSlot(i);
-                if (stack != null)
-                    out.add(new OriginatedStack(new GraveSlotOrigin(GraveSlotOrigin.INV_TCONSTRUCT, i), stack));
-            }
         }
     }
 
