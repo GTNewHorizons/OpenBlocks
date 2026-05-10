@@ -54,11 +54,12 @@ public class GraveInventorySnapshot {
 
     private void captureTConstruct(EntityPlayer player) {
         try {
-            Class.forName("tconstruct.armor.player.TPlayerStats");
+            Class.forName("tconstruct.util.config.PHConstruct");
         } catch (ClassNotFoundException ignored) {
             return;
         }
         try {
+            if (!TConstructCaptureHelper.isTabEnabled()) return;
             TConstructCaptureHelper.capture(player, entries);
         } catch (Exception e) {
             Log.warn("GraveInventorySnapshot: failed to capture TConstruct slots: %s", e);
@@ -66,6 +67,10 @@ public class GraveInventorySnapshot {
     }
 
     private static final class TConstructCaptureHelper {
+
+        static boolean isTabEnabled() {
+            return tconstruct.util.config.PHConstruct.enableTinkerInventoryTab;
+        }
 
         static void capture(EntityPlayer player, List<OriginatedStack> out) {
             tconstruct.armor.player.TPlayerStats stats = tconstruct.armor.player.TPlayerStats.get(player);
