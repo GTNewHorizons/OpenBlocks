@@ -53,11 +53,7 @@ public class GraveInventorySnapshot {
     }
 
     private void captureTConstruct(EntityPlayer player) {
-        try {
-            Class.forName("tconstruct.util.config.PHConstruct");
-        } catch (ClassNotFoundException ignored) {
-            return;
-        }
+        if (!ModPresence.TCONSTRUCT) return;
         try {
             if (!TConstructCaptureHelper.isTabEnabled()) return;
             TConstructCaptureHelper.capture(player, entries);
@@ -85,11 +81,7 @@ public class GraveInventorySnapshot {
     }
 
     private void captureBaubles(EntityPlayer player) {
-        try {
-            Class.forName("baubles.api.IBauble");
-        } catch (ClassNotFoundException ignored) {
-            return;
-        }
+        if (!ModPresence.BAUBLES) return;
         try {
             BaublesCaptureHelper.capture(player, entries);
         } catch (Exception e) {
@@ -111,11 +103,7 @@ public class GraveInventorySnapshot {
     }
 
     private void captureAdventureBackpack(EntityPlayer player) {
-        try {
-            Class.forName("com.darkona.adventurebackpack.playerProperties.BackpackProperty");
-        } catch (ClassNotFoundException ignored) {
-            return;
-        }
+        if (!ModPresence.ADVENTURE_BACKPACK) return;
         try {
             AdventureBackpackCaptureHelper.capture(player, entries);
         } catch (Exception e) {
@@ -136,11 +124,7 @@ public class GraveInventorySnapshot {
     }
 
     private void captureMcBackpack(EntityPlayer player) {
-        try {
-            Class.forName("de.eydamos.backpack.saves.PlayerSave");
-        } catch (ClassNotFoundException ignored) {
-            return;
-        }
+        if (!ModPresence.MC_BACKPACK) return;
         try {
             McBackpackCaptureHelper.capture(player, entries);
         } catch (Exception e) {

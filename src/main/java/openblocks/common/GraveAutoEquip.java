@@ -57,11 +57,7 @@ public class GraveAutoEquip {
     }
 
     private static boolean restoreToBaubles(EntityPlayer player, ItemStack stack, int slot) {
-        try {
-            Class.forName("baubles.api.IBauble");
-        } catch (ClassNotFoundException ignored) {
-            return false;
-        }
+        if (!ModPresence.BAUBLES) return false;
         return BaublesRestoreHelper.restore(player, stack, slot);
     }
 
@@ -78,11 +74,7 @@ public class GraveAutoEquip {
     }
 
     private static boolean restoreToAdventureBackpack(EntityPlayer player, ItemStack stack) {
-        try {
-            Class.forName("com.darkona.adventurebackpack.item.IBackWearableItem");
-        } catch (ClassNotFoundException ignored) {
-            return false;
-        }
+        if (!ModPresence.ADVENTURE_BACKPACK) return false;
         return AdventureBackpackRestoreHelper.restore(player, stack);
     }
 
@@ -102,11 +94,7 @@ public class GraveAutoEquip {
     }
 
     private static boolean restoreToMcBackpack(EntityPlayer player, ItemStack stack) {
-        try {
-            Class.forName("de.eydamos.backpack.item.ItemBackpackBase");
-        } catch (ClassNotFoundException ignored) {
-            return false;
-        }
+        if (!ModPresence.MC_BACKPACK) return false;
         return McBackpackRestoreHelper.restore(player, stack);
     }
 
@@ -166,11 +154,7 @@ public class GraveAutoEquip {
     // -------------------------------------------------------------------------
 
     private static boolean isTConstructTabEnabled() {
-        try {
-            Class.forName("tconstruct.util.config.PHConstruct");
-        } catch (ClassNotFoundException ignored) {
-            return false;
-        }
+        if (!ModPresence.TCONSTRUCT) return false;
         return TConstructConfigHelper.isTabEnabled();
     }
 
@@ -183,11 +167,6 @@ public class GraveAutoEquip {
 
     private static boolean tryEquipTConstructAccessory(EntityPlayer player, ItemStack stack) {
         if (!isTConstructTabEnabled()) return false;
-        try {
-            Class.forName("tconstruct.library.accessory.IAccessory");
-        } catch (ClassNotFoundException ignored) {
-            return false;
-        }
         return TConstructAccessoryHelper.equip(player, stack);
     }
 
@@ -212,11 +191,6 @@ public class GraveAutoEquip {
 
     private static boolean restoreToTConstruct(EntityPlayer player, ItemStack stack, int slot) {
         if (!isTConstructTabEnabled()) return false;
-        try {
-            Class.forName("tconstruct.armor.player.TPlayerStats");
-        } catch (ClassNotFoundException ignored) {
-            return false;
-        }
         return TConstructRestoreHelper.restore(player, stack, slot);
     }
 
@@ -253,11 +227,7 @@ public class GraveAutoEquip {
     // -------------------------------------------------------------------------
 
     private static boolean tryEquipBauble(EntityPlayer player, ItemStack stack) {
-        try {
-            Class.forName("baubles.api.IBauble");
-        } catch (ClassNotFoundException ignored) {
-            return false;
-        }
+        if (!ModPresence.BAUBLES) return false;
         return BaubleEquipHelper.equip(player, stack);
     }
 
@@ -282,11 +252,7 @@ public class GraveAutoEquip {
     // -------------------------------------------------------------------------
 
     private static boolean tryEquipAdventureBackpack(EntityPlayer player, ItemStack stack) {
-        try {
-            Class.forName("com.darkona.adventurebackpack.item.IBackWearableItem");
-        } catch (ClassNotFoundException ignored) {
-            return false;
-        }
+        if (!ModPresence.ADVENTURE_BACKPACK) return false;
         return AdventureBackpackEquipHelper.equip(player, stack);
     }
 
@@ -310,11 +276,7 @@ public class GraveAutoEquip {
     // -------------------------------------------------------------------------
 
     private static boolean tryEquipMcBackpack(EntityPlayer player, ItemStack stack) {
-        try {
-            Class.forName("de.eydamos.backpack.item.ItemBackpackBase");
-        } catch (ClassNotFoundException ignored) {
-            return false;
-        }
+        if (!ModPresence.MC_BACKPACK) return false;
         return McBackpackEquipHelper.equip(player, stack);
     }
 
