@@ -53,12 +53,9 @@ public class GraveInventorySnapshot {
     }
 
     private void captureTConstruct(EntityPlayer player) {
+        if (!ModPresence.TCONSTRUCT) return;
         try {
-            Class.forName("tconstruct.armor.player.TPlayerStats");
-        } catch (ClassNotFoundException ignored) {
-            return;
-        }
-        try {
+            if (!TConstructCaptureHelper.isTabEnabled()) return;
             TConstructCaptureHelper.capture(player, entries);
         } catch (Exception e) {
             Log.warn("GraveInventorySnapshot: failed to capture TConstruct slots: %s", e);
@@ -66,6 +63,15 @@ public class GraveInventorySnapshot {
     }
 
     private static final class TConstructCaptureHelper {
+
+        static boolean isTabEnabled() {
+            try {
+                // enableTinkerInventoryTab is available only since TConstruct 1.14.72-GTNH
+                return tconstruct.util.config.PHConstruct.enableTinkerInventoryTab;
+            } catch (NoSuchFieldError e) {
+                return true;
+            }
+        }
 
         static void capture(EntityPlayer player, List<OriginatedStack> out) {
             tconstruct.armor.player.TPlayerStats stats = tconstruct.armor.player.TPlayerStats.get(player);
@@ -80,11 +86,7 @@ public class GraveInventorySnapshot {
     }
 
     private void captureBaubles(EntityPlayer player) {
-        try {
-            Class.forName("baubles.api.IBauble");
-        } catch (ClassNotFoundException ignored) {
-            return;
-        }
+        if (!ModPresence.BAUBLES) return;
         try {
             BaublesCaptureHelper.capture(player, entries);
         } catch (Exception e) {
@@ -106,11 +108,7 @@ public class GraveInventorySnapshot {
     }
 
     private void captureAdventureBackpack(EntityPlayer player) {
-        try {
-            Class.forName("com.darkona.adventurebackpack.playerProperties.BackpackProperty");
-        } catch (ClassNotFoundException ignored) {
-            return;
-        }
+        if (!ModPresence.ADVENTURE_BACKPACK) return;
         try {
             AdventureBackpackCaptureHelper.capture(player, entries);
         } catch (Exception e) {
@@ -131,11 +129,7 @@ public class GraveInventorySnapshot {
     }
 
     private void captureMcBackpack(EntityPlayer player) {
-        try {
-            Class.forName("de.eydamos.backpack.saves.PlayerSave");
-        } catch (ClassNotFoundException ignored) {
-            return;
-        }
+        if (!ModPresence.MC_BACKPACK) return;
         try {
             McBackpackCaptureHelper.capture(player, entries);
         } catch (Exception e) {
