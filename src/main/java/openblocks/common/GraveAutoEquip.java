@@ -161,7 +161,12 @@ public class GraveAutoEquip {
     private static final class TConstructConfigHelper {
 
         static boolean isTabEnabled() {
-            return tconstruct.util.config.PHConstruct.enableTinkerInventoryTab;
+            try {
+                // enableTinkerInventoryTab is available only since TConstruct 1.14.72-GTNH
+                return tconstruct.util.config.PHConstruct.enableTinkerInventoryTab;
+            } catch (NoSuchFieldError e) {
+                return true;
+            }
         }
     }
 
