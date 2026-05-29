@@ -1,8 +1,9 @@
 package openblocks.common.entity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -87,16 +88,21 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
     @SideOnly(Side.CLIENT)
     public static void updateGliders(World worldObj) {
-        Iterator<Map.Entry<EntityPlayer, EntityHangGlider>> iterator = gliderMap.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<EntityPlayer, EntityHangGlider> e = iterator.next();
+        List<Map.Entry<EntityPlayer, EntityHangGlider>> gliders =
+                new ArrayList<>(gliderMap.entrySet());
+
+        for (Map.Entry<EntityPlayer, EntityHangGlider> e : gliders) {
             EntityPlayer player = e.getKey();
             EntityHangGlider glider = e.getValue();
+            if (gliderMap.get(player) != glider) continue;
 
             if (isGliderValid(player, glider)) {
                 glider.fixPositions(player, true);
             } else {
-                iterator.remove();
+                if (gliderMap.get(player) == glider) {
+                    gliderMap.remove(player);
+                }
+
                 glider.setDeadUnsafe();
             }
         }
