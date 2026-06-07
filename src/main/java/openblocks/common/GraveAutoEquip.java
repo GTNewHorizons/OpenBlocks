@@ -146,6 +146,12 @@ public class GraveAutoEquip {
             Log.warn("GraveAutoEquip: error equipping mc backpack %s: %s", stack.getDisplayName(), e);
         }
 
+        try {
+            if (tryEquipGalacticraft(player, stack)) return null;
+        } catch (Exception e) {
+            Log.warn("GraveAutoEquip: error equipping galacticraft gear %s: %s", stack.getDisplayName(), e);
+        }
+
         return stack;
     }
 
@@ -293,6 +299,67 @@ public class GraveAutoEquip {
             if (save.hasPersonalBackpack()) return false;
             save.setPersonalBackpack(stack.copy());
             return true;
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // GalactiCraft extended inventory (soft dependency)
+    // -------------------------------------------------------------------------
+
+    private static boolean tryEquipGalacticraft(EntityPlayer player, ItemStack stack) {
+        if (!ModPresence.GALACTICRAFT) return false;
+        return GalacticraftEquipHelper.equip(player, stack);
+    }
+
+    private static final class GalacticraftEquipHelper {
+
+        static boolean equip(EntityPlayer player, ItemStack stack) {
+            if (!(player instanceof net.minecraft.entity.player.EntityPlayerMP)) return false;
+            micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats stats = micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats
+                    .get((net.minecraft.entity.player.EntityPlayerMP) player);
+            if (stats == null) return false;
+            micdoodle8.mods.galacticraft.core.inventory.InventoryExtended inv = stats.extendedInventory;
+            for (int i = 0; i < inv.getSizeInventory(); i++) {
+                if (inv.getStackInSlot(i) == null && isValidForSlot(stack, i)) {
+                    inv.setInventorySlotContents(i, stack.copy());
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /** Mirrors SlotExtendedInventory.isItemValid logic without depending on the slot class. */
+        private static boolean isValidForSlot(ItemStack stack, int slot) {
+            switch (slot) {
+                case 0:
+                    return stack.getItem() instanceof micdoodle8.mods.galacticraft.core.items.ItemOxygenMask;
+                case 1:
+                    return stack.getItem() == micdoodle8.mods.galacticraft.core.items.GCItems.oxygenGear;
+                case 2:
+                case 3:
+                    return stack.getItem() instanceof micdoodle8.mods.galacticraft.core.items.ItemOxygenTank;
+                case 4:
+                    return stack.getItem() instanceof micdoodle8.mods.galacticraft.core.items.ItemParaChute;
+                case 5:
+                    return stack.getItem() == micdoodle8.mods.galacticraft.core.items.GCItems.basicItem
+                            && stack.getItemDamage() == 19;
+                case 6:
+                    return isThermalValid(stack, 0);
+                case 7:
+                    return isThermalValid(stack, 1);
+                case 8:
+                    return isThermalValid(stack, 2);
+                case 9:
+                    return isThermalValid(stack, 3);
+                default:
+                    return false;
+            }
+        }
+
+        private static boolean isThermalValid(ItemStack stack, int slotIndex) {
+            if (!(stack.getItem() instanceof micdoodle8.mods.galacticraft.api.item.IItemThermal)) return false;
+            return ((micdoodle8.mods.galacticraft.api.item.IItemThermal) stack.getItem())
+                    .isValidForSlot(stack, slotIndex);
         }
     }
 }
