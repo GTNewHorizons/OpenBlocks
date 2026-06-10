@@ -96,10 +96,22 @@ public class ItemHangGlider extends Item {
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
-        if (!world.isRemote && player != null) {
-            EntityHangGlider glider = EntityHangGlider.getEntityHangGlider(player);
-            if (glider != null) glider.setDead();
-            else spawnGlider(player);
+        if (!world.isRemote) {
+            // ensures only the serverside glider instance is created or destroyed
+            EntityHangGlider glider = null;
+            for (Object o : player.worldObj.loadedEntityList) {
+                if (o instanceof EntityHangGlider g) {
+                    if (g.getPlayer() == player && !g.isDead) {
+                        glider = g;
+                        break;
+                    }
+                }
+            }
+            if (glider != null) {
+                glider.setDead();
+                return itemStack;
+            }
+            spawnGlider(player);
         }
         return itemStack;
     }
