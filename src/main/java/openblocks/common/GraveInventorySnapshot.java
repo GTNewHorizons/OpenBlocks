@@ -6,6 +6,7 @@ import java.util.Map;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
@@ -34,6 +35,7 @@ public class GraveInventorySnapshot {
         captureBaubles(player);
         captureAdventureBackpack(player);
         captureMcBackpack(player);
+        captureGalacticraft(player);
     }
 
     private void captureMain(EntityPlayer player) {
@@ -145,6 +147,31 @@ public class GraveInventorySnapshot {
             ItemStack stack = save.getPersonalBackpack();
             if (stack != null)
                 out.add(new OriginatedStack(new GraveSlotOrigin(GraveSlotOrigin.INV_MC_BACKPACK, 0), stack));
+        }
+    }
+
+    private void captureGalacticraft(EntityPlayer player) {
+        if (!ModPresence.GALACTICRAFT) return;
+        try {
+            GalacticraftCaptureHelper.capture(player, entries);
+        } catch (Exception e) {
+            Log.warn("GraveInventorySnapshot: failed to capture GalactiCraft slots: %s", e);
+        }
+    }
+
+    private static final class GalacticraftCaptureHelper {
+
+        static void capture(EntityPlayer player, List<OriginatedStack> out) {
+            if (!(player instanceof EntityPlayerMP)) return;
+            micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats stats = micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats
+                    .get((EntityPlayerMP) player);
+            if (stats == null) return;
+            micdoodle8.mods.galacticraft.core.inventory.InventoryExtended inv = stats.extendedInventory;
+            for (int i = 0; i < inv.getSizeInventory(); i++) {
+                ItemStack stack = inv.getStackInSlot(i);
+                if (stack != null)
+                    out.add(new OriginatedStack(new GraveSlotOrigin(GraveSlotOrigin.INV_GALACTICRAFT, i), stack));
+            }
         }
     }
 
