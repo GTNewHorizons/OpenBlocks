@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import baubles.api.BaublesApi;
+import com.darkona.adventurebackpack.playerProperties.BackpackProperty;
+import de.eydamos.backpack.saves.PlayerSave;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
+import micdoodle8.mods.galacticraft.core.inventory.InventoryExtended;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -12,6 +17,9 @@ import net.minecraft.item.ItemStack;
 
 import openmods.Log;
 import openmods.inventory.GenericInventory;
+import tconstruct.armor.player.ArmorExtended;
+import tconstruct.armor.player.TPlayerStats;
+import tconstruct.util.config.PHConstruct;
 
 public class GraveInventorySnapshot {
 
@@ -69,16 +77,16 @@ public class GraveInventorySnapshot {
         static boolean isTabEnabled() {
             try {
                 // enableTinkerInventoryTab is available only since TConstruct 1.14.72-GTNH
-                return tconstruct.util.config.PHConstruct.enableTinkerInventoryTab;
+                return PHConstruct.enableTinkerInventoryTab;
             } catch (NoSuchFieldError e) {
                 return true;
             }
         }
 
         static void capture(EntityPlayer player, List<OriginatedStack> out) {
-            tconstruct.armor.player.TPlayerStats stats = tconstruct.armor.player.TPlayerStats.get(player);
+            TPlayerStats stats = TPlayerStats.get(player);
             if (stats == null) return;
-            tconstruct.armor.player.ArmorExtended armor = stats.armor;
+            ArmorExtended armor = stats.armor;
             for (int i = 0; i < armor.getSizeInventory(); i++) {
                 ItemStack stack = armor.getStackInSlot(i);
                 if (stack != null)
@@ -99,7 +107,7 @@ public class GraveInventorySnapshot {
     private static final class BaublesCaptureHelper {
 
         static void capture(EntityPlayer player, List<OriginatedStack> out) {
-            IInventory inv = baubles.api.BaublesApi.getBaubles(player);
+            IInventory inv = BaublesApi.getBaubles(player);
             if (inv == null) return;
             for (int i = 0; i < inv.getSizeInventory(); i++) {
                 ItemStack stack = inv.getStackInSlot(i);
@@ -121,7 +129,7 @@ public class GraveInventorySnapshot {
     private static final class AdventureBackpackCaptureHelper {
 
         static void capture(EntityPlayer player, List<OriginatedStack> out) {
-            com.darkona.adventurebackpack.playerProperties.BackpackProperty prop = com.darkona.adventurebackpack.playerProperties.BackpackProperty
+            BackpackProperty prop = BackpackProperty
                     .get(player);
             if (prop == null) return;
             ItemStack stack = prop.getWearable();
@@ -142,7 +150,7 @@ public class GraveInventorySnapshot {
     private static final class McBackpackCaptureHelper {
 
         static void capture(EntityPlayer player, List<OriginatedStack> out) {
-            de.eydamos.backpack.saves.PlayerSave save = new de.eydamos.backpack.saves.PlayerSave(player);
+            PlayerSave save = new PlayerSave(player);
             if (!save.hasPersonalBackpack()) return;
             ItemStack stack = save.getPersonalBackpack();
             if (stack != null)
@@ -163,10 +171,10 @@ public class GraveInventorySnapshot {
 
         static void capture(EntityPlayer player, List<OriginatedStack> out) {
             if (!(player instanceof EntityPlayerMP)) return;
-            micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats stats = micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats
+            GCPlayerStats stats = GCPlayerStats
                     .get((EntityPlayerMP) player);
             if (stats == null) return;
-            micdoodle8.mods.galacticraft.core.inventory.InventoryExtended inv = stats.extendedInventory;
+            InventoryExtended inv = stats.extendedInventory;
             for (int i = 0; i < inv.getSizeInventory(); i++) {
                 ItemStack stack = inv.getStackInSlot(i);
                 if (stack != null)
