@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import baubles.api.BaublesApi;
-import com.darkona.adventurebackpack.playerProperties.BackpackProperty;
-import de.eydamos.backpack.saves.PlayerSave;
-import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
-import micdoodle8.mods.galacticraft.core.inventory.InventoryExtended;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
+import com.darkona.adventurebackpack.playerProperties.BackpackProperty;
+
+import baubles.api.BaublesApi;
+import de.eydamos.backpack.saves.PlayerSave;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
+import micdoodle8.mods.galacticraft.core.inventory.InventoryExtended;
 import openmods.Log;
 import openmods.inventory.GenericInventory;
 import tconstruct.armor.player.ArmorExtended;
@@ -129,8 +130,7 @@ public class GraveInventorySnapshot {
     private static final class AdventureBackpackCaptureHelper {
 
         static void capture(EntityPlayer player, List<OriginatedStack> out) {
-            BackpackProperty prop = BackpackProperty
-                    .get(player);
+            BackpackProperty prop = BackpackProperty.get(player);
             if (prop == null) return;
             ItemStack stack = prop.getWearable();
             if (stack != null)
@@ -171,8 +171,7 @@ public class GraveInventorySnapshot {
 
         static void capture(EntityPlayer player, List<OriginatedStack> out) {
             if (!(player instanceof EntityPlayerMP)) return;
-            GCPlayerStats stats = GCPlayerStats
-                    .get((EntityPlayerMP) player);
+            GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) player);
             if (stats == null) return;
             InventoryExtended inv = stats.extendedInventory;
             for (int i = 0; i < inv.getSizeInventory(); i++) {
