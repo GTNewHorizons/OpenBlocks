@@ -13,7 +13,7 @@ dependencies {
     compileOnly("com.github.GTNewHorizons:TinkersConstruct:1.14.91-GTNH:dev") { transitive = false }
     compileOnly("com.github.GTNewHorizons:Galacticraft:3.4.29-GTNH:dev") { transitive = false }
 
-    devOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.8.101-GTNH:dev')
+    devOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.8.102-GTNH:dev')
     devOnlyNonPublishable("com.github.GTNewHorizons:Baubles-Expanded:2.2.21-GTNH:dev") { transitive = false }
     devOnlyNonPublishable("com.github.GTNewHorizons:AdventureBackpack2:1.4.21-GTNH:dev") { transitive = false }
     devOnlyNonPublishable("com.github.GTNewHorizons:Minecraft-Backpack-Mod:2.6.13-GTNH:dev") { transitive = false }
