@@ -6,11 +6,21 @@ import java.util.Map;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
+import com.darkona.adventurebackpack.playerProperties.BackpackProperty;
+
+import baubles.api.BaublesApi;
+import de.eydamos.backpack.saves.PlayerSave;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
+import micdoodle8.mods.galacticraft.core.inventory.InventoryExtended;
 import openmods.Log;
 import openmods.inventory.GenericInventory;
+import tconstruct.armor.player.ArmorExtended;
+import tconstruct.armor.player.TPlayerStats;
+import tconstruct.util.config.PHConstruct;
 
 public class GraveInventorySnapshot {
 
@@ -34,6 +44,7 @@ public class GraveInventorySnapshot {
         captureBaubles(player);
         captureAdventureBackpack(player);
         captureMcBackpack(player);
+        captureGalacticraft(player);
     }
 
     private void captureMain(EntityPlayer player) {
@@ -67,16 +78,16 @@ public class GraveInventorySnapshot {
         static boolean isTabEnabled() {
             try {
                 // enableTinkerInventoryTab is available only since TConstruct 1.14.72-GTNH
-                return tconstruct.util.config.PHConstruct.enableTinkerInventoryTab;
+                return PHConstruct.enableTinkerInventoryTab;
             } catch (NoSuchFieldError e) {
                 return true;
             }
         }
 
         static void capture(EntityPlayer player, List<OriginatedStack> out) {
-            tconstruct.armor.player.TPlayerStats stats = tconstruct.armor.player.TPlayerStats.get(player);
+            TPlayerStats stats = TPlayerStats.get(player);
             if (stats == null) return;
-            tconstruct.armor.player.ArmorExtended armor = stats.armor;
+            ArmorExtended armor = stats.armor;
             for (int i = 0; i < armor.getSizeInventory(); i++) {
                 ItemStack stack = armor.getStackInSlot(i);
                 if (stack != null)
@@ -97,7 +108,7 @@ public class GraveInventorySnapshot {
     private static final class BaublesCaptureHelper {
 
         static void capture(EntityPlayer player, List<OriginatedStack> out) {
-            IInventory inv = baubles.api.BaublesApi.getBaubles(player);
+            IInventory inv = BaublesApi.getBaubles(player);
             if (inv == null) return;
             for (int i = 0; i < inv.getSizeInventory(); i++) {
                 ItemStack stack = inv.getStackInSlot(i);
@@ -119,8 +130,7 @@ public class GraveInventorySnapshot {
     private static final class AdventureBackpackCaptureHelper {
 
         static void capture(EntityPlayer player, List<OriginatedStack> out) {
-            com.darkona.adventurebackpack.playerProperties.BackpackProperty prop = com.darkona.adventurebackpack.playerProperties.BackpackProperty
-                    .get(player);
+            BackpackProperty prop = BackpackProperty.get(player);
             if (prop == null) return;
             ItemStack stack = prop.getWearable();
             if (stack != null)
@@ -140,11 +150,35 @@ public class GraveInventorySnapshot {
     private static final class McBackpackCaptureHelper {
 
         static void capture(EntityPlayer player, List<OriginatedStack> out) {
-            de.eydamos.backpack.saves.PlayerSave save = new de.eydamos.backpack.saves.PlayerSave(player);
+            PlayerSave save = new PlayerSave(player);
             if (!save.hasPersonalBackpack()) return;
             ItemStack stack = save.getPersonalBackpack();
             if (stack != null)
                 out.add(new OriginatedStack(new GraveSlotOrigin(GraveSlotOrigin.INV_MC_BACKPACK, 0), stack));
+        }
+    }
+
+    private void captureGalacticraft(EntityPlayer player) {
+        if (!ModPresence.GALACTICRAFT) return;
+        try {
+            GalacticraftCaptureHelper.capture(player, entries);
+        } catch (Exception e) {
+            Log.warn("GraveInventorySnapshot: failed to capture GalactiCraft slots: %s", e);
+        }
+    }
+
+    private static final class GalacticraftCaptureHelper {
+
+        static void capture(EntityPlayer player, List<OriginatedStack> out) {
+            if (!(player instanceof EntityPlayerMP)) return;
+            GCPlayerStats stats = GCPlayerStats.get((EntityPlayerMP) player);
+            if (stats == null) return;
+            InventoryExtended inv = stats.extendedInventory;
+            for (int i = 0; i < inv.getSizeInventory(); i++) {
+                ItemStack stack = inv.getStackInSlot(i);
+                if (stack != null)
+                    out.add(new OriginatedStack(new GraveSlotOrigin(GraveSlotOrigin.INV_GALACTICRAFT, i), stack));
+            }
         }
     }
 

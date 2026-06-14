@@ -10,6 +10,7 @@ public class GraveSlotOrigin {
     public static final String INV_BAUBLES = "baubles";
     public static final String INV_ADVENTURE_BACKPACK = "adventurebackpack";
     public static final String INV_MC_BACKPACK = "mcbackpack";
+    public static final String INV_GALACTICRAFT = "galacticraft";
 
     public final String inventoryType;
     public final int slot;
