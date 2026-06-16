@@ -6,11 +6,12 @@ public class GraveSlotOrigin {
 
     public static final String INV_MAIN = "main";
     public static final String INV_ARMOR = "armor";
-    public static final String INV_TCONSTRUCT = "tconstruct";
-    public static final String INV_BAUBLES = "baubles";
     public static final String INV_ADVENTURE_BACKPACK = "adventurebackpack";
-    public static final String INV_MC_BACKPACK = "mcbackpack";
+    public static final String INV_BAUBLES = "baubles";
+    public static final String INV_COSMETIC_ARMOR = "cosmeticarmor";
     public static final String INV_GALACTICRAFT = "galacticraft";
+    public static final String INV_MC_BACKPACK = "mcbackpack";
+    public static final String INV_TCONSTRUCT = "tconstruct";
 
     public final String inventoryType;
     public final int slot;
