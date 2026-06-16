@@ -26,16 +26,7 @@ import tconstruct.util.config.PHConstruct;
 
 public class GraveInventorySnapshot {
 
-    public static final class OriginatedStack {
-
-        public final GraveSlotOrigin origin;
-        public final ItemStack stack;
-
-        public OriginatedStack(GraveSlotOrigin origin, ItemStack stack) {
-            this.origin = origin;
-            this.stack = stack;
-        }
-    }
+    public record OriginatedStack(GraveSlotOrigin origin, ItemStack stack) {}
 
     private final List<OriginatedStack> entries = new ArrayList<>();
 

@@ -2,7 +2,7 @@ package openblocks.common;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-public class GraveSlotOrigin {
+public record GraveSlotOrigin(String inventoryType, int slot) {
 
     public static final String INV_MAIN = "main";
     public static final String INV_ARMOR = "armor";
@@ -12,14 +12,6 @@ public class GraveSlotOrigin {
     public static final String INV_GALACTICRAFT = "galacticraft";
     public static final String INV_MC_BACKPACK = "mcbackpack";
     public static final String INV_TCONSTRUCT = "tconstruct";
-
-    public final String inventoryType;
-    public final int slot;
-
-    public GraveSlotOrigin(String inventoryType, int slot) {
-        this.inventoryType = inventoryType;
-        this.slot = slot;
-    }
 
     public NBTTagCompound toNBT() {
         NBTTagCompound tag = new NBTTagCompound();

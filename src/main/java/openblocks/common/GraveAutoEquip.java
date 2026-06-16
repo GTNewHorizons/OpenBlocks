@@ -36,23 +36,23 @@ public class GraveAutoEquip {
     public static boolean tryRestoreToOrigin(EntityPlayer player, ItemStack stack, GraveSlotOrigin origin) {
         if (stack == null || origin == null) return false;
         try {
-            return switch (origin.inventoryType) {
-                case GraveSlotOrigin.INV_MAIN -> restoreToMain(player, stack, origin.slot);
-                case GraveSlotOrigin.INV_ARMOR -> restoreToArmor(player, stack, origin.slot);
+            return switch (origin.inventoryType()) {
+                case GraveSlotOrigin.INV_MAIN -> restoreToMain(player, stack, origin.slot());
+                case GraveSlotOrigin.INV_ARMOR -> restoreToArmor(player, stack, origin.slot());
                 case GraveSlotOrigin.INV_ADVENTURE_BACKPACK -> restoreToAdventureBackpack(player, stack);
-                case GraveSlotOrigin.INV_BAUBLES -> restoreToBaubles(player, stack, origin.slot);
-                case GraveSlotOrigin.INV_COSMETIC_ARMOR -> restoreToCosmeticArmor(player, stack, origin.slot);
-                case GraveSlotOrigin.INV_GALACTICRAFT -> restoreToGalacticraft(player, stack, origin.slot);
+                case GraveSlotOrigin.INV_BAUBLES -> restoreToBaubles(player, stack, origin.slot());
+                case GraveSlotOrigin.INV_COSMETIC_ARMOR -> restoreToCosmeticArmor(player, stack, origin.slot());
+                case GraveSlotOrigin.INV_GALACTICRAFT -> restoreToGalacticraft(player, stack, origin.slot());
                 case GraveSlotOrigin.INV_MC_BACKPACK -> restoreToMcBackpack(player, stack);
-                case GraveSlotOrigin.INV_TCONSTRUCT -> restoreToTConstruct(player, stack, origin.slot);
+                case GraveSlotOrigin.INV_TCONSTRUCT -> restoreToTConstruct(player, stack, origin.slot());
                 default -> false;
             };
         } catch (Exception e) {
             Log.warn(
                     "GraveAutoEquip: error restoring %s to origin %s/%d: %s",
                     stack.getDisplayName(),
-                    origin.inventoryType,
-                    origin.slot,
+                    origin.inventoryType(),
+                    origin.slot(),
                     e);
             return false;
         }
