@@ -118,7 +118,7 @@ public class GraveAutoEquip {
             InventoryCosArmor cosArmorInventory = CosmeticArmorReworked.invMan
                     .getCosArmorInventory(player.getUniqueID());
             cosArmorInventory.setInventorySlotContents(slot, stack);
-			cosArmorInventory.markDirty();
+            cosArmorInventory.markDirty();
             return true;
         }
     }
