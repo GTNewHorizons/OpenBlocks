@@ -115,10 +115,10 @@ public class GraveAutoEquip {
     private static final class CosmeticArmorRestoreHelper {
 
         static boolean restore(EntityPlayer player, ItemStack stack, int slot) {
-            InventoryCosArmor cosArmorInventory = CosmeticArmorReworked.invMan
-                    .getCosArmorInventory(player.getUniqueID());
-            cosArmorInventory.setInventorySlotContents(slot, stack);
-            cosArmorInventory.markDirty();
+            InventoryCosArmor inv = CosmeticArmorReworked.invMan.getCosArmorInventory(player.getUniqueID());
+            if (inv.getStackInSlot(slot) != null) return false;
+            inv.setInventorySlotContents(slot, stack.copy());
+            inv.markDirty();
             return true;
         }
     }
