@@ -13,6 +13,8 @@ import baubles.api.BaublesApi;
 import baubles.api.IBauble;
 import de.eydamos.backpack.item.ItemBackpackBase;
 import de.eydamos.backpack.saves.PlayerSave;
+import lain.mods.cos.CosmeticArmorReworked;
+import lain.mods.cos.inventory.InventoryCosArmor;
 import micdoodle8.mods.galacticraft.api.item.IItemThermal;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import micdoodle8.mods.galacticraft.core.inventory.InventoryExtended;
@@ -34,22 +36,23 @@ public class GraveAutoEquip {
     public static boolean tryRestoreToOrigin(EntityPlayer player, ItemStack stack, GraveSlotOrigin origin) {
         if (stack == null || origin == null) return false;
         try {
-            return switch (origin.inventoryType) {
-                case GraveSlotOrigin.INV_MAIN -> restoreToMain(player, stack, origin.slot);
-                case GraveSlotOrigin.INV_ARMOR -> restoreToArmor(player, stack, origin.slot);
-                case GraveSlotOrigin.INV_TCONSTRUCT -> restoreToTConstruct(player, stack, origin.slot);
-                case GraveSlotOrigin.INV_BAUBLES -> restoreToBaubles(player, stack, origin.slot);
+            return switch (origin.inventoryType()) {
+                case GraveSlotOrigin.INV_MAIN -> restoreToMain(player, stack, origin.slot());
+                case GraveSlotOrigin.INV_ARMOR -> restoreToArmor(player, stack, origin.slot());
                 case GraveSlotOrigin.INV_ADVENTURE_BACKPACK -> restoreToAdventureBackpack(player, stack);
+                case GraveSlotOrigin.INV_BAUBLES -> restoreToBaubles(player, stack, origin.slot());
+                case GraveSlotOrigin.INV_COSMETIC_ARMOR -> restoreToCosmeticArmor(player, stack, origin.slot());
+                case GraveSlotOrigin.INV_GALACTICRAFT -> restoreToGalacticraft(player, stack, origin.slot());
                 case GraveSlotOrigin.INV_MC_BACKPACK -> restoreToMcBackpack(player, stack);
-                case GraveSlotOrigin.INV_GALACTICRAFT -> restoreToGalacticraft(player, stack, origin.slot);
+                case GraveSlotOrigin.INV_TCONSTRUCT -> restoreToTConstruct(player, stack, origin.slot());
                 default -> false;
             };
         } catch (Exception e) {
             Log.warn(
                     "GraveAutoEquip: error restoring %s to origin %s/%d: %s",
                     stack.getDisplayName(),
-                    origin.inventoryType,
-                    origin.slot,
+                    origin.inventoryType(),
+                    origin.slot(),
                     e);
             return false;
         }
@@ -100,6 +103,22 @@ public class GraveAutoEquip {
             prop.setWearable(stack.copy());
             ((IBackWearableItem) stack.getItem()).onEquipped(player.worldObj, player, stack);
             BackpackProperty.sync(player);
+            return true;
+        }
+    }
+
+    private static boolean restoreToCosmeticArmor(EntityPlayer player, ItemStack stack, int slot) {
+        if (!ModPresence.COSMETIC_ARMOR) return false;
+        return CosmeticArmorRestoreHelper.restore(player, stack, slot);
+    }
+
+    private static final class CosmeticArmorRestoreHelper {
+
+        static boolean restore(EntityPlayer player, ItemStack stack, int slot) {
+            InventoryCosArmor inv = CosmeticArmorReworked.invMan.getCosArmorInventory(player.getUniqueID());
+            if (inv.getStackInSlot(slot) != null) return false;
+            inv.setInventorySlotContents(slot, stack.copy());
+            inv.markDirty();
             return true;
         }
     }

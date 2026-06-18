@@ -14,6 +14,8 @@ import com.darkona.adventurebackpack.playerProperties.BackpackProperty;
 
 import baubles.api.BaublesApi;
 import de.eydamos.backpack.saves.PlayerSave;
+import lain.mods.cos.CosmeticArmorReworked;
+import lain.mods.cos.inventory.InventoryCosArmor;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import micdoodle8.mods.galacticraft.core.inventory.InventoryExtended;
 import openmods.Log;
@@ -24,18 +26,9 @@ import tconstruct.util.config.PHConstruct;
 
 public class GraveInventorySnapshot {
 
-    public static final class OriginatedStack {
+    public record OriginatedStack(GraveSlotOrigin origin, ItemStack stack) {}
 
-        public final GraveSlotOrigin origin;
-        public final ItemStack stack;
-
-        public OriginatedStack(GraveSlotOrigin origin, ItemStack stack) {
-            this.origin = origin;
-            this.stack = stack;
-        }
-    }
-
-    private final List<OriginatedStack> entries = new ArrayList<OriginatedStack>();
+    private final List<OriginatedStack> entries = new ArrayList<>();
 
     public GraveInventorySnapshot(EntityPlayer player) {
         captureMain(player);
@@ -45,6 +38,7 @@ public class GraveInventorySnapshot {
         captureAdventureBackpack(player);
         captureMcBackpack(player);
         captureGalacticraft(player);
+        captureCosmeticArmor(player);
     }
 
     private void captureMain(EntityPlayer player) {
@@ -182,6 +176,29 @@ public class GraveInventorySnapshot {
         }
     }
 
+    private void captureCosmeticArmor(EntityPlayer player) {
+        if (!ModPresence.COSMETIC_ARMOR) return;
+        try {
+            CosmeticArmorCaptureHelper.capture(player, entries);
+        } catch (Exception e) {
+            Log.warn("GraveInventorySnapshot: failed to capture Cosmetic Armor slots: %s", e);
+        }
+    }
+
+    private static final class CosmeticArmorCaptureHelper {
+
+        static void capture(EntityPlayer player, List<OriginatedStack> out) {
+            InventoryCosArmor cosArmorInventory = CosmeticArmorReworked.invMan
+                    .getCosArmorInventory(player.getUniqueID());
+            ItemStack[] inv = cosArmorInventory.getInventory();
+            for (int i = 0; i < inv.length; i++) {
+                ItemStack stack = inv[i];
+                if (stack != null)
+                    out.add(new OriginatedStack(new GraveSlotOrigin(GraveSlotOrigin.INV_COSMETIC_ARMOR, i), stack));
+            }
+        }
+    }
+
     /**
      * Builds grave inventory and slot origins from the snapshot. Only items that appear in graveLoot (matched by
      * item/damage/NBT) are included.
@@ -192,13 +209,13 @@ public class GraveInventorySnapshot {
      */
     public IInventory buildLoot(List<EntityItem> graveLoot, Map<Integer, GraveSlotOrigin> originsOut) {
         // Build a consumable pool of drops for matching
-        List<ItemStack> pool = new ArrayList<ItemStack>(graveLoot.size());
+        List<ItemStack> pool = new ArrayList<>(graveLoot.size());
         for (EntityItem ei : graveLoot) {
             ItemStack s = ei.getEntityItem();
             if (s != null) pool.add(s);
         }
 
-        List<OriginatedStack> matched = new ArrayList<OriginatedStack>();
+        List<OriginatedStack> matched = new ArrayList<>();
         for (OriginatedStack entry : entries) {
             int idx = findAndConsume(pool, entry.stack);
             if (idx >= 0) matched.add(entry);
@@ -206,7 +223,7 @@ public class GraveInventorySnapshot {
 
         // Items in graveLoot that had no snapshot match (e.g. spawned by other mods)
         // are added without origin info.
-        List<ItemStack> unmatched = new ArrayList<ItemStack>(pool);
+        List<ItemStack> unmatched = new ArrayList<>(pool);
 
         GenericInventory inv = new GenericInventory("tmpplayer", false, matched.size() + unmatched.size());
         int graveSlot = 0;
