@@ -88,8 +88,7 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
     @SideOnly(Side.CLIENT)
     public static void updateGliders(World worldObj) {
-        List<Map.Entry<EntityPlayer, EntityHangGlider>> gliders =
-                new ArrayList<>(gliderMap.entrySet());
+        List<Map.Entry<EntityPlayer, EntityHangGlider>> gliders = new ArrayList<>(gliderMap.entrySet());
 
         for (Map.Entry<EntityPlayer, EntityHangGlider> e : gliders) {
             EntityPlayer player = e.getKey();
