@@ -164,35 +164,16 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
     }
 
     private static boolean isElytraFlying(EntityPlayer player) {
-        if (!ModPresence.ET_FUTURUM) return false;
-        try {
-            return EtFuturumHelper.isElytraFlying(player);
-        } catch (Exception e) {
-            Log.warn("EntityHangGlider: failed to read Et Futurum Requiem Elytra state: %s", e);
-            return false;
-        }
+        return ModPresence.ET_FUTURUM && player instanceof IElytraPlayer
+                && ((IElytraPlayer) player).etfu$isElytraFlying();
     }
 
     private static boolean stopElytraFlying(EntityPlayer player) {
-        if (!ModPresence.ET_FUTURUM) return false;
-        try {
-            EtFuturumHelper.stopElytraFlying(player);
-            return true;
-        } catch (Exception e) {
-            Log.warn("EntityHangGlider: failed to stop Et Futurum Requiem Elytra flight: %s", e);
-            return false;
-        }
-    }
-
-    private static final class EtFuturumHelper {
-
-        static boolean isElytraFlying(EntityPlayer player) {
-            return ((IElytraPlayer) player).etfu$isElytraFlying();
-        }
-
-        static void stopElytraFlying(EntityPlayer player) {
+        if (ModPresence.ET_FUTURUM && player instanceof IElytraPlayer) {
             ((IElytraPlayer) player).etfu$setElytraFlying(false);
+            return true;
         }
+        return false;
     }
 
     @Override
