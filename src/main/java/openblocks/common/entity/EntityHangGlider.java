@@ -18,9 +18,11 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ganymedes01.etfuturum.elytra.IElytraPlayer;
 import io.netty.buffer.ByteBuf;
 import openblocks.Config;
 import openblocks.common.IVarioController;
+import openblocks.common.ModPresence;
 import openblocks.common.Vario;
 import openblocks.common.item.ItemHangGlider;
 import openmods.Log;
@@ -112,6 +114,7 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
     private int ticksSinceLastVarioUpdate = 0;
     private double verticalMotionSinceLastVarioUpdate = 0;
     private double lastMotionY = 0;
+    private boolean deployedLastTick;
 
     public EntityHangGlider(World world) {
         super(world);
@@ -160,6 +163,38 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
         return this.dataWatcher.getWatchableObjectByte(PROPERTY_DEPLOYED) == 1;
     }
 
+    private static boolean isElytraFlying(EntityPlayer player) {
+        if (!ModPresence.ET_FUTURUM) return false;
+        try {
+            return EtFuturumHelper.isElytraFlying(player);
+        } catch (Exception e) {
+            Log.warn("EntityHangGlider: failed to read Et Futurum Requiem Elytra state: %s", e);
+            return false;
+        }
+    }
+
+    private static boolean stopElytraFlying(EntityPlayer player) {
+        if (!ModPresence.ET_FUTURUM) return false;
+        try {
+            EtFuturumHelper.stopElytraFlying(player);
+            return true;
+        } catch (Exception e) {
+            Log.warn("EntityHangGlider: failed to stop Et Futurum Requiem Elytra flight: %s", e);
+            return false;
+        }
+    }
+
+    private static final class EtFuturumHelper {
+
+        static boolean isElytraFlying(EntityPlayer player) {
+            return ((IElytraPlayer) player).etfu$isElytraFlying();
+        }
+
+        static void stopElytraFlying(EntityPlayer player) {
+            ((IElytraPlayer) player).etfu$setElytraFlying(false);
+        }
+    }
+
     @Override
     public void onUpdate() {
         if (!isGliderValid(player, this)) {
@@ -173,9 +208,18 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
         varioControl.keepAlive();
 
+        // Prevent EFR Elytra from being deployed at the same time as the glider
+        boolean elytraFlying = isElytraFlying(player);
+        if (elytraFlying && deployedLastTick) {
+            if (stopElytraFlying(player)) elytraFlying = false;
+        }
+
         boolean isDeployed = !player.onGround && !player.isInWater()
                 && !player.isPlayerSleeping()
-                && !player.isRiding();
+                && !player.isRiding()
+                && !elytraFlying;
+
+        deployedLastTick = isDeployed;
 
         if (!worldObj.isRemote) {
             this.dataWatcher.updateObject(PROPERTY_DEPLOYED, (byte) (isDeployed ? 1 : 0));
