@@ -50,6 +50,13 @@ import openmods.utils.ColorUtils.ColorMeta;
 public class Config {
 
     @OnLineModifiable
+    @ConfigProperty(
+            category = "luggage",
+            name = "playWalkingSound",
+            comment = "Should luggage play its walking sound")
+    public static boolean luggagePlayWalkingSound = true;
+
+    @OnLineModifiable
     @ConfigProperty(category = "dropblock", name = "searchDistance", comment = "The range of the drop block")
     public static int elevatorTravelDistance = 20;
 

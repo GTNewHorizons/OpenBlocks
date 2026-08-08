@@ -18,6 +18,7 @@ import com.google.common.base.Strings;
 
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import io.netty.buffer.ByteBuf;
+import openblocks.Config;
 import openblocks.OpenBlocks;
 import openblocks.OpenBlocksGuiHandler;
 import openblocks.common.entity.ai.EntityAICollectItem;
@@ -194,7 +195,8 @@ public class EntityLuggage extends EntityTameable implements IInventoryProvider,
 
     @Override
     protected void func_145780_a(int x, int y, int z, Block block) {
-        playSound("openblocks:luggage.walk", 0.3F, 0.7F + (worldObj.rand.nextFloat() * 0.5f));
+        if (Config.luggagePlayWalkingSound)
+            playSound("openblocks:luggage.walk", 0.3F, 0.7F + (worldObj.rand.nextFloat() * 0.5f));
     }
 
     public void storeItemTag(NBTTagCompound itemTag) {
