@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.AxisAlignedBB;
 
+import openblocks.Config;
 import openblocks.common.entity.EntityLuggage;
 import openmods.inventory.legacy.ItemDistribution;
 
@@ -28,6 +29,7 @@ public class EntityAICollectItem extends EntityAIBase {
 
     @Override
     public boolean shouldExecute() {
+        if (!Config.luggageCollectItems) return false;
         if (!pathFinder.noPath()) {
             return false;
         }
@@ -70,7 +72,7 @@ public class EntityAICollectItem extends EntityAIBase {
 
     @Override
     public boolean continueExecuting() {
-        return luggage.isEntityAlive() && !pathFinder.noPath() && !targetItem.isDead;
+        return Config.luggageCollectItems && luggage.isEntityAlive() && !pathFinder.noPath() && !targetItem.isDead;
     }
 
     @Override
