@@ -80,7 +80,7 @@ public class SyncableBlockLayers extends SyncableObjectBase {
                 layer.setRotation(stream.readByte());
                 byte b = stream.readByte();
                 if (b > -1) {
-                    layer.setStencil(Stencil.values()[b]);
+                    layer.setStencil(Stencil.VALUES[b]);
                 }
                 layer.setHasStencilCover(stream.readBoolean());
             } catch (Exception e) {
