@@ -60,7 +60,6 @@ public class Config {
             comment = "Should luggage collect nearby dropped items")
     public static boolean luggageCollectItems = true;
 
-
     @OnLineModifiable
     @ConfigProperty(category = "dropblock", name = "searchDistance", comment = "The range of the drop block")
     public static int elevatorTravelDistance = 20;
