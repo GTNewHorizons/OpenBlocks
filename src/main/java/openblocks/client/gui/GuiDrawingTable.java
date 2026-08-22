@@ -70,7 +70,7 @@ public class GuiDrawingTable extends BaseGuiContainer<ContainerDrawingTable> {
         (iconDisplay = new GuiComponentSprite(
                 80,
                 34,
-                Stencil.values()[0].getBlockIcon(),
+                Stencil.VALUES[0].getBlockIcon(),
                 TextureMap.locationBlocksTexture)).setColor(0f, 0f, 0f).setOverlayMode(true)
                         .setEnabled(inventorySlots.getSlot(0).getStack() != null);
         root.addComponent(iconDisplay);

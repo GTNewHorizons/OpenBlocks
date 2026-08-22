@@ -1273,7 +1273,7 @@ public class Config {
 
         if (OpenBlocks.Items.stencil != null) {
             if (stencilLoot) {
-                for (Stencil stencil : Stencil.values()) {
+                for (Stencil stencil : Stencil.VALUES) {
                     WeightedRandomChestContent drop = new WeightedRandomChestContent(
                             new ItemStack(OpenBlocks.Items.stencil, 1, stencil.ordinal()),
                             1,

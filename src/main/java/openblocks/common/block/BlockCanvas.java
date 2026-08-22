@@ -47,7 +47,7 @@ public class BlockCanvas extends OpenBlock implements IPaintableBlock {
         super.registerBlockIcons(registry);
         baseIcon = registry.registerIcon("openblocks:canvas");
         wallpaper = registry.registerIcon("openblocks:wallpaper");
-        for (Stencil stencil : Stencil.values()) stencil.registerBlockIcons(registry);
+        for (Stencil stencil : Stencil.VALUES) stencil.registerBlockIcons(registry);
     }
 
     public void setLayerForRender(int layer) {
