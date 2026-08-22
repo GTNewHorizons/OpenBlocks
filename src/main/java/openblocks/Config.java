@@ -50,6 +50,13 @@ import openmods.utils.ColorUtils.ColorMeta;
 public class Config {
 
     @OnLineModifiable
+    @ConfigProperty(
+            category = "luggage",
+            name = "collectItems",
+            comment = "Should luggage collect nearby dropped items")
+    public static boolean luggageCollectItems = true;
+
+    @OnLineModifiable
     @ConfigProperty(category = "dropblock", name = "searchDistance", comment = "The range of the drop block")
     public static int elevatorTravelDistance = 20;
 
