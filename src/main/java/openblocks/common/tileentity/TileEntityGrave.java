@@ -248,6 +248,9 @@ public class TileEntityGrave extends SyncedTileEntity
     }
 
     public void autoEquipAll(EntityPlayer player) {
+        // items handed to a dying player are lost: his drops are already collected and the inventory
+        // is discarded on respawn
+        if (!player.isEntityAlive()) return;
         int equipped = 0;
         int toInventory = 0;
         int leftover = 0;
@@ -294,6 +297,7 @@ public class TileEntityGrave extends SyncedTileEntity
     }
 
     protected void robGrave(EntityPlayer player, ItemStack held) {
+        if (!player.isEntityAlive()) return;
         boolean dropped = false;
         for (int i = 0; i < inventory.getSizeInventory(); i++) {
             final ItemStack stack = inventory.getStackInSlot(i);
