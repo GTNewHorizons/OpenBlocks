@@ -2,6 +2,8 @@ package openblocks.common;
 
 import net.minecraft.nbt.NBTTagCompound;
 
+import com.gtnewhorizons.postea.api.CustomDataReplacementManager;
+
 import cpw.mods.fml.common.Loader;
 
 /// Offers the stored inventory dumps to Postea's custom world data API, so versioned transformers rewrite
@@ -26,11 +28,11 @@ public final class PosteaCompat {
     private static final class Impl {
 
         static void transform(String storageId, NBTTagCompound root) {
-            com.gtnewhorizons.postea.api.CustomDataReplacementManager.transform(storageId, root);
+            CustomDataReplacementManager.transform(storageId, root);
         }
 
         static void stamp(NBTTagCompound root) {
-            com.gtnewhorizons.postea.api.CustomDataReplacementManager.stamp(root);
+            CustomDataReplacementManager.stamp(root);
         }
     }
 }
