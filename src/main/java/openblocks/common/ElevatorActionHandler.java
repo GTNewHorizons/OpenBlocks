@@ -198,15 +198,23 @@ public class ElevatorActionHandler {
         final int z = MathHelper.floor_double(player.posZ);
         Block block = world.getBlock(x, y, z);
 
-        if (block == Blocks.air && evt.type == PlayerMovementEvent.Type.JUMP) {
-            // In case the player is just particularly good at jumping, we'll check one block below.
-            // (Looking at you, Nanosuit Boots of the Traveller O_O)
-            y--;
-            block = world.getBlock(x, y, z);
+        if (block instanceof IElevatorBlock) {
+            new ElevatorActionEvent(world.provider.dimensionId, x, y, z, evt.type).sendToServer();
         }
 
-        if (block instanceof IElevatorBlock)
-            new ElevatorActionEvent(world.provider.dimensionId, x, y, z, evt.type).sendToServer();
+        // In case the player is just particularly good at jumping, we'll check one block below.
+        // (Looking at you, Nanosuit Boots of the Traveller O_O)
+        // if the block found below is air it'll check y-1 and y-2 for the elevator block
+        if (block == Blocks.air && evt.type == PlayerMovementEvent.Type.JUMP) {
+            for (int i = 0; i < 2 && block == Blocks.air; i++) {
+                y--;
+                block = world.getBlock(x, y, z);
+                if (block instanceof IElevatorBlock) {
+                    new ElevatorActionEvent(world.provider.dimensionId, x, y, z, evt.type).sendToServer();
+                    break;
+                }
+            }
+        }
 
     }
 }
