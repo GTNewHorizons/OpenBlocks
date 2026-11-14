@@ -15,7 +15,7 @@ public class TileEntityAutoEnchantmentTableRenderer extends TileEntitySpecialRen
 
     private static final ResourceLocation enchantingTableBookTextures = new ResourceLocation(
             "textures/entity/enchanting_table_book.png");
-    private ModelBook enchantmentBook = new ModelBook();
+    private final ModelBook enchantmentBook = new ModelBook();
 
     @Override
     public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {

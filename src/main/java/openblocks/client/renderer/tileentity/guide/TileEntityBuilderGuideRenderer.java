@@ -34,7 +34,7 @@ public class TileEntityBuilderGuideRenderer extends TileEntityGuideRenderer {
     private static final float OMEGA_32 = 0.0351f;
     private static final float DELTA_32 = 0.7635f;
 
-    private DisplayListWrapper cube = new DisplayListWrapper() {
+    private final DisplayListWrapper cube = new DisplayListWrapper() {
 
         @Override
         public void compile() {

@@ -21,7 +21,7 @@ import openmods.utils.render.RenderUtils;
 public class TileEntityPaintMixerRenderer extends TileEntitySpecialRenderer {
 
     RenderBlocks renderer = new RenderBlocks();
-    private ModelPaintMixer model = new ModelPaintMixer();
+    private final ModelPaintMixer model = new ModelPaintMixer();
     private static final ResourceLocation texture = new ResourceLocation(
             "openblocks",
             "textures/models/paintmixer.png");

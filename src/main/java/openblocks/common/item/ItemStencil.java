@@ -35,13 +35,13 @@ public class ItemStencil extends Item {
 
     @Override
     public IIcon getIconFromDamage(int dmg) {
-        return Objects.firstNonNull(Stencil.values()[dmg].getCoverBlockIcon(), itemIcon);
+        return Objects.firstNonNull(Stencil.VALUES[dmg].getCoverBlockIcon(), itemIcon);
     }
 
     @Override
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List list) {
-        for (Stencil stencil : Stencil.values()) {
+        for (Stencil stencil : Stencil.VALUES) {
             list.add(new ItemStack(item, 1, stencil.ordinal()));
         }
     }

@@ -12,7 +12,7 @@ import openmods.utils.TextureUtils;
 
 public class GuideLegacyRenderer implements IGuideRenderer {
 
-    private DisplayListWrapper wrapper;
+    private final DisplayListWrapper wrapper;
 
     public GuideLegacyRenderer(final Runnable model) {
         wrapper = new DisplayListWrapper() {

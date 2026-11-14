@@ -136,7 +136,7 @@ public class TileEntityBlockBreaker extends SyncedTileEntity implements INeighbo
 
         for (EntityItem drop : drops) {
             ItemStack stack = drop.getEntityItem();
-            ItemDistribution.insertItemInto(stack, targetInventory, direction, true);
+            ItemDistribution.insertItemInto(stack, targetInventory, direction.getOpposite(), true);
 
             if (stack.stackSize <= 0) drop.setDead();
         }

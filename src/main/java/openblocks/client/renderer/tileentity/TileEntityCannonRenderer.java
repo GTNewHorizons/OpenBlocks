@@ -16,7 +16,7 @@ import openmods.OpenMods;
 
 public class TileEntityCannonRenderer extends TileEntitySpecialRenderer {
 
-    private ModelCannon model = new ModelCannon();
+    private final ModelCannon model = new ModelCannon();
     private static final ResourceLocation texture = new ResourceLocation("openblocks", "textures/models/cannon.png");
 
     @Override

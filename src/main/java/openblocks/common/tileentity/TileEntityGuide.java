@@ -427,15 +427,25 @@ public class TileEntityGuide extends DroppableTileEntity implements ISyncListene
     }
 
     private void notifyPlayer(EntityPlayer player) {
-        player.addChatMessage(
-                new ChatComponentTranslation(
+        boolean is2D = posY.get() == 0 && negY.get() == 0;
+
+        ChatComponentTranslation notification = is2D
+                ? new ChatComponentTranslation(
+                        "openblocks.misc.change_area_size",
+                        -negX.get(),
+                        -negZ.get(),
+                        +posX.get(),
+                        +posZ.get())
+                : new ChatComponentTranslation(
                         "openblocks.misc.change_box_size",
                         -negX.get(),
                         -negY.get(),
                         -negZ.get(),
                         +posX.get(),
                         +posY.get(),
-                        +posZ.get()));
+                        +posZ.get());
+
+        player.addChatMessage(notification);
         displayBlockCount(player);
     }
 

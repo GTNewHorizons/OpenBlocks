@@ -39,8 +39,8 @@ public class CraneRegistry {
         }
     }
 
-    private Map<EntityPlayer, Data> itemData = new MapMaker().weakKeys().makeMap();
-    private Map<EntityPlayer, EntityMagnet> playersMagnets = new MapMaker().weakKeys().weakValues().makeMap();
+    private final Map<EntityPlayer, Data> itemData = new MapMaker().weakKeys().makeMap();
+    private final Map<EntityPlayer, EntityMagnet> playersMagnets = new MapMaker().weakKeys().weakValues().makeMap();
 
     public void ensureMagnetExists(EntityPlayer player) {
         EntityMagnet magnet = playersMagnets.get(player);

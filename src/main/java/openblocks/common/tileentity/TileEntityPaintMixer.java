@@ -57,7 +57,7 @@ public class TileEntityPaintMixer extends DroppableTileEntity
         black
     }
 
-    private static EnumMap<Slots, Integer> ALLOWED_COLORS = Maps.newEnumMap(Slots.class);
+    private static final EnumMap<Slots, Integer> ALLOWED_COLORS = Maps.newEnumMap(Slots.class);
 
     static {
         ALLOWED_COLORS.put(Slots.dyeBlack, OreDictionary.getOreID("dyeBlack"));
@@ -95,7 +95,7 @@ public class TileEntityPaintMixer extends DroppableTileEntity
     @StoreOnDrop
     public SyncableFloat lvlBlack;
 
-    private GenericInventory inventory = new TileEntityInventory(this, "paintmixer", true, 6) {
+    private final GenericInventory inventory = new TileEntityInventory(this, "paintmixer", true, 6) {
 
         @Override
         public boolean isItemValidForSlot(int slotId, ItemStack stack) {

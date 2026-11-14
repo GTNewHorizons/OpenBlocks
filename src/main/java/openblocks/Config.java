@@ -50,6 +50,17 @@ import openmods.utils.ColorUtils.ColorMeta;
 public class Config {
 
     @OnLineModifiable
+
+    @ConfigProperty(category = "luggage", name = "playWalkingSound", comment = "Should luggage play its walking sound")
+    public static boolean luggagePlayWalkingSound = true;
+
+    @ConfigProperty(
+            category = "luggage",
+            name = "collectItems",
+            comment = "Should luggage collect nearby dropped items")
+    public static boolean luggageCollectItems = true;
+
+    @OnLineModifiable
     @ConfigProperty(category = "dropblock", name = "searchDistance", comment = "The range of the drop block")
     public static int elevatorTravelDistance = 20;
 
@@ -1273,7 +1284,7 @@ public class Config {
 
         if (OpenBlocks.Items.stencil != null) {
             if (stencilLoot) {
-                for (Stencil stencil : Stencil.values()) {
+                for (Stencil stencil : Stencil.VALUES) {
                     WeightedRandomChestContent drop = new WeightedRandomChestContent(
                             new ItemStack(OpenBlocks.Items.stencil, 1, stencil.ordinal()),
                             1,
@@ -1390,7 +1401,6 @@ public class Config {
         }
 
         if (OpenBlocks.Items.devNull != null) {
-            MinecraftForge.EVENT_BUS.register(OpenBlocks.Items.devNull);
             recipeList.add(new ShapelessOreRecipe(new ItemStack(OpenBlocks.Items.devNull), "cobblestone", Items.apple));
         }
 

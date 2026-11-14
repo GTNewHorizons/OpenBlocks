@@ -35,7 +35,7 @@ public class BlockGuide extends OpenBlock implements ISelectionAware {
 
     private AxisAlignedBB selection;
 
-    private static double P = 1.0 / 16.0;
+    private static final double P = 1.0 / 16.0;
 
     private static final double SELECTION_BOX_DEPTH = 0.01;
 
@@ -172,7 +172,7 @@ public class BlockGuide extends OpenBlock implements ISelectionAware {
                 subBoxes);
     }
 
-    private BoundingBoxMap<BoundingBoxMap<IShapeManipulator>> buttons = BoundingBoxMap.create();
+    private final BoundingBoxMap<BoundingBoxMap<IShapeManipulator>> buttons = BoundingBoxMap.create();
     {
         createTopBottomSide(buttons, ForgeDirection.UP);
         createNSWESide(buttons, ForgeDirection.NORTH);

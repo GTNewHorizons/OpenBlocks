@@ -15,7 +15,7 @@ import openmods.utils.render.RenderUtils;
 
 public class EntityGoldenEyeRenderer extends Render {
 
-    private Tessellator tes = new Tessellator();
+    private final Tessellator tes = new Tessellator();
 
     @Override
     public void doRender(Entity entity, double x, double y, double z, float f1, float partialTickTime) {

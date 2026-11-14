@@ -86,6 +86,7 @@ openblocks.misc.pointed_cannon=Пушка направлена на %s, %s, %s
 openblocks.misc.change_mode=Изменение режима на %s
 openblocks.misc.change_size=Изменение размера на %sx%sx%s
 #openblocks.misc.change_box_size=Changing size to (%d,%d,%d):(%d,%d,%d) ## NEEDS TRANSLATION ##
+#openblocks.misc.change_area_size=Changing size to (%d,%d):(%d,%d) ## NEEDS TRANSLATION ##
 openblocks.misc.total_blocks=Общее количество блоков: %d
 openblocks.misc.get_witched=Get witched!
 openblocks.misc.page=Страница %d из %d
@@ -95,6 +96,10 @@ openblocks.misc.sleeping_bag_broken=Предмет недоступен из-з�
 #openblocks.misc.inverted=Inverted ## NEEDS TRANSLATION ##
 
 openblocks.misc.grave_msg=%s (день: %.1f)
+openblocks.misc.grave_equipped=Экипировано %d предмет(ов) из могилы.
+openblocks.misc.grave_to_inventory=Перемещено %d предмет(ов) в инвентарь.
+openblocks.misc.grave_skipped=%d предмет(ов) не удалось вернуть (инвентарь заполнен).
+openblocks.misc.grave_not_owner=Это не ваша могила.
 
 openblocks.misc.cant_restore_player=Не удалось восстановить инвентарь для игрока %s
 openblocks.misc.cant_restore_inventory=Не удалось восстановить инвентарь

@@ -28,7 +28,7 @@ public class GuiProjector extends BaseGuiContainer<ContainerProjector> {
 
     private static final int VIEW_HEIGHT = 138;
     private static final int VIEW_WIDTH = 160;
-    private TrackballWrapper trackball = new TrackballWrapper(1, 150);
+    private final TrackballWrapper trackball = new TrackballWrapper(1, 150);
 
     private static IMouseDownListener createRotationListener(final IRotatable proxy, final int direction) {
         return new IMouseDownListener() {
@@ -69,7 +69,7 @@ public class GuiProjector extends BaseGuiContainer<ContainerProjector> {
     }
 
     private boolean isInitialized;
-    private int scale = 90;
+    private final int scale = 90;
     private double mapHeight = 2;
 
     @Override

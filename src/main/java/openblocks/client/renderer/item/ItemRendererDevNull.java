@@ -51,7 +51,7 @@ public class ItemRendererDevNull implements IItemRenderer {
         }
     };
 
-    private DisplayListWrapper cube = new DisplayListWrapper() {
+    private final DisplayListWrapper cube = new DisplayListWrapper() {
 
         @Override
         public void compile() {

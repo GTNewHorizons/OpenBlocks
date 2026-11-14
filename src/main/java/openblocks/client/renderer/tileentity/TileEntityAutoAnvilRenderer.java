@@ -12,7 +12,7 @@ import openmods.utils.BlockUtils;
 
 public class TileEntityAutoAnvilRenderer extends TileEntitySpecialRenderer {
 
-    private ModelAutoAnvil model = new ModelAutoAnvil();
+    private final ModelAutoAnvil model = new ModelAutoAnvil();
     private static final ResourceLocation texture = new ResourceLocation("openblocks", "textures/models/autoanvil.png");
 
     @Override

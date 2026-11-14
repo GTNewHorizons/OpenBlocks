@@ -562,6 +562,7 @@ public class OpenBlocks {
         @Override
         protected void populateConfig(Configuration config) {
             ConfigProcessing.processAnnotations("OpenBlocks", config, Config.class);
+            config.save();
         }
 
         @Override

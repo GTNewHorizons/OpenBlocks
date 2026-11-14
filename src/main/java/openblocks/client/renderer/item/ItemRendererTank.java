@@ -17,7 +17,7 @@ import openmods.utils.Diagonal;
 
 public class ItemRendererTank implements IItemRenderer {
 
-    private FluidTank tank = new FluidTank(TileEntityTank.getTankCapacity());
+    private final FluidTank tank = new FluidTank(TileEntityTank.getTankCapacity());
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {

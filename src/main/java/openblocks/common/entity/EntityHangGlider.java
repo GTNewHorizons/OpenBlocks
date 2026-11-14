@@ -1,7 +1,9 @@
 package openblocks.common.entity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -12,16 +14,20 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ganymedes01.etfuturum.elytra.IElytraPlayer;
 import io.netty.buffer.ByteBuf;
 import openblocks.Config;
 import openblocks.common.IVarioController;
+import openblocks.common.ModPresence;
 import openblocks.common.Vario;
 import openblocks.common.item.ItemHangGlider;
 import openmods.Log;
 import openmods.OpenMods;
+import xonin.backhand.api.core.BackhandUtils;
 
 public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnData {
 
@@ -46,7 +52,9 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
     private static final int PROPERTY_DEPLOYED = 17;
 
-    private static Map<EntityPlayer, EntityHangGlider> gliderMap = new HashMap<>();
+    private static final boolean isBackhandLoaded = Loader.isModLoaded("backhand");
+
+    private static final Map<EntityPlayer, EntityHangGlider> gliderMap = new HashMap<>();
 
     private IVarioController varioControl = IVarioController.NULL;
 
@@ -68,26 +76,45 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
         if (player == null || player.isDead || glider == null || glider.isDead) return false;
 
         ItemStack held = player.getHeldItem();
+        if (isBackhandLoaded) {
+            ItemStack offhand = BackhandUtils.getOffhandItem(player);
+            if (offhand != null && offhand.getItem() instanceof ItemHangGlider) {
+                held = offhand;
+            }
+        }
+
         if (held == null || !(held.getItem() instanceof ItemHangGlider)) return false;
-        if (player.worldObj.provider.dimensionId != glider.worldObj.provider.dimensionId) return false;
-        return true;
+        if (player.isRiding()) return false;
+        return player.worldObj.provider.dimensionId == glider.worldObj.provider.dimensionId;
     }
 
     @SideOnly(Side.CLIENT)
     public static void updateGliders(World worldObj) {
-        for (Map.Entry<EntityPlayer, EntityHangGlider> e : gliderMap.entrySet()) {
+        List<Map.Entry<EntityPlayer, EntityHangGlider>> gliders = new ArrayList<>(gliderMap.entrySet());
+
+        for (Map.Entry<EntityPlayer, EntityHangGlider> e : gliders) {
             EntityPlayer player = e.getKey();
             EntityHangGlider glider = e.getValue();
-            if (isGliderValid(player, glider)) glider.fixPositions(player, true);
-            else glider.setDead();
+            if (gliderMap.get(player) != glider) continue;
+
+            if (isGliderValid(player, glider)) {
+                glider.fixPositions(player, true);
+            } else {
+                if (gliderMap.get(player) == glider) {
+                    gliderMap.remove(player);
+                }
+
+                glider.setDeadUnsafe();
+            }
         }
     }
 
     private EntityPlayer player;
-    private NoiseGeneratorPerlin noiseGen;
+    private final NoiseGeneratorPerlin noiseGen;
     private int ticksSinceLastVarioUpdate = 0;
     private double verticalMotionSinceLastVarioUpdate = 0;
     private double lastMotionY = 0;
+    private boolean deployedLastTick;
 
     public EntityHangGlider(World world) {
         super(world);
@@ -136,6 +163,19 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
         return this.dataWatcher.getWatchableObjectByte(PROPERTY_DEPLOYED) == 1;
     }
 
+    private static boolean isElytraFlying(EntityPlayer player) {
+        return ModPresence.ET_FUTURUM && player instanceof IElytraPlayer
+                && ((IElytraPlayer) player).etfu$isElytraFlying();
+    }
+
+    private static boolean stopElytraFlying(EntityPlayer player) {
+        if (ModPresence.ET_FUTURUM && player instanceof IElytraPlayer) {
+            ((IElytraPlayer) player).etfu$setElytraFlying(false);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void onUpdate() {
         if (!isGliderValid(player, this)) {
@@ -149,7 +189,18 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
         varioControl.keepAlive();
 
-        boolean isDeployed = !player.onGround && !player.isInWater() && !player.isPlayerSleeping();
+        // Prevent EFR Elytra from being deployed at the same time as the glider
+        boolean elytraFlying = isElytraFlying(player);
+        if (elytraFlying && deployedLastTick) {
+            if (stopElytraFlying(player)) elytraFlying = false;
+        }
+
+        boolean isDeployed = !player.onGround && !player.isInWater()
+                && !player.isPlayerSleeping()
+                && !player.isRiding()
+                && !elytraFlying;
+
+        deployedLastTick = isDeployed;
 
         if (!worldObj.isRemote) {
             this.dataWatcher.updateObject(PROPERTY_DEPLOYED, (byte) (isDeployed ? 1 : 0));
@@ -220,6 +271,17 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
         return player;
     }
 
+    /**
+     * Light the glider like its player. The glider sits at the player's head, so its own light sample point ends up
+     * inside the block above when flying under a ceiling, which renders it black.
+     */
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender(float partialTicks) {
+        if (player != null) return player.getBrightnessForRender(partialTicks);
+        return super.getBrightnessForRender(partialTicks);
+    }
+
     public double getNoise() {
         double noise = noiseGen.func_151601_a((float) player.posX / 20f, (float) player.posZ / 20f) / 4d;
         final boolean strong = (noise > 0.7 ? true : false);
@@ -245,8 +307,12 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
     @Override
     public void setDead() {
-        super.setDead();
         gliderMap.remove(player);
+        setDeadUnsafe();
+    }
+
+    private void setDeadUnsafe() {
+        super.setDead();
 
         if (varioControl.isValid()) {
             varioControl.kill();

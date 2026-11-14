@@ -11,7 +11,7 @@ import openblocks.common.tileentity.TileEntityVacuumHopper;
 
 public class TileEntityVacuumHopperRenderer extends TileEntitySpecialRenderer {
 
-    private ModelVacuumHopper model = new ModelVacuumHopper();
+    private final ModelVacuumHopper model = new ModelVacuumHopper();
 
     private static final ResourceLocation texture = new ResourceLocation(
             "openblocks",

@@ -80,10 +80,10 @@ public class EntityHangGliderRenderer extends Render {
         } else {
             if (!isDeployed) {
                 // move up little bit (other player center is lower)
-                GL11.glTranslated(0, +0.2, +0.3);
+                GL11.glTranslated(0, +1.4, +0.3);
             } else {
                 // move closer to back and forward when flying
-                GL11.glTranslated(0, -0.5, -1.0);
+                GL11.glTranslated(0, +0.8, -1.0);
             }
         }
 

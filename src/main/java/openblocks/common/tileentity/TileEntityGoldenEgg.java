@@ -178,7 +178,7 @@ public class TileEntityGoldenEgg extends SyncedTileEntity implements IPlacerAwar
     private float rotationSpeed;
     private float progressSpeed;
 
-    private List<EntityBlock> blocks = Lists.newArrayList();
+    private final List<EntityBlock> blocks = Lists.newArrayList();
     private SyncableEnum<State> stage;
 
     private GameProfile owner;

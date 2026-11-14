@@ -86,6 +86,7 @@ openblocks.misc.pointed_cannon=Cannone puntato su %s, %s, %s
 openblocks.misc.change_mode=Cambiando modalità a %s
 openblocks.misc.change_size=Modificando dimensione in %sx%sx%s
 openblocks.misc.change_box_size=Modificando dimensione in (%d,%d,%d):(%d,%d,%d)
+openblocks.misc.change_area_size=Modificando dimensione in (%d,%d):(%d,%d)
 openblocks.misc.total_blocks=Conto totale blocchi: %d
 openblocks.misc.get_witched=Diventa stregato!
 openblocks.misc.page=Pagina %d di %d

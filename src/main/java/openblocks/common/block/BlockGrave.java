@@ -1,12 +1,12 @@
 package openblocks.common.block;
 
-import java.util.Objects;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
@@ -26,7 +26,7 @@ public class BlockGrave extends OpenBlock {
         setRotationMode(BlockRotationMode.FOUR_DIRECTIONS);
         setBlockBounds(0, 0, 0, 1f, 0.2f, 1f);
         setResistance(2000.0F);
-        setHardness(25.0F);
+        setHardness(5.0F);
         setRenderMode(RenderMode.TESR_ONLY);
     }
 
@@ -86,14 +86,33 @@ public class BlockGrave extends OpenBlock {
     }
 
     @Override
+    public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
+        if (world.isRemote) return;
+        TileEntity tile = getTileEntity(world, x, y, z);
+        if (tile instanceof TileEntityGrave) {
+            TileEntityGrave grave = (TileEntityGrave) tile;
+            if (!grave.isInventoryEmpty()) {
+                if (grave.isOwner(player)) {
+                    grave.autoEquipAll(player);
+                } else {
+                    player.addChatMessage(
+                            new net.minecraft.util.ChatComponentTranslation("openblocks.misc.grave_not_owner"));
+                }
+            }
+        }
+    }
+
+    @Override
     public float getPlayerRelativeBlockHardness(EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tile = getTileEntity(world, x, y, z);
-
         if (tile instanceof TileEntityGrave) {
-            TileEntityGrave graveStone = (TileEntityGrave) tile;
-            if (Objects.equals(graveStone.getUsername(), player.getGameProfile().getName())) return 2.0F;
+            TileEntityGrave grave = (TileEntityGrave) tile;
+            if (!grave.isInventoryEmpty()) {
+                ItemStack held = player.getHeldItem();
+                boolean hasShovel = held != null && held.getItem().getToolClasses(held).contains("shovel");
+                if (!hasShovel) return 0;
+            }
         }
-
         return super.getPlayerRelativeBlockHardness(player, world, x, y, z);
     }
 }
