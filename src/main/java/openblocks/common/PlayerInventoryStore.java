@@ -66,6 +66,8 @@ public class PlayerInventoryStore {
 
     private static final String PREFIX = "inventory-";
 
+    private static final String DUMP_FOLDER = "openblocks_inventories";
+
     private PlayerInventoryStore() {}
 
     public static final PlayerInventoryStore instance = new PlayerInventoryStore();
@@ -93,7 +95,7 @@ public class PlayerInventoryStore {
         int id = 0;
         while (true) {
             String filename = String.format(PREFIX + "%s-%s-%s-%d", player, dateStr, type, id);
-            File file = world.getSaveHandler().getMapFileFromName(filename);
+            File file = new File(getSaveFolder(world), filename + ".dat");
             if (!file.exists()) return file;
             id++;
         }
@@ -229,7 +231,10 @@ public class PlayerInventoryStore {
     }
 
     private static NBTTagCompound loadInventoryTag(World world, String fileId) {
-        File file = world.getSaveHandler().getMapFileFromName(PREFIX + stripFilename(fileId));
+        final String filename = PREFIX + stripFilename(fileId) + ".dat";
+        File file = new File(getSaveFolder(world), filename);
+        // dumps created before they were moved to their own folder
+        if (!file.exists()) file = new File(getLegacySaveFolder(world), filename);
 
         try {
             InputStream stream = new FileInputStream(file);
@@ -245,28 +250,37 @@ public class PlayerInventoryStore {
     }
 
     public List<String> getMatchedDumps(World world, String prefix) {
-        File saveFolder = getSaveFolder(world);
         final String actualPrefix = StringUtils.startsWithIgnoreCase(prefix, PREFIX) ? prefix : PREFIX + prefix;
-        File[] files = saveFolder.listFiles(new FilenameFilter() {
+        final FilenameFilter filter = new FilenameFilter() {
 
             @Override
             public boolean accept(File dir, String name) {
                 return name.startsWith(actualPrefix);
             }
-        });
+        };
 
         List<String> result = Lists.newArrayList();
         int toCut = PREFIX.length();
 
-        for (File f : files) {
-            String name = f.getName();
-            result.add(name.substring(toCut, name.length() - 4));
+        for (File folder : new File[] { getSaveFolder(world), getLegacySaveFolder(world) }) {
+            File[] files = folder.listFiles(filter);
+            if (files == null) continue;
+            for (File f : files) {
+                String name = f.getName();
+                result.add(name.substring(toCut, name.length() - 4));
+            }
         }
 
         return result;
     }
 
     public static File getSaveFolder(World world) {
+        File folder = new File(getLegacySaveFolder(world), DUMP_FOLDER);
+        folder.mkdirs();
+        return folder;
+    }
+
+    private static File getLegacySaveFolder(World world) {
         File dummy = world.getSaveHandler().getMapFileFromName("dummy");
         return dummy.getParentFile();
     }
