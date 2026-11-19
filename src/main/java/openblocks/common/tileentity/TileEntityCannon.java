@@ -143,6 +143,8 @@ public class TileEntityCannon extends SyncedTileEntity implements IPointable, IS
 
     @Override
     public void trigger() {
+        if (!worldObj.isRemote) return;
+
         ticksSinceLastFire = 0;
         double pitchRad = Math.toRadians(currentYaw - 90);
         double x = -0.5 * Math.cos(pitchRad);
