@@ -2,7 +2,6 @@ package openblocks.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -196,17 +195,13 @@ public class ElevatorActionHandler {
         final int x = MathHelper.floor_double(player.posX);
         int y = MathHelper.floor_double(player.boundingBox.minY) - 1;
         final int z = MathHelper.floor_double(player.posZ);
-        Block block = world.getBlock(x, y, z);
 
-        if (block == Blocks.air && evt.type == PlayerMovementEvent.Type.JUMP) {
-            // In case the player is just particularly good at jumping, we'll check one block below.
-            // (Looking at you, Nanosuit Boots of the Traveller O_O)
-            y--;
-            block = world.getBlock(x, y, z);
-        }
+        // In case the player is just particularly good at jumping, we'll check three blocks below.
+        // (Looking at you, Nanosuit Boots of the Traveller O_O)
+        for (int i = 0; i < 3 && world.isAirBlock(x, y, z); i++) y--;
 
-        if (block instanceof IElevatorBlock)
+        if (world.getBlock(x, y, z) instanceof IElevatorBlock) {
             new ElevatorActionEvent(world.provider.dimensionId, x, y, z, evt.type).sendToServer();
-
+        }
     }
 }
