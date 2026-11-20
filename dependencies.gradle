@@ -6,6 +6,7 @@ dependencies {
     compileOnly("com.github.GTNewHorizons:Backhand:1.8.13:dev") { transitive = false }
     compileOnly('curse.maven:computercraft-67504:2269339')
     compileOnly('com.github.GTNewHorizons:Mobs-Info:0.5.20-GTNH:dev')
+    compileOnly('com.github.GTNewHorizons:Postea:1.4.0-mu:dev')
     compileOnly('openperipheral:OpenPeripheralCore-API:3.4.1')
 
     devOnlyNonPublishable("com.github.GTNewHorizons:AdventureBackpack2:1.4.23-GTNH:dev") { transitive = false }

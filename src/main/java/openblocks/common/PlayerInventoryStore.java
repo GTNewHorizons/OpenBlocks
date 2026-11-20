@@ -171,6 +171,7 @@ public class PlayerInventoryStore {
         root.setLong("Created", now.getTime());
         root.setString("Type", type);
         filler.addExtras(root);
+        PosteaCompat.stamp(root);
 
         try {
             OutputStream stream = new FileOutputStream(dumpFile);
@@ -234,7 +235,11 @@ public class PlayerInventoryStore {
         try {
             InputStream stream = new FileInputStream(file);
             try {
-                return CompressedStreamTools.readCompressed(stream);
+                NBTTagCompound tag = CompressedStreamTools.readCompressed(stream);
+                // The dump is never written back, so the transform runs against the stamp (or the unstamped
+                // baseline) it was created with on every read; the stamp stays as stored.
+                PosteaCompat.transform("openblocks:" + file.getName(), tag);
+                return tag;
             } finally {
                 stream.close();
             }
