@@ -594,6 +594,13 @@ public class Config {
     @OnLineModifiable
     @ConfigProperty(
             category = "hangglider",
+            name = "enableRain",
+            comment = "If true, the Hang Glider will fall down faster when taking on rain")
+    public static boolean hanggliderEnableRain = true;
+
+    @OnLineModifiable
+    @ConfigProperty(
+            category = "hangglider",
             name = "enableThermal",
             comment = "Enable a whole new level of hanggliding experience through thermal lift. See keybindings for acoustic vario controls")
     public static boolean hanggliderEnableThermal = true;
