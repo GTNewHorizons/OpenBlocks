@@ -271,6 +271,17 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
         return player;
     }
 
+    /**
+     * Light the glider like its player. The glider sits at the player's head, so its own light sample point ends up
+     * inside the block above when flying under a ceiling, which renders it black.
+     */
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender(float partialTicks) {
+        if (player != null) return player.getBrightnessForRender(partialTicks);
+        return super.getBrightnessForRender(partialTicks);
+    }
+
     public double getNoise() {
         double noise = noiseGen.func_151601_a((float) player.posX / 20f, (float) player.posZ / 20f) / 4d;
         final boolean strong = (noise > 0.7 ? true : false);
