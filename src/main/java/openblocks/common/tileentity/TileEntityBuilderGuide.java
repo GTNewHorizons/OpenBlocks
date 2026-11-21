@@ -117,6 +117,8 @@ public class TileEntityBuilderGuide extends TileEntityGuide implements IGuideAni
 
     @Override
     public void trigger(int x, int y, int z, final String particle) {
+        if (!worldObj.isRemote) return;
+
         GeometryUtils.line3D(xCoord, yCoord, zCoord, x, y, z, new IShapeable() {
 
             @Override
