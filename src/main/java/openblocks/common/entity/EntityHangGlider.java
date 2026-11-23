@@ -3,6 +3,7 @@ package openblocks.common.entity;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -12,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 
 import cpw.mods.fml.common.Loader;
@@ -55,6 +57,8 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
     private static final boolean isBackhandLoaded = Loader.isModLoaded("backhand");
 
     private static final Map<EntityPlayer, EntityHangGlider> gliderMap = new HashMap<>();
+
+    private static final HashSet<Integer> noThermalRiseDimensions = new HashSet<>();
 
     private IVarioController varioControl = IVarioController.NULL;
 
@@ -119,6 +123,12 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
     public EntityHangGlider(World world) {
         super(world);
         this.noiseGen = new NoiseGeneratorPerlin(new Random(world.getCurrentDate().get(Calendar.DAY_OF_YEAR)), 2);
+
+        if (noThermalRiseDimensions.isEmpty()) {
+            for (int dimensionID : Config.hanggliderNoThermalLiftDimensions) {
+                noThermalRiseDimensions.add(dimensionID);
+            }
+        }
     }
 
     public EntityHangGlider(World world, EntityPlayer player) {
@@ -210,8 +220,7 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
         if (isDeployed) {
             if (player.motionY < lastMotionY) {
 
-                final double noise = Config.hanggliderEnableThermal ? getNoise() : 0;
-
+                final double noise = getNoise();
                 final double vspeed = (noise >= 0 ? VSPEED_MAX : -VSPEED_MIN);
 
                 final double horizontalSpeed;
@@ -284,9 +293,24 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
 
     public double getNoise() {
         double noise = noiseGen.func_151601_a((float) player.posX / 20f, (float) player.posZ / 20f) / 4d;
-        final boolean strong = (noise > 0.7 ? true : false);
-        final int bonus = (strong ? THERMAL_STRONG_BONUS_HEIGTH : 0);
-        final int biomeRain = worldObj.getBiomeGenForCoords((int) player.posX, (int) player.posZ).getIntRainfall();
+        final boolean weak = noise <= 0.7;
+
+        if (Config.hanggliderEnableRain && weak && worldObj.isRaining() && player.isWet()) {
+            final BiomeGenBase biome = worldObj.getBiomeGenForCoords((int) player.posX, (int) player.posZ);
+
+            // Apparently rainfall == 0 doesn't actually mean no rain
+            // (see, for instance, Twilight Forest's Oak Savanna biome).
+            // So this is a roundabout way of getting the value of the
+            // protected BiomeGenBase var 'enableRain' without messing with reflection.
+            final boolean canRain = !biome.getEnableSnow() && biome.canSpawnLightningBolt();
+            return canRain ? -0.5 : 0;
+        }
+
+        if (!Config.hanggliderEnableThermal || noThermalRiseDimensions.contains(player.dimension)) {
+            return 0;
+        }
+
+        final int bonus = weak ? 0 : THERMAL_STRONG_BONUS_HEIGTH;
 
         noise *= Math.min(
                 (Math.max((player.posY - THERMAL_HEIGTH_MIN), 0d) / (THERMAL_HEIGTH_OPT - THERMAL_HEIGTH_MIN)),
@@ -300,8 +324,6 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
         noise *= Math.min((worldTime / 1000d), 1);
         noise *= Math.min((Math.max((12000 - worldTime), 0) / 1000d), 1);
 
-        if (player.dimension != 0) noise = 0;
-        else if (worldObj.isRaining() && player.isWet() && !strong) noise = (biomeRain > 0 ? -0.5 : 0);
         return noise;
     }
 
