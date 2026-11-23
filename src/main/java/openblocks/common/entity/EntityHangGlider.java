@@ -3,6 +3,7 @@ package openblocks.common.entity;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -56,6 +57,8 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
     private static final boolean isBackhandLoaded = Loader.isModLoaded("backhand");
 
     private static final Map<EntityPlayer, EntityHangGlider> gliderMap = new HashMap<>();
+
+    private static final HashSet<Integer> noThermalRiseDimensions = new HashSet<>();
 
     private IVarioController varioControl = IVarioController.NULL;
 
@@ -120,6 +123,12 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
     public EntityHangGlider(World world) {
         super(world);
         this.noiseGen = new NoiseGeneratorPerlin(new Random(world.getCurrentDate().get(Calendar.DAY_OF_YEAR)), 2);
+
+        if (noThermalRiseDimensions.isEmpty()) {
+            for (int dimensionID : Config.hanggliderNoThermalLiftDimensions) {
+                noThermalRiseDimensions.add(dimensionID);
+            }
+        }
     }
 
     public EntityHangGlider(World world, EntityPlayer player) {
@@ -297,7 +306,7 @@ public class EntityHangGlider extends Entity implements IEntityAdditionalSpawnDa
             return canRain ? -0.5 : 0;
         }
 
-        if (!Config.hanggliderEnableThermal) {
+        if (!Config.hanggliderEnableThermal || noThermalRiseDimensions.contains(player.dimension)) {
             return 0;
         }
 
