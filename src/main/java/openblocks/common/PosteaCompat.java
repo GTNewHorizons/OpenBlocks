@@ -6,7 +6,8 @@ import com.gtnewhorizons.postea.api.CustomDataReplacementManager;
 
 import cpw.mods.fml.common.Loader;
 
-/// Used to provide custom save data (like saved inventory dumps) to Postea's [IVersionedTransformer]s.
+/// Used to provide custom save data (like saved inventory dumps) to Postea's
+/// [com.gtnewhorizons.postea.api.IVersionedTransformer]s.
 ///
 /// These transformers allow other mods to change saved data based on their own version stamps. This compat flags,
 /// to those transformers, the times they should fire. [#transform] is used before consuming data, so the transformer
