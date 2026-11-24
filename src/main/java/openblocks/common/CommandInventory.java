@@ -16,6 +16,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.ReportedException;
 
 import com.google.common.collect.Lists;
 
@@ -81,6 +82,8 @@ public class CommandInventory implements ICommand {
             final boolean success;
             try {
                 success = PlayerInventoryStore.instance.restoreInventory(player, id);
+            } catch (ReportedException e) {
+                throw e;
             } catch (Exception e) {
                 Log.warn(e, "Failed to restore inventory, player %s, file %s", playerName, id);
                 throw new CommandException("openblocks.misc.cant_restore_player", playerName);
@@ -149,6 +152,8 @@ public class CommandInventory implements ICommand {
     private static LoadedInventories loadInventories(ICommandSender sender, String id) {
         try {
             return PlayerInventoryStore.instance.loadInventories(sender.getEntityWorld(), id);
+        } catch (ReportedException e) {
+            throw e;
         } catch (Exception e) {
             Log.warn(e, "Failed to restore inventory, file %s", id);
             throw new CommandException("openblocks.misc.cant_restore_inventory");
@@ -189,6 +194,8 @@ public class CommandInventory implements ICommand {
                     List<String> result = Lists.newArrayList(ID_MAIN_INVENTORY);
                     result.addAll(inventories.subInventories.keySet());
                     return filterPrefixes(args[2], result);
+                } catch (ReportedException e) {
+                    throw e;
                 } catch (Exception e) {
                     // just ignore, don't spam
                 }
