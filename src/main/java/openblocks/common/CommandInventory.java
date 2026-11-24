@@ -194,8 +194,6 @@ public class CommandInventory implements ICommand {
                     List<String> result = Lists.newArrayList(ID_MAIN_INVENTORY);
                     result.addAll(inventories.subInventories.keySet());
                     return filterPrefixes(args[2], result);
-                } catch (ReportedException e) {
-                    throw e;
                 } catch (Exception e) {
                     // just ignore, don't spam
                 }
