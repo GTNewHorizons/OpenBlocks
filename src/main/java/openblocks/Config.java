@@ -594,9 +594,32 @@ public class Config {
     @OnLineModifiable
     @ConfigProperty(
             category = "hangglider",
+            name = "enableRain",
+            comment = "If true, the Hang Glider will fall down faster when taking on rain")
+    public static boolean hanggliderEnableRain = true;
+
+    @OnLineModifiable
+    @ConfigProperty(
+            category = "hangglider",
             name = "enableThermal",
             comment = "Enable a whole new level of hanggliding experience through thermal lift. See keybindings for acoustic vario controls")
     public static boolean hanggliderEnableThermal = true;
+
+    @OnLineModifiable
+    @ConfigProperty(
+            category = "hangglider",
+            name = "thermalBlacklistedDimensions",
+            comment = "List of dimension IDs where thermal lift will not affect the hang glider (rain still can, if the biome allows).")
+    public static int[] hanggliderNoThermalLiftDimensions = new int[] { -1, // Nether
+            1, // The End
+            2, // Spectre (Random Things)
+            50, // The Outer Lands (Thaumcraft)
+            60, // Bedrock (Thaumic Tinkerer)
+            69, // Pocket Plane (Thaumic Horizons)
+            70, // Mirror (Witchery)
+            100, // Underdark (Extra Utilities)
+            112, // The Last Millenium (Extra Utilities)
+            173 }; // Outer Lands (Gadomancy)
 
     public static void register() {
         @SuppressWarnings("unchecked")
