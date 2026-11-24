@@ -22,6 +22,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.storage.WorldInfo;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 
 import com.google.common.base.Strings;
@@ -29,6 +30,7 @@ import com.google.common.base.Strings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.Config;
+import openblocks.api.GraveRetrievedEvent;
 import openblocks.common.GraveAutoEquip;
 import openblocks.common.GraveSlotOrigin;
 import openmods.api.IActivateAwareTile;
@@ -47,11 +49,16 @@ public class TileEntityGrave extends SyncedTileEntity
 
     private static final String TAG_MESSAGE = "Message";
     private static final String TAG_ORIGINS = "SlotOrigins";
+    private static final String TAG_DEATH_TIME = "DeathTime";
+    public static final long UNKNOWN_DEATH_TIME = -1;
     private SyncableString perishedUsername;
     public SyncableBoolean onSoil;
     private SyncableBoolean inventoryEmpty;
 
     private IChatComponent deathMessage;
+
+    /** epoch millis; graves placed by hand or saved before this field existed have none */
+    private long deathTime = UNKNOWN_DEATH_TIME;
 
     /** grave slot index → origin slot at death; may be empty if grave predates this feature */
     private final Map<Integer, GraveSlotOrigin> slotOrigins = new HashMap<Integer, GraveSlotOrigin>();
@@ -143,6 +150,10 @@ public class TileEntityGrave extends SyncedTileEntity
             tag.setString(TAG_MESSAGE, serialized);
         }
 
+        if (deathTime != UNKNOWN_DEATH_TIME) {
+            tag.setLong(TAG_DEATH_TIME, deathTime);
+        }
+
         if (!slotOrigins.isEmpty()) {
             NBTTagList list = new NBTTagList();
             for (Map.Entry<Integer, GraveSlotOrigin> entry : slotOrigins.entrySet()) {
@@ -170,6 +181,8 @@ public class TileEntityGrave extends SyncedTileEntity
         }
 
         refreshEmptyFlag();
+
+        deathTime = tag.hasKey(TAG_DEATH_TIME) ? tag.getLong(TAG_DEATH_TIME) : UNKNOWN_DEATH_TIME;
 
         String serializedMsg = tag.getString(TAG_MESSAGE);
 
@@ -293,6 +306,7 @@ public class TileEntityGrave extends SyncedTileEntity
         }
         if (leftover == 0 && (equipped > 0 || toInventory > 0)) {
             worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+            fireRetrievedEvent(player, GraveRetrievedEvent.Type.OWNER_CLICKED);
         }
     }
 
@@ -317,7 +331,13 @@ public class TileEntityGrave extends SyncedTileEntity
             if (worldObj.rand.nextDouble() < Config.graveSpecialAction) ohNoes(player);
             held.damageItem(2, player);
             worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+            fireRetrievedEvent(player, GraveRetrievedEvent.Type.SHOVEL_CLICK);
         }
+    }
+
+    private void fireRetrievedEvent(EntityPlayer player, GraveRetrievedEvent.Type type) {
+        MinecraftForge.EVENT_BUS
+                .post(new GraveRetrievedEvent(player, type, getUsername(), deathTime, xCoord, yCoord, zCoord));
     }
 
     private void ohNoes(EntityPlayer player) {
@@ -330,4 +350,7 @@ public class TileEntityGrave extends SyncedTileEntity
         worldInfo.setRaining(true);
     }
 
+    public void setDeathTime(long deathTime) {
+        this.deathTime = deathTime;
+    }
 }
