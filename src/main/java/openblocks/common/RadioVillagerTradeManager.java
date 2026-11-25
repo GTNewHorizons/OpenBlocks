@@ -6,8 +6,6 @@ import static com.kuba6000.mobsinfo.api.VillagerTrade.createItem;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -16,6 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraftforge.oredict.OreDictionary;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.kuba6000.mobsinfo.api.IVillagerInfoProvider;
 import com.kuba6000.mobsinfo.api.VillagerTrade;
@@ -52,8 +52,8 @@ public class RadioVillagerTradeManager implements IVillageTradeHandler, IVillage
 
     @Optional.Method(modid = "mobsinfo")
     @Override
-    public void provideTrades(@Nonnull EntityVillager villager, int profession,
-            @Nonnull ArrayList<VillagerTrade> trades) {
+    public void provideTrades(@NotNull EntityVillager villager, int profession,
+            @NotNull ArrayList<VillagerTrade> trades) {
         if (Config.radioVillagerRecords) {
             for (ItemStack record : OreDictionary.getOres("record")) {
                 trades.add(
