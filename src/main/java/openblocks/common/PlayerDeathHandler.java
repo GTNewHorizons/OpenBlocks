@@ -234,6 +234,7 @@ public class PlayerDeathHandler {
             grave.setSlotOrigins(origins);
             grave.setDeathMessage(deathMessage);
             grave.setDeathTime(deathTime);
+            grave.setOwnerId(stiffId.getId());
             return true;
         }
 
