@@ -161,6 +161,8 @@ public class PlayerDeathHandler {
 
         private final GraveInventorySnapshot snapshot;
 
+        private final long deathTime = System.currentTimeMillis();
+
         public GraveCallable(World world, EntityPlayer exPlayer, List<EntityItem> loot,
                 GraveInventorySnapshot snapshot) {
             this.posX = MathHelper.floor_double(exPlayer.posX);
@@ -231,6 +233,8 @@ public class PlayerDeathHandler {
             grave.setLoot(loot);
             grave.setSlotOrigins(origins);
             grave.setDeathMessage(deathMessage);
+            grave.setDeathTime(deathTime);
+            grave.setOwnerId(stiffId.getId());
             return true;
         }
 

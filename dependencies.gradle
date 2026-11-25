@@ -3,6 +3,8 @@
 dependencies {
     api('com.github.GTNewHorizons:OpenModsLib:0.10.15:dev')
 
+    compileOnly('org.jetbrains:annotations:26.0.2')
+
     compileOnly("com.github.GTNewHorizons:Backhand:1.9.0:dev") { transitive = false }
     compileOnly('curse.maven:computercraft-67504:2269339')
     compileOnly('com.github.GTNewHorizons:Mobs-Info:0.6.0-GTNH:dev')

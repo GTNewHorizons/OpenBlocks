@@ -3,6 +3,7 @@ package openblocks.common.tileentity;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
@@ -22,6 +23,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.storage.WorldInfo;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.FakePlayer;
 
 import com.google.common.base.Strings;
@@ -29,6 +31,7 @@ import com.google.common.base.Strings;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import openblocks.Config;
+import openblocks.api.GraveRetrievedEvent;
 import openblocks.common.GraveAutoEquip;
 import openblocks.common.GraveSlotOrigin;
 import openmods.api.IActivateAwareTile;
@@ -47,11 +50,19 @@ public class TileEntityGrave extends SyncedTileEntity
 
     private static final String TAG_MESSAGE = "Message";
     private static final String TAG_ORIGINS = "SlotOrigins";
+    private static final String TAG_DEATH_TIME = "DeathTime";
+    private static final String TAG_OWNER_ID = "OwnerUUID";
     private SyncableString perishedUsername;
     public SyncableBoolean onSoil;
     private SyncableBoolean inventoryEmpty;
 
     private IChatComponent deathMessage;
+
+    /** epoch millis; graves placed by hand or saved before this field existed have none */
+    private long deathTime = GraveRetrievedEvent.UNKNOWN_DEATH_TIME;
+
+    /** unlike perishedUsername, not overridable by GraveSpawnEvent listeners or a renamed grave item */
+    private UUID ownerId;
 
     /** grave slot index → origin slot at death; may be empty if grave predates this feature */
     private final Map<Integer, GraveSlotOrigin> slotOrigins = new HashMap<Integer, GraveSlotOrigin>();
@@ -125,7 +136,10 @@ public class TileEntityGrave extends SyncedTileEntity
             if ((placer instanceof EntityPlayer player) && !(placer instanceof FakePlayer)) {
 
                 if (stack.hasDisplayName()) setUsername(stack.getDisplayName());
-                else setUsername(player.getGameProfile().getName());
+                else {
+                    setUsername(player.getGameProfile().getName());
+                    ownerId = player.getGameProfile().getId();
+                }
                 if (player.capabilities.isCreativeMode) setLoot(player.inventory);
                 updateBlockBelow();
                 sync();
@@ -141,6 +155,14 @@ public class TileEntityGrave extends SyncedTileEntity
         if (deathMessage != null) {
             String serialized = IChatComponent.Serializer.func_150696_a(deathMessage);
             tag.setString(TAG_MESSAGE, serialized);
+        }
+
+        if (deathTime != GraveRetrievedEvent.UNKNOWN_DEATH_TIME) {
+            tag.setLong(TAG_DEATH_TIME, deathTime);
+        }
+
+        if (ownerId != null) {
+            tag.setString(TAG_OWNER_ID, ownerId.toString());
         }
 
         if (!slotOrigins.isEmpty()) {
@@ -170,6 +192,9 @@ public class TileEntityGrave extends SyncedTileEntity
         }
 
         refreshEmptyFlag();
+
+        deathTime = tag.hasKey(TAG_DEATH_TIME) ? tag.getLong(TAG_DEATH_TIME) : GraveRetrievedEvent.UNKNOWN_DEATH_TIME;
+        ownerId = tag.hasKey(TAG_OWNER_ID) ? UUID.fromString(tag.getString(TAG_OWNER_ID)) : null;
 
         String serializedMsg = tag.getString(TAG_MESSAGE);
 
@@ -293,6 +318,7 @@ public class TileEntityGrave extends SyncedTileEntity
         }
         if (leftover == 0 && (equipped > 0 || toInventory > 0)) {
             worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+            fireRetrievedEvent(player, GraveRetrievedEvent.Type.OWNER_CLICKED);
         }
     }
 
@@ -317,7 +343,13 @@ public class TileEntityGrave extends SyncedTileEntity
             if (worldObj.rand.nextDouble() < Config.graveSpecialAction) ohNoes(player);
             held.damageItem(2, player);
             worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+            fireRetrievedEvent(player, GraveRetrievedEvent.Type.SHOVEL_CLICK);
         }
+    }
+
+    private void fireRetrievedEvent(EntityPlayer player, GraveRetrievedEvent.Type type) {
+        MinecraftForge.EVENT_BUS
+                .post(new GraveRetrievedEvent(player, type, ownerId, deathTime, xCoord, yCoord, zCoord));
     }
 
     private void ohNoes(EntityPlayer player) {
@@ -330,4 +362,11 @@ public class TileEntityGrave extends SyncedTileEntity
         worldInfo.setRaining(true);
     }
 
+    public void setDeathTime(long deathTime) {
+        this.deathTime = deathTime;
+    }
+
+    public void setOwnerId(UUID ownerId) {
+        this.ownerId = ownerId;
+    }
 }
